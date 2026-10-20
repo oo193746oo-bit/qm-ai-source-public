@@ -1,0 +1,254 @@
+/* ============================================================
+   therapist-page.v3.1.css — 页面级补充（不修改 v3.1 合同文件）
+   职责：Serif 字体加载、筛选下拉面板、图片错误态占位、
+        About 折叠开关、服务区辅助行、<picture> 适配。
+   v3.1 合同类（layout.v3.1.css）零改动，仅做新增前缀类。
+   ============================================================ */
+
+
+/* ---------- <picture> 包裹下保持 v3.1 图片窗口规则 ---------- */
+.therapist-card__photo picture img,
+.therapist-detail-hero__photo picture img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* ---------- 图片错误态：保留姓名占位，禁止换人 ---------- */
+.therapist-photo-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+  border: 1px solid var(--qm-error);
+  border-radius: inherit;
+  background: var(--qm-tag);
+  color: var(--qm-ink);
+  font: 600 14px/20px var(--qm-font-body);
+}
+
+/* ---------- 筛选下拉面板（qm- 前缀，独立于 v3.1 合同类） ---------- */
+.qm-dropdown {
+  position: relative;
+}
+.qm-filter-panel {
+  position: absolute;
+  left: 0;
+  z-index: 20;
+  margin-top: 8px;
+  width: 288px;
+  max-width: 80vw;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--qm-border);
+  border-radius: 18px;
+  background: var(--qm-surface);
+  box-shadow: var(--qm-shadow-card);
+}
+.qm-filter-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: 600 13px/18px var(--qm-font-body);
+  color: var(--qm-ink-secondary);
+}
+.qm-filter-panel__clear {
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--qm-coral);
+  font: 500 13px/18px var(--qm-font-body);
+}
+.qm-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.qm-chip {
+  height: 28px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--qm-border);
+  border-radius: var(--qm-radius-pill);
+  background: var(--qm-surface);
+  cursor: pointer;
+  font: 500 12px/18px var(--qm-font-body);
+  color: var(--qm-ink);
+}
+.qm-chip[aria-pressed="true"] {
+  border-color: var(--qm-coral);
+  background: var(--qm-focus);
+  color: var(--qm-coral);
+  font-weight: 600;
+}
+.therapist-filter .qm-chevron {
+  transition: transform var(--qm-motion-cta);
+}
+.therapist-filter[aria-expanded="true"] .qm-chevron {
+  transform: rotate(180deg);
+}
+.qm-list-empty {
+  margin-top: 20px;
+  padding: 28px;
+  border: 1px solid var(--qm-border);
+  border-radius: var(--qm-radius-card);
+  background: var(--qm-surface);
+  text-align: center;
+  font: 400 15px/24px var(--qm-font-body);
+  color: var(--qm-ink-secondary);
+}
+
+/* ---------- Link 化的 CTA 保持 v3.1 按钮几何 ---------- */
+a.qm-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity var(--qm-motion-cta);
+}
+a.qm-cta:hover {
+  opacity: 0.92;
+}
+
+/* ---------- 服务区辅助行 ---------- */
+.therapist-services__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.therapist-services__note-side {
+  font: 400 13px/20px var(--qm-font-body);
+  color: var(--qm-ink-secondary);
+}
+.therapist-service-card__title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 600 16px/24px var(--qm-font-body);
+  color: var(--qm-ink);
+}
+.therapist-service-card__desc {
+  margin: 4px 0 0;
+  font: 400 12px/18px var(--qm-font-body);
+  color: var(--qm-ink-secondary);
+}
+.therapist-service-card__rows {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.therapist-service-card__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font: 400 13px/20px var(--qm-font-body);
+  color: var(--qm-ink-secondary);
+}
+.therapist-service-card__row strong {
+  font: 700 17px/24px var(--qm-font-body);
+  color: var(--qm-coral);
+}
+.therapist-service-card__save {
+  display: block;
+  font: 400 11px/16px var(--qm-font-body);
+  color: var(--qm-ink-secondary);
+}
+.qm-badge-trial {
+  margin-left: auto;
+  height: 20px;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--qm-radius-pill);
+  background: var(--qm-focus);
+  color: var(--qm-coral);
+  font: 600 11px/16px var(--qm-font-body);
+}
+.therapist-services__cta-wrap {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+a.therapist-human-service-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: opacity var(--qm-motion-cta);
+}
+a.therapist-human-service-cta:hover {
+  opacity: 0.92;
+}
+.therapist-services__footnote {
+  margin: 0;
+  text-align: center;
+  font: 400 12px/18px var(--qm-font-body);
+  color: var(--qm-ink-secondary);
+}
+
+/* ---------- 详情资料四格 ---------- */
+.therapist-credential__icon {
+  flex: none;
+  color: var(--qm-coral);
+}
+.therapist-credential__main {
+  min-width: 0;
+}
+.therapist-credential__value {
+  margin: 0;
+  font: 600 15px/22px var(--qm-font-body);
+  color: var(--qm-ink);
+  overflow-wrap: anywhere;
+}
+.therapist-credential__label {
+  margin: 2px 0 0;
+  font: 400 12px/18px var(--qm-font-body);
+  color: var(--qm-ink-secondary);
+}
+
+/* ---------- About 正文与折叠开关 ---------- */
+.therapist-about__body {
+  white-space: pre-line;
+}
+.therapist-about__toggle {
+  display: none;
+}
+
+/* ---------- 手机端补充行为 ---------- */
+@media (max-width: 767px) {
+  .therapist-about__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    height: 36px;
+    padding: 0 16px;
+    border: 1px solid var(--qm-border);
+    border-radius: var(--qm-radius-pill);
+    background: var(--qm-surface);
+    cursor: pointer;
+    font: 500 13px/18px var(--qm-font-body);
+    color: var(--qm-ink);
+  }
+  .therapist-services__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

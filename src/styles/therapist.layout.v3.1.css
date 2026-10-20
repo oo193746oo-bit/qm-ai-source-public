@@ -1,0 +1,114 @@
+/* v3.1：以下类为精确工程合同；禁止用旧组件近似替代。 */
+.qm-page-shell { width: min(100%, var(--qm-page-max)); margin-inline: auto; padding-inline: var(--qm-page-pad-desktop); }
+.qm-site-header { height: 72px; display: flex; align-items: center; background: rgba(255,255,255,.94); border-bottom: 1px solid var(--qm-border); }
+
+.therapist-list-hero { min-height: 248px; margin-top: 24px; padding: 40px 48px; border-radius: var(--qm-radius-section); display: grid; place-content: center; text-align: center; background: var(--qm-surface); }
+.therapist-list-hero__eyebrow { margin: 0 0 8px; font: 600 12px/18px var(--qm-font-body); letter-spacing: .16em; color: var(--qm-coral); }
+.therapist-list-hero h1 { margin: 0; font: 700 44px/56px var(--qm-font-display); }
+.therapist-list-hero__subtitle { margin: 8px 0 0; font: 500 20px/30px var(--qm-font-body); color: var(--qm-ink-secondary); }
+
+.therapist-filterbar { min-height: 44px; margin-top: 24px; display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+.therapist-filterbar__group { display: flex; gap: 12px; flex-wrap: wrap; }
+.therapist-filter { height: 44px; padding: 0 16px; display: inline-flex; gap: 8px; align-items: center; border: 1px solid var(--qm-border); border-radius: var(--qm-radius-pill); color: var(--qm-ink); background: var(--qm-surface); font: 500 14px/20px var(--qm-font-body); }
+
+.therapist-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.therapist-card { min-height: 318px; padding: 20px; border: 1px solid var(--qm-border); border-radius: var(--qm-radius-card); background: var(--qm-surface); box-shadow: var(--qm-shadow-soft); }
+.therapist-card__top { display: grid; grid-template-columns: 176px minmax(0, 1fr); gap: 16px; }
+.therapist-card__photo { width: 176px; height: 232px; aspect-ratio: 22 / 29; overflow: hidden; border-radius: var(--qm-radius-image); background: var(--qm-tag); }
+.therapist-card__photo > img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 50% var(--qm-photo-focus-y, 50%); }
+.therapist-card__name { margin: 0; font: 700 24px/32px var(--qm-font-display); }
+.therapist-card__name-en { margin-left: 6px; font: 500 14px/22px var(--qm-font-body); color: var(--qm-ink-secondary); }
+.therapist-card__meta { margin: 4px 0 0; font: 400 14px/22px var(--qm-font-body); color: var(--qm-ink-secondary); }
+.therapist-tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+.therapist-tag { height: 28px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: var(--qm-radius-pill); background: var(--qm-tag); font: 500 12px/18px var(--qm-font-body); }
+.therapist-card__commerce { margin-top: 16px; display: flex; gap: 12px; align-items: center; justify-content: space-between; }
+.therapist-card__price { font: 700 22px/28px var(--qm-font-body); color: var(--qm-coral); }
+.therapist-card__duration { font: 400 13px/20px var(--qm-font-body); color: var(--qm-ink-secondary); }
+.qm-cta { min-width: 136px; height: 44px; padding: 0 16px; border: 0; border-radius: var(--qm-radius-pill); color: var(--qm-ink); background: linear-gradient(90deg, #F6DEC9 0%, var(--qm-lavender) 100%); font: 600 14px/20px var(--qm-font-body); }
+.therapist-card__quote { margin: 16px 0 0; display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font: 400 15px/24px var(--qm-font-body); color: var(--qm-ink-secondary); }
+
+.therapist-detail__breadcrumb { height: 32px; margin-top: 16px; display: flex; align-items: center; font: 400 13px/20px var(--qm-font-body); color: var(--qm-ink-secondary); }
+.therapist-detail-hero { min-height: 336px; margin-top: 8px; padding: 28px; display: grid; grid-template-columns: 288px minmax(0, 1fr); gap: 32px; border-radius: var(--qm-radius-section); background: var(--qm-surface); }
+.therapist-detail-hero__photo { width: 288px; height: 320px; aspect-ratio: 9 / 10; overflow: hidden; border-radius: var(--qm-radius-image); background: var(--qm-tag); }
+.therapist-detail-hero__photo > img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 50% var(--qm-photo-focus-y, 50%); }
+.therapist-detail-hero__name { margin: 8px 0 0; font: 700 42px/54px var(--qm-font-display); }
+.therapist-detail-hero__name-en { margin-left: 10px; font: 500 22px/32px var(--qm-font-body); color: var(--qm-ink-secondary); }
+.therapist-detail-hero__meta { margin: 6px 0 0; font: 500 18px/28px var(--qm-font-body); color: var(--qm-ink-secondary); }
+.therapist-detail-hero__quote { margin: 12px 0 0; max-width: 720px; font: 400 18px/30px var(--qm-font-body); color: var(--qm-ink-secondary); }
+.therapist-detail-hero .therapist-tags { 
+  flex-wrap: wrap;
+}
+.therapist-detail-hero .therapist-tag { height: 32px; padding-inline: 12px; font-size: 13px; }
+
+.therapist-about { margin-top: 20px; padding: 28px; border: 1px solid var(--qm-border); border-radius: var(--qm-radius-card); background: var(--qm-surface); }
+.therapist-section-title { margin: 0; font: 700 24px/32px var(--qm-font-display); }
+.therapist-about__body { max-width: 760px; margin: 12px 0 0; font: 400 16px/29px var(--qm-font-body); }
+.therapist-credentials { min-height: 88px; margin-top: 12px; padding: 14px 16px; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border: 1px solid var(--qm-border); border-radius: var(--qm-radius-card); background: var(--qm-surface); }
+.therapist-credential { padding-inline: 16px; display: flex; gap: 12px; align-items: center; border-right: 1px solid var(--qm-border); }
+.therapist-credential:last-child { border-right: 0; }
+.therapist-services { margin-top: 20px; }
+.therapist-services > h2 { margin: 0 0 12px; font: 700 28px/38px var(--qm-font-display); }
+.therapist-service-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+.therapist-service-card { min-height: 180px; padding: 18px; border: 1px solid var(--qm-border); border-radius: var(--qm-radius-card); background: var(--qm-surface); }
+.therapist-human-service-cta { width: 100%; height: 48px; margin-top: 16px; border: 0; border-radius: var(--qm-radius-pill); color: #fff; background: var(--qm-coral); font: 600 15px/22px var(--qm-font-body); }
+
+.is-loading { color: transparent !important; background: linear-gradient(90deg, #F4ECE5 25%, #FFF 50%, #F4ECE5 75%); background-size: 200% 100%; animation: qm-shimmer 1.2s linear infinite; }
+.is-disabled, :disabled { opacity: .45; cursor: not-allowed; }
+.is-error { border-color: var(--qm-error); }
+@keyframes qm-shimmer { to { background-position: -200% 0; } }
+
+.therapist-card__meta { white-space: nowrap; }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .qm-page-shell { padding-inline: var(--qm-page-pad-tablet); }
+  .therapist-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .therapist-service-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 767px) {
+  .qm-page-shell { padding-inline: var(--qm-page-pad-mobile); }
+  .qm-site-header { height: 64px; }
+  .therapist-list-hero { min-height: 164px; margin-top: 12px; padding: 24px 16px; border-radius: 24px; }
+  .therapist-list-hero h1 { font-size: 30px; line-height: 40px; }
+  .therapist-list-hero__subtitle { margin-top: 4px; font-size: 14px; line-height: 22px; }
+  .therapist-filterbar { margin-top: 12px; gap: 8px; align-items: flex-start; flex-direction: column; }
+  .therapist-filterbar__group { gap: 10px; }
+  .therapist-filter { height: 44px; padding-inline: 12px; font-size: 13px; }
+  .therapist-grid { margin-top: 12px; grid-template-columns: 1fr; gap: 12px; }
+  .therapist-card { min-height: 176px; padding: 14px; }
+  .therapist-card__top { grid-template-columns: 112px minmax(0,1fr); gap: 12px; }
+  .therapist-card__photo { width: 112px; height: 140px; aspect-ratio: 4 / 5; }
+  .therapist-card__name { font-size: 20px; line-height: 28px; }
+  .therapist-card__name-en { font-size: 13px; line-height: 20px; }
+  .therapist-card__meta { margin-top: 2px; font-size: 13px; line-height: 20px; white-space:nowrap; }
+  .therapist-tags { margin-top: 6px; gap: 6px; 
+  flex-wrap: wrap;
+}
+  .therapist-tag { height: 26px; padding-inline: 8px; font-size: 11px; }
+  .therapist-card__commerce { margin-top: 12px; }
+  .therapist-card__price { font-size: 19px; line-height: 26px; }
+  .qm-cta { min-width: 116px; height: 44px; padding-inline: 12px; }
+  .therapist-card__quote { display: none; }
+
+  .therapist-detail__breadcrumb { height: 36px; margin-top: 8px; }
+  .therapist-detail-hero { min-height: 180px; margin-top: 4px; padding: 14px; grid-template-columns: 128px minmax(0,1fr); gap: 12px; border-radius: 24px; }
+  .therapist-detail-hero__photo { width: 128px; height: 168px; aspect-ratio: 16 / 21; }
+  .therapist-detail-hero__name { margin-top: 0; font-size: 26px; line-height: 34px; }
+  .therapist-detail-hero__name-en { margin-left: 6px; font-size: 18px; line-height: 28px; }
+  .therapist-detail-hero__meta { margin-top: 2px; font-size: 14px; line-height: 22px; }
+  .therapist-detail-hero__quote { margin-top: 6px; display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: 14px; line-height: 22px; }
+  .therapist-detail-hero .therapist-tags { grid-column: 1 / -1; margin-top: 0; 
+  flex-wrap: wrap;
+}
+  .therapist-detail-hero .therapist-tag { height: 28px; padding-inline: 9px; font-size: 11px; }
+  .therapist-about { margin-top: 12px; padding: 16px; }
+  .therapist-section-title { font-size: 22px; line-height: 30px; }
+  .therapist-about__body { margin-top: 8px; font-size: 16px; line-height: 28px; }
+  .therapist-about__body[data-collapsed="true"] { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 6; }
+  .therapist-credentials { min-height: 72px; padding: 14px 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; }
+  .therapist-credential { padding-inline: 6px; gap: 6px; flex-direction: column; justify-content: center; text-align: center; font-size: 12px; line-height: 18px; }
+  .therapist-credential:nth-child(2n) { border-right: 0; }
+  .therapist-services { margin-top: 12px; }
+  .therapist-services > h2 { margin-bottom: 8px; font-size: 24px; line-height: 32px; }
+  .therapist-service-grid { grid-template-columns: 1fr; gap: 8px; }
+  .therapist-service-card { min-height: 72px; padding: 12px 14px; }
+}

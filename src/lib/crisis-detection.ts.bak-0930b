@@ -1,0 +1,635 @@
+// 危机干预关键词检测
+import { detectHardGate } from "./crisis-hardgates";
+
+export const CRISIS_KEYWORDS = {
+  direct: [
+    // 原有直接表达
+    "自杀", "想自杀", "不想活了", "不想活", "不活了", "活不下去了", "不想活下去",
+    "结束生命", "了结自己", "一了百了", "去死", "我想死", "想死了", "想去死",
+    "割腕", "跳楼", "吃安眠药", "上吊", "跳河", "烧炭",
+    "楼顶", "天台", "跳下去", "想跳下去", "翻栏杆", "跨出去",
+    "自伤", "自残", "伤害自己", "割自己", "划自己",
+    "我不在了", "离开这个世界", "与世长辞", "杀了我", "打死我",
+    // P0-1 新增：计划暗示/行踪保密
+    "想好要去哪里了", "地方不告诉你们", "想找个没人的地方", "安静地走",
+    "明天去一个很远的地方", "可能不回来了", "已经决定了", "具体地方不说",
+    // P0-2 新增：告别/愧疚
+    "帮我和大家说声对不起", "拖累他们太久了", "跟每个人都好好道了别",
+    "帮我把信交给我妈", "帮我把信交给家人",
+    // P0-2 新增：自我负担/无价值感
+    "没有我他们会更好", "没有我他们会更轻松", "我是累赘", "有我没我都一样",
+    "没人会注意到我", "我这种人不该被生下来",
+    // P0-2 新增：自我负担族（隐晦表达）
+    "我是负担", "拖后腿", "活着浪费", "没人在意", "不拖累", "不给你们添麻烦",
+    "少我一个无所谓", "我消失了也没人发现",
+    // 1.3-2 补充：负担类更多表达
+    "没有我他们更轻松", "没有我他们会轻松", "没我他们更轻松",
+    "我是所有人的负担", "我是大家的负担",
+    // 1.6 补充：负担感/无价值感完整覆盖
+    "没有我他们会过得更好", "没有我他们过得更好", "没我他们会更好",
+    "我拖累他们", "我只会添麻烦", "我只会添乱",
+    "世界有没有我都一样", "有没有我都一样", "没有人会注意到我消失",
+    "没人会注意到我消失", "我消失了就好了", "没人会在意我没了",
+    "没有我他们会更好吧", "没有他们可能会过得更好",
+    // P0-2 新增：消失隐喻
+    "想消失", "对话框会不会记得我", "世界会不会记得我", "想睡过去不醒",
+    "去很远的地方不回来", "安静地走",
+    // 1.3-2 补充：直白自杀意念
+    "死了算了", "不如死了算了", "不如去死", "死了比较好",
+    // 繁体中文
+    "自殺", "不想活了", "想死", "割腕", "跳樓",
+    "撐不下去了", "扛不住了", "活著沒意思",
+    // 1.3-2 补充：繁体负担/消失
+    "沒有我他們會更好", "沒有我他們會更輕鬆", "我是累贅", "有我都沒一樣",
+    "沒人在意我", "想消失", "就這樣消失", "誰也找不到我",
+    "死了算了", "不如死了算了",
+  ],
+  indirect: [
+    // 原有间接表达
+    "没什么好留恋的", "活着没意思", "活着好累", "活着没意义",
+    "人生没有意义", "觉得没意思", "看不到希望", "没有希望了",
+    "撑不下去了", "扛不住了", "坚持不下去了", "熬不下去了", "不想再熬下去了",
+    "想解脱", "想消失", "想一睡不醒", "想永远睡下去",
+    "太痛苦了", "受不了了", "受够了", "熬不下去",
+    "没有未来", "一片黑暗", "绝望了", "彻底绝望",
+    // P0-2 新增：存在性绝望/耗竭
+    "日复一日地熬", "不知道哪天是个头", "看不到头", "望不到头",
+    "撑了很多年撑不住", "撑不动了", "就想好好休息了",
+    "活着真没什么意思", "活着没什么意思", "活着没啥意思", "活着没有什么意思",
+    "每天活得没意思", "生活没什么意思", "生活没啥意思", "活得没意思",
+    "找不到活着的意义", "找不到活下去的意义", "不知道活着还有什么意义", "活着不知道为了什么",
+    "活下去没有意义", "活着没有什么意义", "生活没有什么意义", "人生没什么意义", "生无可恋",
+    "我看不到活着的意义", "看不到活着的意义", "觉得生活没意思", "感觉生活没意思",
+    // P1.9 I1 新增：被动意念（不想醒来类）
+    "不想醒来", "不想睡", "醒不来", "睡过去就不用醒", "不想看到明天的太阳",
+    "不想看到明天", "日子什么时候是头", "什么时候是个头",
+    // 繁体中文
+    "沒什麼好留戀的", "活著好累", "撐不下去了", "想解脫",
+    // 1.3-2 补充：繁体间接表达
+    "活著好痛苦", "覺得活著沒意思", "好想就這樣消失",
+  ],
+};
+
+// 英文危机关键词
+export const ENGLISH_CRISIS_KEYWORDS = {
+  direct: [
+    "suicide", "kill myself", "want to die", "end my life", "end it all",
+    "self-harm", "cut myself", "hurt myself", "jump off", "overdose",
+    "don't want to live", "better off dead", "no reason to live",
+  ],
+  indirect: [
+    "tired of everything", "tired of living", "can't go on", "can't take it anymore",
+    "no point in living", "nothing matters", "hopeless", "no hope",
+    "want to disappear", "want to sleep forever", "want to fade away",
+    "burden to everyone", "everyone would be better without me",
+    "nobody would notice", "nobody cares if i'm gone",
+  ],
+};
+
+// 未成年人识别关键词
+export const MINOR_KEYWORDS = [
+  "初二", "初三", "高一", "高二", "高三", "六年级", "初一",
+  "初中", "高中", "小学", "中学生", "小学生",
+  "爸妈", "妈妈", "爸爸", "家长", "老师", "同学",
+  "学校", "作业", "考试", "上课",
+  "未成年", "青少年", "18岁以下",
+  "不能让我妈知道", "不能让我爸知道", "偷拿手机",
+];
+
+export function detectMinor(text: string): boolean {
+  const lowerText = text.toLowerCase();
+  return MINOR_KEYWORDS.some((keyword) => lowerText.includes(keyword));
+}
+
+// ========== 1.9.1: 危机检测词表扩展（隐喻式、负担感式、计划式、告别式、断续式） ==========
+
+// 第一人称"自我消失/不在"语义族
+const SELF_ABSENCE = /没有我|我不在(了)?|我走了|我消失|我没了|我离开(了)?|从世界上消失/i;
+// "他人因此变好/解脱"语义族
+const OTHERS_RELIEF = /轻松|解脱|过得更好|会更好|少点?麻烦|不(再)?拖累|不为难|松口气|好过|省心/i;
+// 独立的消失愿望族（不依赖共现）
+const VANISH_WISH = /如果我消失|我想消失|人间蒸发|从这个世界上消失|我不存在了|对话框会记得我吗|你们会记得我吗/i;
+
+// 1.9.1 新增：隐喻式（结束键、睡过去、飘走、天上的云等）
+const METAPHOR_WISH = /结束键|按个结束|结束人生|睡过去|永远睡|飘走|天上的云|消失在|一了百了/i;
+
+// 1.9.1 新增：负担感式（正则共现）
+const BURDEN_PATTERN_1 = /没有我.{0,12}(好过|轻松|解脱|省心)/i;
+const BURDEN_PATTERN_2 = /(我|自己).{0,6}(多余|累赘|没用|留着没用|走了就好)/i;
+const BURDEN_PATTERN_3 = /(他们|大家|家里).{0,12}(没有我|少了我).{0,12}(好|轻松|解脱)/i;
+
+// 1.9.1 新增：计划/预备式
+const PLAN_PATTERN = /想好.{0,10}(怎么|如何).{0,10}(走|离开|结束)|攒了.{0,6}(药|安眠药)|不会痛的|悄悄走|最后一次.{0,8}(说|聊|见)/i;
+
+// 1.9.1 新增：告别式
+const FAREWELL_PATTERN = /最后一次跟?(人|你|大家).{0,6}(说|聊)|谢谢你陪我.{0,20}最后/i;
+
+// 1.9.1 新增：断续犹豫式（碎片共现）
+const HESITATION_FRAGMENT_1 = /算了|不说了/i;
+const HESITATION_FRAGMENT_2 = /没用|没意义|熬不下去|撑不住|不想熬/i;
+
+// 专业/第三人称视角闸门（1.9.1 扩展：增加法律学术词）
+// 1.9b P0-2: 视角闸门扩面（创作/公共卫生/专业元语境）
+// [P06-P07-FIX 20260915] 检测词表（Lara 2026-09-15 拍板 A 方案，仅新增前置闸，不动既有危机路径）
+const PAST_HISTORY_DEATH_KEYWORDS = /自杀|轻生|想死|不想活|活不下去|自伤|自残|割腕|跳楼|跳河|结束生命|了结|一了百了/;
+const PAST_HISTORY_TIME_MARKER = /(?:[0-9０-９一二两三四五六七八九十百千]+|些|好些)\s*年\s*前|以前|之前|上次|上回|当年|曾经|早些年/;
+const CURRENT_TIME_MARKER = /现在|如今|最近|这(?:段|几|阵|些)(?:时间|日子|年)?|眼下|目前/;
+const CURRENT_STABLE_MARKER = /还行|还好|过得去|稳定|挺好|挺稳|不错|好多了|好起来|好转|平静|安顿|踏实/;
+// 近期危险守卫：命中则不降级（昨天/今天类近况或"又割/又吞"仍走原危机路径）
+const RECENT_EVENT_GUARD = /昨天|昨晚|昨夜|刚才|刚刚|今天|今晚|今早|前天|这几天|上周|上礼拜|上个月|最近一次|又(?:割|划|吞|跳)/;
+// P07 习语豁免表：X死/加到想死 等口语习语
+const IDIOM_DEATH_PATTERN = /笑死|累死|无聊死|饿死|困死|热死|冷死|烦死|愁死|吓死|挤死|忙死|渴死|撑死|加到想死|累到想死|忙到想死|困到想死|烦到想死|愁到想死/;
+const IDIOM_DAILY_CONTEXT = /加班|上班|上学|上课|作业|考试|复习|工作|项目|需求|开会|值班|通勤|地铁|公交|堵车|排队|天气|老板|甲方|期末|周报|deadline|打卡/i;
+
+const PROFESSIONAL_CONTEXT = /量表|评估|量化|研究|文献|理论|概念|perceived burdensomeness|INQ|问卷|测量|论文|学术|教学|培训|督导|案例讨论|法条|法规|制度|法律|四类主体|生效条件|认定民事|写小说|小说里|角色|编剧|剧组|拍戏|拍一段|剧本|创作|怎么写这段|台词|自杀率|预防体系|干预体系|学校层面|公共卫生|数据统计|流行病学|接听流程|拍摄|避免拍错|误导观众|问法|访谈|记录|筛查|保密例外/i;
+
+/**
+ * 1.9.1: 扩展负担感/消失愿望信号确定性检测
+ * 同一句话输入10次结果必须10次一致
+ */
+function detectBurdenSignal(text: string): boolean {
+  if (PROFESSIONAL_CONTEXT.test(text)) return false;  // 视角闸门优先，专业讨论不亮灯
+  if (VANISH_WISH.test(text)) return true;
+  if (METAPHOR_WISH.test(text)) return true;  // 1.9.1 新增：隐喻式
+  if (PLAN_PATTERN.test(text)) return true;   // 1.9.1 新增：计划式
+  if (FAREWELL_PATTERN.test(text)) return true; // 1.9.1 新增：告别式
+  // 1.9.1 新增：断续犹豫式（碎片共现）
+  if (HESITATION_FRAGMENT_1.test(text) && HESITATION_FRAGMENT_2.test(text)) return true;
+  // 1.9.1 新增：负担感式（三种模式任一命中）
+  if (BURDEN_PATTERN_1.test(text) || BURDEN_PATTERN_2.test(text) || BURDEN_PATTERN_3.test(text)) return true;
+  return SELF_ABSENCE.test(text) && OTHERS_RELIEF.test(text);
+}
+
+// CRFIX2（20260925）：本人后事类多信号规则——自述「我在安排/交代/处理/分配自己的身后事」= 明确的自我终结准备信号 → 置危机 direct。
+// 与 5.7b 告别信（他人遗书类）是两类问题，勿混：本条只认「后事/身后事+自我指向+安排动作」。
+// 防误伤设计：①以「后事/身后事」为必含核词（无后事词一律不亮，还清房贷/怕ta想不开/情绪低落不命中）；
+// ②要求自我指向（我/自己/本人）与安排动作（安排/交代/处理/分/办/写/就等）在句中成对出现，纯咨询/疑问句式不命中；
+// ③排除帮助/他人/旁观语境（帮忙处理后事、家人/姥姥/他/她的后事、办理咨询）——三者任一命中即否决。
+function hasPersonalAfterlifeSignal(text: string): boolean {
+  if (!/后事|身后事/.test(text)) return false;
+  // 三方向交替：①后事在先动作在后（我把后事安排好）②后事+我（后事我都安排好了）③动作在先后事在后（我交代身后事）
+  const selfAfterlife =
+    /我(?:自己|本人)?(?:.{0,14})(?:后事|身后事)(?:.{0,10})(?:安排|交代|处理|分(?:好|配)?|办(?:好|妥)?|写(?:好|了)?|给(?:了|好)?|准备好|就等)|(?:后事|身后事)(?:.{0,10})(?:我|自己)(?:.{0,16})(?:安排|交代|处理|分(?:好|配)?|办(?:好|妥)?|写好|准备好|就等)|我(?:自己|本人)?(?:.{0,8})(?:安排|交代|处理)(?:.{0,4})(?:后事|身后事)/;
+  if (!selfAfterlife.test(text)) return false;
+  const neutralOrOthersContext = /怎么办|如何办|咨询|请教|请问|怎么处理|怎么办理|流程|手续|费用|了解一下|了解下|问问|想问|帮忙|帮他|帮他家|帮(?:着|忙)?(?:我)?(?:家人|父母|亲戚|姥姥|奶奶|爷爷|外公|舅舅)|我(?:的)?(?:家人|父母|亲戚|姥姥|奶奶|爷爷|外公).{0,8}(?:后事|身后事)|他(?:的|家|们)|她的|别人(?:的)?/;
+  return !neutralOrOthersContext.test(text);
+}
+
+export function detectCrisis(text: string): {
+  isCrisis: boolean;
+  level: "direct" | "indirect" | "gentle" | "none";
+  matchedWords: string[];
+} {
+  // R3（20260929 按P0-0923工单口径）：direct层误伤豁免 词表本体零改动
+  const R3_SELF_HARM = /死|自杀|自残|自伤|轻生|不想活|不活了|活不下去|了结|遗书|安眠药|割腕|上吊|烧炭|跳|这个世界|人间|结束生命|不在了|消失|走掉|动手|实施|撑不住|撑不下去/i;
+  const R3_WALK_DAILY = /走(?:了|过|着|到|去)?(?:[0-9０-９两三四五六七八九十百千万几]+|很多|无数)(?:多)?(?:步|里|公里|米)|走了.{0,6}?(?:路|步|里|公里)/;
+  const R3_WITHDRAWAL = /气话|吓到|缓过来|缓过劲|没事了|开玩笑|玩笑话|不想聊这个了/i;
+  if (!R3_SELF_HARM.test(text) && (R3_WALK_DAILY.test(text) || R3_WITHDRAWAL.test(text))) {
+    return { isCrisis: false, level: "none", matchedWords: ["r3_fp_exempt"] };
+  }
+  const lowerText = text.toLowerCase();
+
+  // 第1层：确定性硬闸（独立配置，无条件覆盖——在专业豁免/玩笑豁免之前，命中即 direct 不许下钻）
+  const hardGate = detectHardGate(text);
+  if (hardGate.gate) {
+    return { isCrisis: true, level: "direct", matchedWords: hardGate.matched ? [hardGate.matched] : ["hardgate"] };
+  }
+
+  // T10 新闻/社会旁观前置豁免（与 hardGate 同款守卫，防第2层 keyword 绕过）：
+  // 主语为"新闻/报道/有人/别人/大家"等旁观视角，且全文无第一人称危险意图 → 正常讨论，不置危机。
+  // 一旦出现"我也/换我/如果是我就…"等第一人称危险意图，仍升级硬卡（见 hardgate L61 规则）。
+  // [P06-P07-FIX 20260915] 前置闸：位于硬闸之后、既有判定之前，仅新增不改旧路径
+  // P06：第一人称过去史（死亡类关键词+过去时间状语）且当下稳定（现在类时间词+稳定状态词）→ 温和资源卡
+  if (
+    PAST_HISTORY_DEATH_KEYWORDS.test(text) &&
+    PAST_HISTORY_TIME_MARKER.test(text) &&
+    CURRENT_TIME_MARKER.test(text) &&
+    CURRENT_STABLE_MARKER.test(text) &&
+    !RECENT_EVENT_GUARD.test(text)
+  ) {
+    return { isCrisis: true, level: "gentle", matchedWords: ["past_history_gentle"] };
+  }
+
+  // P07：口语习语（X死/加到想死 等）+ 日常语境词同时命中 → 豁免，不打危机卡（保留正常情绪承接）
+  if (IDIOM_DEATH_PATTERN.test(text) && IDIOM_DAILY_CONTEXT.test(text)) {
+    return { isCrisis: false, level: "none", matchedWords: [] };
+  }
+
+  const bystander = /(?:新闻|报道|资讯|热搜|消息说|听(?:说|到)|看到|大家|有人|有个人|他们|那些人|别人|路人|网(?:友|上))/i;
+  const firstPersonDangerIntent = /(?:我也|换我|我也会|我可能|我想.{0,4}(?:也|就)|我要(?:那)?样|如果是(?:我|我自己)|假设我)/i;
+  const bystanderExempt = bystander.test(text) && !firstPersonDangerIntent.test(text);
+
+  // P18-1: 负担感/消失愿望确定性检测（视角闸门内置）
+  if (detectBurdenSignal(text)) {
+    return { isCrisis: true, level: "direct", matchedWords: ["burden_or_vanish_signal"] };
+  }
+  
+  // T10 新闻旁观前置豁免（与 hardgate 同款守卫）：旁观视角且无第一人称危险意图 → 正常讨论
+  if (bystanderExempt) {
+    return { isCrisis: false, level: "none", matchedWords: [] };
+  }
+
+  // CRFIX2（20260925）：本人后事类多信号 → 置危机 direct（与本人危机同层）。仅新增路径，不改既有判定。
+  if (hasPersonalAfterlifeSignal(text)) {
+    return { isCrisis: true, level: "direct", matchedWords: ["personal_afterlife_signal"] };
+  }
+  
+  // P05（安全侧定稿）：第一人称 + 撑不住/好痛苦 → 硬卡，宁严勿漏（工单明确"永久保留硬卡"）。
+  // 仅限第一人称自陈（含"我/自己/本人/真的"等），排除专业讨论与玩笑豁免可覆盖的对象化表述。
+  const painDirect = /(?:我|自己|本人|真的|越来越|实在|全都|这些年).{0,8}(?:撑不住|撑不下去了|撑不住(?:了)?|熬不住|熬不下去|受够了|受不下去了|抗不住|撑不下去).{0,10}(?:好痛苦|太痛苦|很痛苦|难受|痛|疼|煎熬|熬|没力气|撑|绝望)/;
+  const painShort = /(?:我|自己|本人).{0,6}(?:好痛苦|太痛苦|非常痛苦|真的受够了|实在撑不住|快撑不住了|撑不住(?:了)?)/;
+  if ((painDirect.test(text) || painShort.test(text)) && !PROFESSIONAL_CONTEXT.test(text)) {
+    return { isCrisis: true, level: "direct", matchedWords: ["first_person_pain_direct"] };
+  }
+  
+  // P17-2: 专业讨论视角闸门——整个危机检测都过闸门
+  if (PROFESSIONAL_CONTEXT.test(text)) {
+    return { isCrisis: false, level: "none", matchedWords: [] };
+  }
+  
+  // P1.8 H8：玩笑/吐槽信号消歧
+  // 同句含明确玩笑/吐槽信号且无第一人称具体计划/手段/时间 → 降级为共情陪聊
+  const jokeSignals = /哈哈哈|笑死|社死|原地去世|老板|上班|周五|加班|吐槽|23333|6666|233|666/i;
+  const explicitPlanSignals = /计划|准备|已经.*决定|今晚|明天|具体.*方法|写了.*遗书|站在.*楼顶|割腕|跳楼|跳河|安眠药|买.*药|药.*准备好了|收集.*药|囤.*药|掌握.*方法/i;
+  if (jokeSignals.test(text) && !explicitPlanSignals.test(text)) {
+    // 玩笑/吐槽语境，无明确计划，不触发危机模板
+    return { isCrisis: false, level: "none", matchedWords: [] };
+  }
+  
+  // P1.8 H8 缺口3：被动意念句检测（活着没意思/没人会在意我/想干脆消失）
+  // 固定动作：共情+温和安全确认问句+轻量资源兜底（含热线卡）
+  const sleep = /睡过去(?:不用|不再|不再需要)?醒|不想醒|想睡过去|睡一觉.{0,6}(?:不用|不要再|不想)?醒|醒不过来/;
+  const burden = /我是(?:个|家里(?:的)?)?负担/;
+  const prepareToGo = /走之前.{0,10}(?:安排|交代|处理)(?:好|完)/;
+  const vanishRelief = /没有我(?:们)?他们?(?:更轻松|就轻松)/;
+  // P0-1: 第一人称「否定醒转」之被动意念 + 高危行为佐证（窗边/天台/河边等持久停留）→ 漏报零容忍
+  // 仅当两者同时命中才置危机：单有「不想醒」可能是起床口语，单有「窗边站」可能是发呆。
+  const firstPersonPassiveSleep = /我(?:自己|本人)?.{0,10}(?:不想醒(?:过来|来)?|睡过去(?:就)?不醒|就这么睡过去|睡着(?:就|了)?不醒|醒不过来|再也不要醒)/;
+  const highplaceStay = /(?:窗边|窗户边|窗台|天台|楼顶|阳台|河边|江边|水边|桥边|栏杆)(?:.{0,10}?)?(?:站|坐|待|蹲|趴|转|走)(?:了)?(?:很久)?/;
+  if (firstPersonPassiveSleep.test(text) && highplaceStay.test(text) && !explicitPlanSignals.test(text) && !PROFESSIONAL_CONTEXT.test(text)) {
+    return { isCrisis: true, level: "indirect", matchedWords: ["first_person_passive_ideation"] };
+  }
+  const passiveIdeationSignals = /活着.*没意思|活着.*没意义|活着.*有什么意思|活着.{0,8}有啥意思|找不到活着的意义|活着.*还有什么意义|生活.*没意义|没人在意|没有人.*在意|想.*消失|想.*离开|干脆.*消失|不如.*消失|存在.*没意义|(?:活着|生活|人生|日子|活下去|撑下去|活下去的日子).{0,14}(?:没意思|没意义|没什么意思|没什么意义|有什么意义|没有意义)|(?:活着|生活|日子|人生|活下去).{0,6}(?:没|无|看不到|没有).{0,6}(?:盼头|奔头)|看不到.{0,6}(?:生活|日子|人生|活着|未来).{0,6}(?:盼头|奔头|意义)|找不到.{0,4}(?:意义|价值|奔头|盼头)|(?:消失|不见了|离开这个世界|消失不见|凭空消失|就这样消失).{0,10}(?:就好|就轻松|就解脱|就算了|就省心|就没人烦|就是解脱)|(?:要是|如果|能就地|现在).{0,8}消失.{0,8}(?:就好|就解脱|就轻松|就算了|多好)|(?:要是|如果|能)。{0,10}(?:消失了?|不见了?|就这样消失).{0,10}(?:就?不|也不用|就不用|就不|也就)(?:累|难过|痛苦|烦恼)/i;
+  const r2Patterns = sleep.test(text) || burden.test(text) || prepareToGo.test(text) || vanishRelief.test(text);
+  if (r2Patterns && !explicitPlanSignals.test(text)) {
+    return { isCrisis: true, level: "indirect", matchedWords: ["r45_passive_ideation_signal"] };
+  }
+  const R3_LEAVE_TERMINUS = /离开.{0,8}(?:这个世界|世界|人间|所有人|一切|尘世)/i;
+  const R3_LEAVE_PLACE = /离开[\u4e00-\u9fa5]{0,3}?(?:岛|市|省|县|镇|村|国|洲)|离开(?:学校|公司|单位|工厂|医院|大学|中学|小学|这里|那个地方|这个地方)/i;
+  if (passiveIdeationSignals.test(text) && !explicitPlanSignals.test(text) && !(R3_LEAVE_PLACE.test(text) && !R3_LEAVE_TERMINUS.test(text))) {
+    // 被动意念句，无明确计划，触发间接危机（轻量资源兜底）
+    return { isCrisis: true, level: "indirect", matchedWords: ["passive_ideation_signal"] };
+  }
+  
+  // 原有精确匹配逻辑
+  // P1.11：第三人称帮助者危机（学生/来访者/亲友/同事…代为求助，含他/她等隐式第三主体）
+  // 兜底同学/来访者等帮助者场景：即使未命中第一人称自陈词，也认定为危机
+  const thirdPartyRole = /我(?:的|们?的|身边|认识|担心|班上|带的|接待的|负责的)?(?:有(?:个|位)?)?(?:同学|室友|舍友|朋友|闺蜜|家人|孩子|儿子|女儿|对象|伴侣|老公|老婆|学生|学员|同事|网友|邻居|来访者|来访|当事人|服务对象|案主)|(?:班上有|班里|他的?|她的?|学生|同学|来访者|求助者|当事人|服务对象|案主)|(?:班主任|老师|辅导员)|(?:他|她|TA|ta|他们|她们)/;
+  const thirdPartyCue = /告别|道别|说再见|对不起所有人|联系不上|遗书|自伤|自杀|轻生|想不开|不想活(?:了)?|不想过(?:了)?|做傻事|撑不住|撑不下去|活不下去|伤害自己|自残|划自己|有.{0,4}(?:自杀|轻生).{0,6}(?:风险|倾向|念头)|没了他(?:们)?怎么办/;
+  const thirdPartySelf = /我.{0,6}(?:不想活|想死|想自杀|撑不住|撑不下去|活不下去|想不开)/;
+
+  // C3：第三人称 NSSI + 明确否定死亡意图（"反复割腕，但他说他不想死"）→ NSSI ≠ 自杀企图，
+  // 走专业装配（MED-03 纠正），不置危机卡。但陪伴者慌乱/此刻正在发生仍保危机（判定规则3）。
+  // NSSI 行为词与死亡意图否定词距离相关，防误伤；否定死亡意图可无转折词（如"割腕不想死"）。
+  const thirdPartyNssi = /(?:割腕|自伤|自残|划自己|伤害自己|拿(?:刀|利器|刀片)(?:割|划|切)?.{0,8})/;
+  const nssiDenyDeathIntent = /(?:割腕|自伤|自残|划自己|伤害自己|拿(?:刀|利器|刀片)).{0,26}(?:不想死|没想死|没想过死|不是(?:想|要)死|不是自杀|没有自杀|不想自杀|只是需要释放|需要一种释放|只是为了释放|只为释放|不想离开世界)|(?:不想死|不是(?:想|要)死|不是自杀|没有自杀|不想自杀).{0,10}(?:只是|纯粹|就是).{0,10}(?:释放|发泄|解脱)/;
+  const panickedNow = /怎么办|正在|现在|快来|紧急|马上|刚刚.{0,6}(?:割|划|拿刀)|送医|救命|流血|还在淌/;
+  if (thirdPartyNssi.test(text) && nssiDenyDeathIntent.test(text) && !panickedNow.test(text) && !thirdPartySelf.test(text)) {
+    return { isCrisis: false, level: "none", matchedWords: ["third_party_nssi_deny_death_intent"] };
+  }
+
+  if (thirdPartyRole.test(text) && thirdPartyCue.test(text) && !thirdPartySelf.test(text)) {
+    return { isCrisis: true, level: "direct", matchedWords: ["third_party_helper_crisis"] };
+  }
+
+  // 检测中文关键词
+  const directMatches = CRISIS_KEYWORDS.direct.filter((word) =>
+    lowerText.includes(word.toLowerCase()),
+  );
+  const indirectMatches = CRISIS_KEYWORDS.indirect.filter((word) =>
+    lowerText.includes(word.toLowerCase()),
+  );
+  
+  // 检测英文关键词
+  const enDirectMatches = ENGLISH_CRISIS_KEYWORDS.direct.filter((word) =>
+    lowerText.includes(word.toLowerCase()),
+  );
+  const enIndirectMatches = ENGLISH_CRISIS_KEYWORDS.indirect.filter((word) =>
+    lowerText.includes(word.toLowerCase()),
+  );
+  
+  const allDirectMatches = [...directMatches, ...enDirectMatches];
+  const allIndirectMatches = [...indirectMatches, ...enIndirectMatches];
+
+  if (allDirectMatches.length > 0) {
+    return { isCrisis: true, level: "direct", matchedWords: allDirectMatches };
+  }
+  
+  // P1.7 F7：长文场景提高阈值，单纯情绪低落表达不单独触发危机模板
+  // 长文（>500字）时，间接危机词须叠加明确危机信号词才命中
+  const isLongText = text.length > 500;
+  if (isLongText && allIndirectMatches.length > 0) {
+    // 长文场景：检查是否有明确的危机信号词（自伤/自杀计划/正在实施）
+    const explicitCrisisSignals = /自杀|自残|自伤|割腕|跳楼|跳河|吃安眠药|上吊|烧炭|想死|不想活|结束生命|了结自己/i;
+    if (!explicitCrisisSignals.test(text)) {
+      // 长文且无明确危机信号，不触发危机模板
+      return { isCrisis: false, level: "none", matchedWords: [] };
+    }
+  }
+  
+  if (allIndirectMatches.length >= 1) {
+    return { isCrisis: true, level: "indirect", matchedWords: allIndirectMatches };
+  }
+  return { isCrisis: false, level: "none", matchedWords: [] };
+}
+
+// ========== 1.9.2: 危机热线区块代码层模板（强制注入，禁止模型自由撰写） ==========
+
+// H1：唯一热线卡片常量（全站所有危机触发点统一调用）
+export const CRISIS_HOTLINE_CARD = `📞 12356（全国心理援助热线，7×24 小时）
+📞 15001930070（QM 24 小时危机热线）
+📞 13601658763（QM 备用热线，24 小时）
+📞 12355（青少年心理服务热线）`;
+
+export const CRISIS_HOTLINE_CARD_WITH_EMERGENCY = `${CRISIS_HOTLINE_CARD}
+如当下有立即危险，请同时拨打 110/120。`;
+
+// 危机响应禁用异步渠道与陪伴承诺（P0）：危机时只引导即时热线，不引导微信留言、不承诺"我们在一起"。
+// 该占位不产生可见文案，仅保留拼接结构；危机热线已由 CRISIS_HOTLINE_CARD 完整给出。
+const CRISIS_WECHAT_GUIDANCE = ``;
+
+// 1.9.2: 危机热线模板常量（逐字拼接，号码与"24小时"不经过模型生成）
+// H1：使用唯一热线卡片常量
+export const CRISIS_HOTLINE_TEMPLATE = `小酷听到你说这些，非常担心你的安全。
+
+请你现在立刻拨打心理援助热线：
+${CRISIS_HOTLINE_CARD_WITH_EMERGENCY}还有一件事想说：作为跨性别者或性少数，你的身份处境、家里和身边人的反应，都可能让这份沉重更重——这不是你的错。现在你的身体状态怎么样？有没有哪里不舒服需要先处理？`;
+
+// [P06-P07-FIX 20260915] P06 温和资源卡：过去史+当下稳定场景（感谢信任+资源+不阻断对话，禁用高危话术）
+export const PAST_HISTORY_GENTLE_RESPONSE = `谢谢你愿意告诉我这段经历，把它说出来是需要勇气的事。
+
+那段最难的时候已经过去了，现在的你还在好好生活，这本身就很了不起。
+
+我还是想把一些支持资源放在这里，不需要马上用，留着就好：
+${CRISIS_HOTLINE_CARD}
+
+小酷在这里陪着你。你想从哪儿聊起都可以，随便聊聊也行。`;
+
+// [P06-P07-FIX 20260915] 危机卡复述句包装：文案开头复述用户消息片段（三件套 R6 机检），模板本体零改动
+export function crisisCardWithParaphrase(card: string, userText: string): string {
+  const frag = String(userText || "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 16);
+  if (!frag) return card;
+  return `你刚说到『${frag}』，我在这里听你说。\n\n` + card;
+}
+
+export const CRISIS_RESPONSE = {
+  direct: CRISIS_HOTLINE_TEMPLATE,
+  indirect: `你说的这些听起来让人心疼。你最近是不是感觉特别沉重、特别累？
+
+如果你觉得自己撑不住了，请一定记得：
+${CRISIS_HOTLINE_CARD}
+紧急危险请拨 110/120。
+
+小酷在这里陪着你，你愿意多说说最近发生了什么吗？`,
+};
+
+// 未成年人专用危机响应（H4：三号齐全 + 12355 不标 24h + 微信引导）
+export const MINOR_CRISIS_RESPONSE = {
+  direct: `小酷听到你说这些，非常担心你的安全。
+
+你现在人安全吗？有没有伤害自己的想法或计划？
+
+请你现在立刻拨打心理援助热线：
+📞 12356（全国心理援助热线，7×24 小时）
+📞 12355（青少年服务台，青少年专线）
+📞 15001930070（QM 24 小时危机热线）
+📞 13601658763（QM 备用热线，24 小时）
+
+如果你身边有人，请告诉他们你现在的感受，不要一个人待着。远离高处、药物、利器等危险物品。
+
+小酷会在这里陪着你。你愿意告诉我你现在在哪里、身边有人吗？`,
+  indirect: `你说的这些听起来让人心疼。你最近是不是感觉特别沉重、特别累？
+
+如果你觉得自己撑不住了，请一定记得：
+📞 12356（全国心理援助热线，7×24 小时）
+📞 12355（青少年服务台，青少年专线）
+📞 15001930070（QM 24 小时危机热线）
+📞 13601658763（QM 备用热线，24 小时）
+
+如果你觉得很难熬，也请让信任的成年人或身边人知道你的处境，不要独自承担。`
+};
+
+// H2：第三人称施救场景危机响应（亲友代问/施救求助）
+// 任何危机场景热线清单必须三号齐全：12356 + 15001930070 + 13601658763
+// H2：槽位填充 - 禁止"朋友/家人""他/她"占位原文，用"对方/TA"
+export const THIRD_PERSON_CRISIS_RESPONSE = {
+  direct: `你提到的对方的情况听起来非常紧急，你的关心和求助非常重要。
+
+请现在立刻协助 TA 拨打心理援助热线：
+${CRISIS_HOTLINE_CARD_WITH_EMERGENCY}
+
+你可以陪伴 TA，帮助 TA 联系专业资源。你也可以把这些号码发给 TA。你也需要照顾好自己。`,
+  indirect: `你提到的对方的情况让人担心，你的关心非常重要。
+
+如果 TA 情绪低落或有危机信号，请协助 TA 联系专业资源：
+${CRISIS_HOTLINE_CARD}
+
+紧急危险请拨 110/120。
+
+你可以陪伴 TA，帮助 TA 联系专业资源。你也可以把这些号码发给 TA。你也需要照顾好自己。`,
+};
+
+// ========== RC1: 危机呈现分级（判定阈值/拦截零改动，仅呈现分级） ==========
+
+// 低危（low）判据：纯情绪低落/疲惫/压力表达，无即时危险意图，不触发完整热线卡。
+// 只用于"是否走轻提示模板"的呈现分级，不改变 detectCrisis 的 isCrisis/level 判定（防漏拦优先）。
+// 高风险信号（自杀/自伤/轻生/结束生命/被动死亡意念等）一律走 high 完整卡，宁高勿低。
+export const LOW_MOOD_SIGNALS = [
+  "日子灰灰",
+  "灰灰的",
+  "最近好累",
+  "好累",
+  "压力大",
+  "压力好大",
+  "睡不着",
+  "睡不好",
+  "失眠",
+  "心情down",
+  "心情低落",
+  "情绪低落",
+  "提不起劲",
+  "有点down",
+  "心里堵",
+  "心里空落落",
+  "没什么精神",
+  "有点撑不住的感觉",
+  "最近特别累",
+  "焦虑得很",
+  "有点难过",
+  "不太开心",
+  "最近有点闷",
+];
+
+// 高危机意图信号（间接级内用于把"存活语境被动意念"拉回 high，宁高勿低）
+const HIGH_INTENT_SIGNALS =
+  /不想活|想死|自杀|自伤|自残|轻生|结束生命|了结|跳楼|跳河|割腕|烧炭|上吊|安眠药|活不下去|撑不住|撑不下去|想不开|活着?没(?:什么)?意思|活着?好累|没(?:什么)?盼头|没(?:什么)?意义|不想过|做傻事|伤害自己|离开这个世界|永远没|解脱|消失|睡过去(?:不用|不再|不再需要)?醒|我是(?:个|家里(?:的)?)?负担|走之前.{0,10}(?:安排|交代|处理)(?:好|完)|没有我(?:们)?他们?(?:更轻松|就轻松)/;
+
+// RC1-R2 修点5：低危误伤收窄（RC1-R1 增量）
+// R1 中"累/疲惫"类词可单独触发 low，导致「今天上班好累，想早点休息」这类日常组合被卷入低危、整段替换为固定轻提示。
+// 修正（安全边界：只收窄明确日常语境，拿不准一律仍判 low，不放宽任何真危机模式）：
+//   1. "累/疲惫"不再单独构成负面特征——须与明确情绪词（低落/灰/撑不住/绷不住/压力/绝望）共现；
+//   2. 命中日常场景词（上班/工作/加班/忙/放假/周末/休息）且不含其他情绪/危机词时，不判 low。
+// 纯"累/疲惫"但无场景词、也无高危机意图 → 仍判 low（宁高勿低）。
+const DAILY_SCENE_SIGNALS = /上班|工作|加班|忙|放假|周末|休息|下班|开会|出差/;
+const DAILY_RELIEF_WORDS = /累|疲惫|疲乏|困|乏/;
+const EMOTION_WORDS = /低落|灰|撑不住|绷不住|压力|绝望|难过|不开心|烦|down|崩溃|想哭|委屈|堵/;
+
+export function detectLowSeverityCrisis(text: string): boolean {
+  const lowerText = text.toLowerCase();
+  const hasHighIntent = HIGH_INTENT_SIGNALS.test(lowerText);
+  if (hasHighIntent) return false;
+  // 日常场景豁免：命中 累/疲惫 且 有日常场景词 且 无明确情绪词 → 不判 low（答非所问）
+  if (DAILY_RELIEF_WORDS.test(lowerText) && DAILY_SCENE_SIGNALS.test(lowerText) && !EMOTION_WORDS.test(lowerText)) {
+    return false;
+  }
+  const hasLowMood = LOW_MOOD_SIGNALS.some((w) => lowerText.includes(w.toLowerCase()));
+  if (!hasLowMood) return false;
+  return true;
+}
+
+// RC1 低危轻提示模板：共情承接 + 一句轻提示 + 对话自然继续。不弹完整四行卡、不追问安全评估。
+export const CRISIS_LOW_RESPONSE = `听你说这些，能感觉到你最近挺不容易的。状态有些低落、没什么力气，是很常见的，你不需要把它们都扛在自己肩上。
+
+如果想说说话，小酷一直都在；想找专业的人聊聊，QM 24 小时支持热线 15001930070 也随时为你在。你愿意的话，可以和我多说说最近发生了什么吗？`;
+
+export const LOW_CRISIS_LEVEL = "low";
+
+// 补丁一：危机模板"我记得你"上下文插槽
+// 从最近 history（user 原文）抽取身份/事件类自我暴露原话短语，合成前置"记得你"段落。
+// 只引用原话短语、禁改写；命中最多 2 条；命中 0 条返回空串（不虚构，也不加"我记得你"占位）。
+const REMEMBER_IDENTITY_KEYWORDS = ["跨性别", "变性", "txl", "同性", "出柜", "激素", "喉结", "胡子", "身份证", "证件", "MTF", "FTM"];
+const REMEMBER_EVENT_KEYWORDS = ["相亲", "爸妈", "爸", "妈", "家里", "工作", "学校", "宿舍", "分手", "喜欢的人", "吵架", "身体", "镜子", "割腕", "伤口"];
+
+function extractQuoteFragment(text: string, kw: string): string {
+  const idx = text.indexOf(kw);
+  if (idx < 0) return kw;
+  let start = idx;
+  while (start > 0 && !/[\n。！？，、；：]/.test(text[start - 1]) && idx - start < 12) start--;
+  let end = idx + kw.length;
+  while (end < text.length && !/[\n。！？，、；：]/.test(text[end]) && end - start < 20) end++;
+  const q = text.slice(start, end).trim();
+  return q.length >= kw.length ? q : kw;
+}
+
+export function buildRememberYouBlock(historyUserTexts: string[]): string {
+  const ordered = [...historyUserTexts].reverse();
+  const chosen: { kind: "identity" | "event"; quote: string }[] = [];
+  for (const text of ordered) {
+    if (chosen.length >= 2) break;
+    for (const kind of ["identity", "event"] as const) {
+      const kws = kind === "identity" ? REMEMBER_IDENTITY_KEYWORDS : REMEMBER_EVENT_KEYWORDS;
+      const hit = kws.find((k) => text.includes(k));
+      if (hit && !chosen.some((c) => c.kind === kind)) {
+        chosen.push({ kind, quote: extractQuoteFragment(text, hit) });
+        break;
+      }
+    }
+  }
+  if (chosen.length === 0) return "";
+  const parts = chosen.map((c) =>
+    c.kind === "identity"
+      ? `你之前跟我说过${c.quote}，这件事我一直记着，此刻它也在我心里。`
+      : `还有${c.quote}这件事压着你，我知道你不是无缘无故走到这一步的。`,
+  );
+  return `${parts.join("\n")}\n\n`;
+}
+
+
+// ========== 批F：危机回撤机制（误触澄清后的撤卡轻回；触发从严：上一轮危机+本轮零命中+明确澄清词） ==========
+export const CRISIS_WITHDRAW_ACK = `刚才是有点担心你——现在听你说没有那种情况，我就放心了。\n\n要是之后想聊什么，或者哪天情绪又沉下去，随时回来找我，小酷在这里。`;
+
+const CRISIS_WITHDRAW_TRIGGERS = ["不是", "没有", "没有啦", "开玩笑", "逗你", "假的", "随便说说", "随口", "别担心", "没事", "不需要", "不用担心", "放心", "还好", "没在想", "不会真的", "不打了", "不想了"];
+
+export function detectCrisisWithdraw(userText: string, prevAssistantText: string): boolean {
+  if (!userText || !prevAssistantText) return false;
+  const prevCrisis = /你现在人安全吗|12356|15001930070|紧急危险请拨/.test(prevAssistantText);
+  if (!prevCrisis) return false;
+  const head = userText.trim().slice(0, 12);
+  if (!head) return false;
+  return CRISIS_WITHDRAW_TRIGGERS.some((w) => head.includes(w));
+}
+
+// ========== T1（20260924，Lumen E3）：低危模糊档——先共情接住+末尾轻留一个热线，不弹完整危机卡 ==========
+// 背景：低危模糊表达（状态很不好/很累/撑不住/心情差/难受等无明确自伤他伤信号的负向表达）在模型中
+// 会被秒切完整危机卡，吓到用户也稀释真的危机严肃性。T1 把这类模糊低落档从完整卡降级为轻留档。
+// 安全不变量：本判据只在 detectCrisis 返回 isCrisis=false（已排除 direct/indirect/gentle 全部明确信号）
+// 之后才被调用；任何明确危机信号词（自杀/自残/轻生/不想活/想死/想消失等）在 detectCrisis 已归完整卡，
+// 绝不落到本档。这里追加一层极端信号守卫作第二道保险（防词表演进时裸词绕过）。
+const T1_HIGH_GUARD =
+  /自杀|自残|自伤|轻生|不想活|想死|结束了?生命|了结|跳楼|跳河|割腕|烧炭|上吊|安眠药|活不下去|伤害自己|离开这个世界|想消失|解脱|做傻事|划自己|割自己|跳下去/;
+
+const T1_STATE_BAD = /(?:状态|情绪|心情|整个人)(?:一直|最近|这两天)?(?:很|特别|非常|太过|真|真的|无比|有点)?(?:不好|差|糟糕|很差|糟透|很低|沉重|down)/;
+// 累类偏重日常场景豁免参考 RC1：纯"上班好累想休息"不卷入低危
+const T1_TIRED = /(?:最近|这两天|这段时间|这几天|这些天|今天)?(?:好累|很累|特别累|太累|累得|累到|每天都累|累极了)/;
+const T1_DAILY_SCENE = /上班|工作|加班|忙|放假|周末|休息|下班|开会|出差|通勤|地铁|公交|堵车|上学|上课|作业|考试|老板|甲方|deadline|打卡/;
+const T1_TIRED_EMOTION = /低落|灰|撑不住|绷不住|压力|绝望|难过|不开心|烦|崩溃|想哭|委屈|堵|难受|状态差|心情差|煎熬/;
+const T1_EXHAUSTED = /(?:撑不住|撑不太住|有点撑不住|快撑不住|撑不过去|扛不住|顶不住)/;
+const T1_BAD_MOOD = /(?:心情|心里)(?:特别|真的|很)?(?:差|不好|难受|堵|down|低落|灰灰|沉重)|(?:很难受|心里难受|不太舒服|不开心|开心不起来|没力气|提不起劲|提不起精神|没什么精神|烦透了|好压抑|太压抑|喘不过气|缓不过来)/;
+
+export function detectT1LowMood(text: string): boolean {
+  const t = text.toLowerCase();
+  if (T1_HIGH_GUARD.test(t)) return false;
+  if (T1_STATE_BAD.test(t) || T1_EXHAUSTED.test(t) || T1_BAD_MOOD.test(t)) return true;
+  // "累"类：命中日常场景且无额外情绪词 → 视为日常表述，不卷入低危模板
+  if (T1_TIRED.test(t) && T1_DAILY_SCENE.test(t) && !T1_TIRED_EMOTION.test(t)) return false;
+  if (T1_TIRED.test(t)) return true;
+  return false;
+}
+
+// ========== P5（20260925，第5棒）：他人风险主体判定——他人且无具体即时危险 → 降级承接 ==========
+// 背景：风险主体是他人（朋友/家人/ta）、用户自身无风险信号时，会误触发完整危机卡，不承接用户自己的
+// 疲惫与边界困境。本函数识别"他人风险 + 无具体即时危险信号"档，命中则该警示由 route 降级为
+// "承接用户自身 + 支持策略 + 末尾轻留一个热线"，不弹完整危机卡。
+// 安全不变量：仅针对 matchedWords 命中 third_party_helper_crisis 的路径降级——
+//   ① 该分支在 detectCrisis 内已要求 !thirdPartySelf（本人自陈不进入该分支），本人信号不会被误降；
+//   ② 具体即时危险硬词（跳楼/跳下去/割腕流血等）命中的是其他 matched，不在本档，即时危险不降级；
+//   ③ 双主体（ta + 本人）本人信号 priority 已走本人完整卡，不进入本档。
+// 词表零增删：仅新增分流函数与文案，不动 direct/indirect/gentle 词条。
+export function isOtherRiskWithoutUrgency(crisisResult: { matchedWords?: string[] }): boolean {
+  return (crisisResult.matchedWords || []).some((w) => w === "third_party_helper_crisis");
+}
+
+// P5：他人场景"具体即时明确危险"判定——只认明确的即时手段/位置/正在实施表达，宽松危机词（想不开/告别/撑不住）不算。
+// 用于他人风险降级：即时危险升级完整危机卡，无即时危险则承接用户自身+支持策略+轻留。宁严勿纵（宽松词不误升）。
+export function hasImmediateDangerSignal(text: string): boolean {
+  const t = text;
+  // 1) 即时性 + 高致命手段（正在/现在/马上/刚刚 + 跳/割/吞/挂/站/蹲/爬/喝/吃/动手/实施/来/走）
+  if (/(?:正在|现在|马上|立刻|刚刚|刚才).{0,6}(?:跳|割|吞|挂|站|蹲|爬|喝|吃|动手|实施|来|走)/.test(t)) return true;
+  // 2) 高致命行为/身体伤害（跳楼/割腕/自残/流血/上吊/吞药/绑绳——保留 P5 覆盖）
+  if (/(?:跳|纵身|往下|一头).{0,4}(?:楼|桥|河|崖|下去)|割腕|自残|流血|止不住血|上吊|跳下去|吞(?:了|下|下去).{0,4}(?:药|安眠药)|脖子挂着|绑好.{0,3}(?:绳|带)/.test(t)) return true;
+  // 3) 凶器/利器架身（P56①：刀/利器 + 架/抵/贴/顶 + 脖子/身上等 即时接触组合）
+  if (/(?:刀|匕首|剪刀|利器|美工刀|水果刀|剃刀|玻璃(?:片|渣|块)|刃|尖(?:物|器))(?:.{0,5})?(?:架|抵|顶|贴着?|戳|对着?|压|搁|比着?)(?:.{0,5})?(?:脖子|喉咙|喉|胸口|胸前|手腕|动脉|身上|自己)/.test(t)) return true;
+  if (/刀.{0,6}(?:架|抵|顶|贴着?|对着?|戳).{0,6}脖子|脖子上.{0,5}(?:架|抵|顶|贴|按|比着?)/.test(t)) return true;
+  // 3c) 裸三字「刀架脖」（R3.1 20260929 词面补全：P58 口径 direct，与 3a/3b 同族）
+  if (/刀架脖/.test(t)) return true;
+  // 4) 遗书/告别信 + 明确时间/地点/倒计时（P56②）
+  if (/(?:遗书|告别信|绝笔信?|遗言)(?:.{0,18})(?:今晚|今天|明天|凌晨|深夜|几点|几点钟|半小时|倒计时|还剩|还有|没多少|天台|楼顶|顶楼|窗台|河边|桥上|学校|宿舍|放学|出门|跳|结束|实施|不在了|走)/.test(t)) return true;
+  // 5) 高位 + 高致命意图（站在/蹲在/爬上 天台/楼顶/桥/阳台）
+  if (/站在.{0,4}(?:天台|楼顶|窗台|桥(?:上|边)|阳台)|蹲在.{0,4}(?:天台|楼顶|窗台|桥|阳台)|爬上.{0,4}(?:天台|楼顶|窗台|栏杆)/.test(t)) return true;
+  // 5b) 进行中：正(在)处高危位置伴下跳/纵身意图
+  if (/(?:正在|正).{0,5}(?:天台|楼顶|顶楼|窗台|桥(?:上|边)?|阳台|栏杆|边缘).{0,5}(?:跳|往下|纵身|跨|迈|要跳)/.test(t)) return true;
+  // 6) 取凶器/动手临近（扬起刀/正要/就要跳/已经割/伤口还在/抽出刀）
+  if (/扬起.{0,4}(?:刀|利器)|正要|就要跳|已经割|伤口还在|抽(?:出|起)?.{0,2}(?:刀|匕首|利器)/.test(t)) return true;
+  return false;
+}
+
+// 小酷版他人支持承接模板：先承接用户自身的累/边界困境 → 支持策略 → 末尾轻留一个热线。
+// 禁完整卡四特征（12356/15001930070/13601658763/☎ 多号并排），末尾仅留一个号码。
+export const CRISIS_OTHER_SUPPORT_RESPONSE = `听你说这些，也能感觉到你其实很累，也很为难——一边是自己的疲惫、不想再越过边界的难受，一边又怕 TA 出什么事，舍不得也放不下这份担心。你把这些扛在心里，很不容易。
+
+如果你愿意，可以和小酷多说说你现在的处境：是哪些事让你不敢拒绝，你最担心的是哪一部分？我们也可以一起看看，怎么在保护自己的前提下，也给到对方关心——比如陪着 TA 说说话、帮 TA 联系信任的专业支持，或者陪 TA 一起去看看医生，这些都未必需要你一个人扛。
+
+如果需要专业帮助，QM 也有 24 小时支持热线 15001930070，随时可以打。`;

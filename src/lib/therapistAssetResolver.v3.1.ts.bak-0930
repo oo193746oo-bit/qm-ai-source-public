@@ -1,0 +1,227 @@
+// ============================================================
+// therapistAssetResolver.v3.1 — 原样入库（热修包 v3.1）+ 96 场景映射数据
+// 数据来源：Coze导入资产映射_96场景.csv / 24人alt与语义清单.csv（SHA256SUMS 一致）
+// 生产 URL 规则：/therapists/derivatives/<文件名>
+// ============================================================
+
+export type TherapistImageContext =
+  | "list_desktop"
+  | "list_mobile"
+  | "detail_desktop"
+  | "detail_mobile";
+
+export interface TherapistAssetRow {
+  therapistId: string;        // T01..T24
+  context: TherapistImageContext;
+  filename: string;           // 必须来自 Coze导入资产映射_96场景.csv
+  sha256: string;             // 派生图文件 SHA（v3.2 起登记派生图本体），逐文件校验用
+  objectPositionPct?: string; // v3.2 新增：逐场景焦点 "50.0% 22.9%"（X 恒 50%，Y 逐人逐场景）
+  width: number;
+  height: number;
+}
+
+export function selectTherapistContext(
+  page: "list" | "detail",
+  viewportWidth: number
+): TherapistImageContext {
+  const device = viewportWidth <= 767 ? "mobile" : "desktop";
+  return `${page}_${device}` as TherapistImageContext;
+}
+
+export function resolveTherapistAsset(
+  rows: TherapistAssetRow[],
+  therapistId: string,
+  page: "list" | "detail",
+  viewportWidth: number
+): TherapistAssetRow {
+  const context = selectTherapistContext(page, viewportWidth);
+  const exact = rows.find((row) => row.therapistId === therapistId && row.context === context);
+  if (!exact) throw new Error(`THERAPIST_ASSET_MISSING:${therapistId}:${context}`);
+  if (/fullbody|全身|master/i.test(exact.filename)) {
+    throw new Error(`THERAPIST_MASTER_FORBIDDEN_IN_PRODUCTION:${exact.filename}`);
+  }
+  return exact;
+}
+
+// 禁止 fallback 到母图、其他 context、远程 stock 或生成图。
+// 加载失败必须进入 UI 的 image-error 状态并保留姓名，不得静默替换人物。
+
+// ============================================================
+// v3.1 补充：96 场景映射数据（由 CSV 机械转换，禁止手工改动数值）
+// ============================================================
+
+export const THERAPIST_ASSET_ROWS: TherapistAssetRow[] = [
+  { therapistId: "T01", context: "list_desktop", filename: "T01_彭瑞_Rita_list_desktop_640x844.jpg", sha256: "be65260c0e2f6b400430047a22de01b39565f74acd866a9337738c499d53888d", objectPositionPct: "50.0% 22.9%", width: 640, height: 844 },
+  { therapistId: "T01", context: "list_mobile", filename: "T01_彭瑞_Rita_list_mobile_480x600.jpg", sha256: "9ac6d1ab21524341cdb312943a8e9243f3a81ee63c4576c97ae22c9193c2f915", objectPositionPct: "50.0% 26.5%", width: 480, height: 600 },
+  { therapistId: "T01", context: "detail_desktop", filename: "T01_彭瑞_Rita_detail_desktop_960x1067.jpg", sha256: "0e10b6a76ba583af3341132ac5fc9ac9bdad20ddee03e8109552e7b3158e1f05", objectPositionPct: "50.0% 24.3%", width: 960, height: 1067 },
+  { therapistId: "T01", context: "detail_mobile", filename: "T01_彭瑞_Rita_detail_mobile_640x840.jpg", sha256: "5e02f04051fef7a7b440f857cbb2590d96d8e9281a19b9ea57ae85fc7b926293", objectPositionPct: "50.0% 23.0%", width: 640, height: 840 },
+  { therapistId: "T02", context: "list_desktop", filename: "T02_范晓_Nicolas_list_desktop_640x844.jpg", sha256: "c633813e90c4eb119b04782899655b9aea8fa5ec29e3bfcfa22ad795b2f97631", objectPositionPct: "50.0% 25.8%", width: 640, height: 844 },
+  { therapistId: "T02", context: "list_mobile", filename: "T02_范晓_Nicolas_list_mobile_480x600.jpg", sha256: "ce47c8f757607043c4a3881d1ed1e36ac5319e73f2f19e7de72c513fd30aa4b1", objectPositionPct: "50.0% 28.0%", width: 480, height: 600 },
+  { therapistId: "T02", context: "detail_desktop", filename: "T02_范晓_Nicolas_detail_desktop_960x1067.jpg", sha256: "20d4261840388247ffe347077e4b01b030a7245af3aaa8182e21666eb808fab7", objectPositionPct: "50.0% 28.8%", width: 960, height: 1067 },
+  { therapistId: "T02", context: "detail_mobile", filename: "T02_范晓_Nicolas_detail_mobile_640x840.jpg", sha256: "84c915c64bfcac5268a7dcfe4b383fdf9fbb540b8a615973c60b542ff63ac007", objectPositionPct: "50.0% 25.1%", width: 640, height: 840 },
+  { therapistId: "T03", context: "list_desktop", filename: "T03_舒瑱_Susan_list_desktop_640x844.jpg", sha256: "8ff9b256837ac9275d6a881f189bec08c38d942468b851a38c678ffb2609af06", width: 640, height: 844 },
+  { therapistId: "T03", context: "list_mobile", filename: "T03_舒瑱_Susan_list_mobile_480x600.jpg", sha256: "b035e3cc8de220ee80c7c6dba0faf57dc0704f84b6e59895a6bba7085fc166b9", width: 480, height: 600 },
+  { therapistId: "T03", context: "detail_desktop", filename: "T03_舒瑱_Susan_detail_desktop_960x1067.jpg", sha256: "db1a70083b6cf71d8c9d9bd53e7e2e1101ce4788c010ad2454f92ebb99d4fc58", width: 960, height: 1067 },
+  { therapistId: "T03", context: "detail_mobile", filename: "T03_舒瑱_Susan_detail_mobile_640x840.jpg", sha256: "48920ef770ab5775dae65c66ab77b7342ae556c87864a1f7e6b84b422f06fc74", width: 640, height: 840 },
+  { therapistId: "T04", context: "list_desktop", filename: "T04_瑞琪_Rachel_list_desktop_640x844.jpg", sha256: "10ffbd80731137c9cd597d2946691f3ca122ebf465c2a943764368cf91db6d34", objectPositionPct: "50.0% 25.8%", width: 640, height: 844 },
+  { therapistId: "T04", context: "list_mobile", filename: "T04_瑞琪_Rachel_list_mobile_480x600.jpg", sha256: "08f3a42909264f49a5e586b26f8707fe2c340e2f5463cb27e31b9ce48e36787b", objectPositionPct: "50.0% 28.0%", width: 480, height: 600 },
+  { therapistId: "T04", context: "detail_desktop", filename: "T04_瑞琪_Rachel_detail_desktop_960x1067.jpg", sha256: "90ef39d2a030ffc6db24907fbd49b5789247e17446d5aeacc2ffe0af3d29fd8d", objectPositionPct: "50.0% 28.8%", width: 960, height: 1067 },
+  { therapistId: "T04", context: "detail_mobile", filename: "T04_瑞琪_Rachel_detail_mobile_640x840.jpg", sha256: "f23dba87a0afa6855e5f87a2b3d18c8cb2d150cb3c2c7936754d75a36d2e85d8", objectPositionPct: "50.0% 25.1%", width: 640, height: 840 },
+  { therapistId: "T05", context: "list_desktop", filename: "T05_天岚_Christy_list_desktop_640x844.jpg", sha256: "b5a35c2e6091aa5aa6f4a0fadd333602d9db81a5f2f040f42b6aea9a9694ed44", width: 640, height: 844 },
+  { therapistId: "T05", context: "list_mobile", filename: "T05_天岚_Christy_list_mobile_480x600.jpg", sha256: "fe76b07ac2e79283379cbda87ba0a3c3f0a3a646e77f1913295344f6e4f1098a", width: 480, height: 600 },
+  { therapistId: "T05", context: "detail_desktop", filename: "T05_天岚_Christy_detail_desktop_960x1067.jpg", sha256: "f92c6b6365f5f9425f5e47db6b91bfe89c2f174725b869d75691b9baa74b0860", width: 960, height: 1067 },
+  { therapistId: "T05", context: "detail_mobile", filename: "T05_天岚_Christy_detail_mobile_640x840.jpg", sha256: "1120b322bbd8a8aca131696ea25b7774b74406b4ae49804642cb52d2ab13921c", width: 640, height: 840 },
+  { therapistId: "T06", context: "list_desktop", filename: "T06_万从容_Candice_list_desktop_640x844.jpg", sha256: "56d47cb6b40f7c6889057503a1e416d2ab982515d6bbe1593d91103f656105af", width: 640, height: 844 },
+  { therapistId: "T06", context: "list_mobile", filename: "T06_万从容_Candice_list_mobile_480x600.jpg", sha256: "80236a05e23f208de75e34a06eb5fc90b31f88fde829701ab07bd36e4490da49", width: 480, height: 600 },
+  { therapistId: "T06", context: "detail_desktop", filename: "T06_万从容_Candice_detail_desktop_960x1067.jpg", sha256: "559e1430cab2711c5c170fea307ed93ddcad981235128709e49218be0844e932", width: 960, height: 1067 },
+  { therapistId: "T06", context: "detail_mobile", filename: "T06_万从容_Candice_detail_mobile_640x840.jpg", sha256: "905059540fa7a36d343f3c131d3987711d00358b5d69ac114b847ef58c9e5493", width: 640, height: 840 },
+  { therapistId: "T07", context: "list_desktop", filename: "T07_丁怡_Dingding_list_desktop_640x844.jpg", sha256: "1d2a7b40fa70b63c832e27db5b35f057dcaf5aa387480c7292fe10cfdad2d2d7", width: 640, height: 844 },
+  { therapistId: "T07", context: "list_mobile", filename: "T07_丁怡_Dingding_list_mobile_480x600.jpg", sha256: "5bf02ce7ac6c010f0365c3aec6a7e779fdd2b7c6bead52db110181f827fc156c", width: 480, height: 600 },
+  { therapistId: "T07", context: "detail_desktop", filename: "T07_丁怡_Dingding_detail_desktop_960x1067.jpg", sha256: "8764848afb50b4271c2d22123418cc7746805923b2f9540cdbe5306ffb4a6760", width: 960, height: 1067 },
+  { therapistId: "T07", context: "detail_mobile", filename: "T07_丁怡_Dingding_detail_mobile_640x840.jpg", sha256: "d1f6d09ab2de0322881dcd8a303ac0392b0049b983a121ac9304b299f3167c42", width: 640, height: 840 },
+  { therapistId: "T08", context: "list_desktop", filename: "T08_徐玮伶_Fiona_list_desktop_640x844.jpg", sha256: "eb1c06698c7197f84114d77c869bbc41d14f773dbfa54bd540ca01202851fc1a", width: 640, height: 844 },
+  { therapistId: "T08", context: "list_mobile", filename: "T08_徐玮伶_Fiona_list_mobile_480x600.jpg", sha256: "2787c886e5ece44873e104eb754f1334eb33a8749a3ac9eb2f9c28cfdb76faf7", width: 480, height: 600 },
+  { therapistId: "T08", context: "detail_desktop", filename: "T08_徐玮伶_Fiona_detail_desktop_960x1067.jpg", sha256: "1571288315a1e14deb9370e41ad3d1906b0585f58c8cf8efa64c00a441942344", width: 960, height: 1067 },
+  { therapistId: "T08", context: "detail_mobile", filename: "T08_徐玮伶_Fiona_detail_mobile_640x840.jpg", sha256: "d88560e5493b1de468c4eff6d400f5437a3ec003d5c99ee963344b8f91fe7cd2", width: 640, height: 840 },
+  { therapistId: "T09", context: "list_desktop", filename: "T09_闫雪_Qiqi_list_desktop_640x844.jpg", sha256: "2d2e10bb9443a71bc31abc7df87074811355467318a128da45ad641cadb71f25", width: 640, height: 844 },
+  { therapistId: "T09", context: "list_mobile", filename: "T09_闫雪_Qiqi_list_mobile_480x600.jpg", sha256: "38259a8f80bf08e136b2ddeaab5d22e869ec25c6cd3b22b4a383b8e27bdb00e4", width: 480, height: 600 },
+  { therapistId: "T09", context: "detail_desktop", filename: "T09_闫雪_Qiqi_detail_desktop_960x1067.jpg", sha256: "e9e229c6d296a78f6a4e4e8dc55bb8f9b9cad8ddd3b40410347c9f54020aff41", width: 960, height: 1067 },
+  { therapistId: "T09", context: "detail_mobile", filename: "T09_闫雪_Qiqi_detail_mobile_640x840.jpg", sha256: "4a76fc2c4a1fc221cb99ac146d403b4b1a058c51d97560fa539ce032fb707b9c", width: 640, height: 840 },
+  { therapistId: "T10", context: "list_desktop", filename: "T10_墨瑞_Moris_list_desktop_640x844.jpg", sha256: "784abd7e48da0f3521575948fde027cc71527f848796b9eb4003a63b309b86d2", width: 640, height: 844 },
+  { therapistId: "T10", context: "list_mobile", filename: "T10_墨瑞_Moris_list_mobile_480x600.jpg", sha256: "c563003de3606bbebe486664f62a9cefa04303c80d0884ef744004fa15ee3c3a", width: 480, height: 600 },
+  { therapistId: "T10", context: "detail_desktop", filename: "T10_墨瑞_Moris_detail_desktop_960x1067.jpg", sha256: "d2c98f08be543c2897656e27ad11d953a709a960a15aa4be126b4332614fa806", width: 960, height: 1067 },
+  { therapistId: "T10", context: "detail_mobile", filename: "T10_墨瑞_Moris_detail_mobile_640x840.jpg", sha256: "64c585169bccfd135750a31ad956169d0308feab73c9e3e3b641130b2eb8c0cb", width: 640, height: 840 },
+  { therapistId: "T11", context: "list_desktop", filename: "T11_陈一明_Amy_list_desktop_640x844.jpg", sha256: "5bf2c9803454d95555b1788b1e2a78b3671920cedb1ee36320a2142aa50ab912", width: 640, height: 844 },
+  { therapistId: "T11", context: "list_mobile", filename: "T11_陈一明_Amy_list_mobile_480x600.jpg", sha256: "25e8f5e5e6a4668a2e07bba81372c04ff79ff52a5a329565c41c24a8bf03f764", width: 480, height: 600 },
+  { therapistId: "T11", context: "detail_desktop", filename: "T11_陈一明_Amy_detail_desktop_960x1067.jpg", sha256: "6b960800c00ebad0d1ace2e8624e71766895fc3a387762eec702200336951284", width: 960, height: 1067 },
+  { therapistId: "T11", context: "detail_mobile", filename: "T11_陈一明_Amy_detail_mobile_640x840.jpg", sha256: "35019992e2c51141cff3679e18ac73edd5a324f33b3478e24af1a01eb631c54a", width: 640, height: 840 },
+  { therapistId: "T12", context: "list_desktop", filename: "T12_祖迪_Zudi_list_desktop_640x844.jpg", sha256: "b47ccf6132e181e5a34c8c740c28fd20366bb4d82cbfd7b7994f972d4aaf33c9", width: 640, height: 844 },
+  { therapistId: "T12", context: "list_mobile", filename: "T12_祖迪_Zudi_list_mobile_480x600.jpg", sha256: "26d9d44f8a4f2fc92b0d32b068076c6dc6f6f4044fdb0bec25150a184a003124", width: 480, height: 600 },
+  { therapistId: "T12", context: "detail_desktop", filename: "T12_祖迪_Zudi_detail_desktop_960x1067.jpg", sha256: "f76f619f423633162e15d23981d477bd1653bbb8e3704f59ded42df9b7477c2a", width: 960, height: 1067 },
+  { therapistId: "T12", context: "detail_mobile", filename: "T12_祖迪_Zudi_detail_mobile_640x840.jpg", sha256: "b41ab7a7ecf31791f5810d789376d554409224fc878df2a0160b8c5e5b68de34", width: 640, height: 840 },
+  { therapistId: "T13", context: "list_desktop", filename: "T13_叶伶_Eileen_list_desktop_640x844.jpg", sha256: "b4c4458494ee2545a682b1420e1027977d49d67bc9528282ab8cd194add4f3dc", width: 640, height: 844 },
+  { therapistId: "T13", context: "list_mobile", filename: "T13_叶伶_Eileen_list_mobile_480x600.jpg", sha256: "c0705cf131e3ba58df0f8b004f16278f38a116100c59264267ac7ad71bfa0e83", width: 480, height: 600 },
+  { therapistId: "T13", context: "detail_desktop", filename: "T13_叶伶_Eileen_detail_desktop_960x1067.jpg", sha256: "f377587d866f52acd9a17c584e50d98562915107e6ec63759ccbf001f7d44ecd", width: 960, height: 1067 },
+  { therapistId: "T13", context: "detail_mobile", filename: "T13_叶伶_Eileen_detail_mobile_640x840.jpg", sha256: "049a9c98a27a22ca8908d7dd023b4efe91090798fbed7eeb41318fb9a6f63b60", width: 640, height: 840 },
+  { therapistId: "T14", context: "list_desktop", filename: "T14_麦兜_Michelle_list_desktop_640x844.jpg", sha256: "ffdb284b5f8f01b2afab81d6f96c737c99156cfdd780a033b0d0737a48ab3dc0", width: 640, height: 844 },
+  { therapistId: "T14", context: "list_mobile", filename: "T14_麦兜_Michelle_list_mobile_480x600.jpg", sha256: "a23ef5884c784e873203971e521517dfde2014e02d681747bb6aeac055d30a73", width: 480, height: 600 },
+  { therapistId: "T14", context: "detail_desktop", filename: "T14_麦兜_Michelle_detail_desktop_960x1067.jpg", sha256: "c47f88d6abe114e1a0f5d7ffcc4fe6cfb92d11b8e208ff8250f96d59c83d1884", width: 960, height: 1067 },
+  { therapistId: "T14", context: "detail_mobile", filename: "T14_麦兜_Michelle_detail_mobile_640x840.jpg", sha256: "0ea41b02595b02e1b12334fbe652daac62583b48373b6d7ba5706c957e3a2fba", width: 640, height: 840 },
+  { therapistId: "T15", context: "list_desktop", filename: "T15_刘磊_Lily_list_desktop_640x844.jpg", sha256: "c1f03187e5b6066d75face57a7a007d92f8e7c82bfd876a4e0cbe9466386671c", width: 640, height: 844 },
+  { therapistId: "T15", context: "list_mobile", filename: "T15_刘磊_Lily_list_mobile_480x600.jpg", sha256: "4770433098e5e4434b18cf1a1cbdac8000ca22bd8b4fd2459558a76a22adb5ee", width: 480, height: 600 },
+  { therapistId: "T15", context: "detail_desktop", filename: "T15_刘磊_Lily_detail_desktop_960x1067.jpg", sha256: "09023e32ae4ade1957b70be41e8606baf623e7bd49dd31cad0c437337d2b9ac8", width: 960, height: 1067 },
+  { therapistId: "T15", context: "detail_mobile", filename: "T15_刘磊_Lily_detail_mobile_640x840.jpg", sha256: "b7c51bf016b9503e53f7e05a93b7e5c154c48d931d9914de6ada25001b67c9fb", width: 640, height: 840 },
+  { therapistId: "T16", context: "list_desktop", filename: "T16_张菁_Jennifer_list_desktop_640x844.jpg", sha256: "3980f46273e5e6493826a992dc48b0f84100396404fd667e21f25c870d8b1b4c", width: 640, height: 844 },
+  { therapistId: "T16", context: "list_mobile", filename: "T16_张菁_Jennifer_list_mobile_480x600.jpg", sha256: "4c44ae564a2655456f053a55288821c99b6fa279d306b74d837d4030d5d5df49", width: 480, height: 600 },
+  { therapistId: "T16", context: "detail_desktop", filename: "T16_张菁_Jennifer_detail_desktop_960x1067.jpg", sha256: "852bfe1a02e4a26bd51fd9c593b04b24140f8201cbbc78032065a2d487234491", width: 960, height: 1067 },
+  { therapistId: "T16", context: "detail_mobile", filename: "T16_张菁_Jennifer_detail_mobile_640x840.jpg", sha256: "4e6bd93ac845a6823589178d754d7785713e165075ec4c1cbc1305d549cbfc1f", width: 640, height: 840 },
+  { therapistId: "T17", context: "list_desktop", filename: "T17_王艳_NIKO_list_desktop_640x844.jpg", sha256: "9449c0c1408636754a172c247f5546a4034a177ef68542ff75575ac65c78cd9a", width: 640, height: 844 },
+  { therapistId: "T17", context: "list_mobile", filename: "T17_王艳_NIKO_list_mobile_480x600.jpg", sha256: "fc9f58d43575bf8b5eb4b4f43fc3dfb7424905f39cc60bc0d5ab450dbbd2ab18", width: 480, height: 600 },
+  { therapistId: "T17", context: "detail_desktop", filename: "T17_王艳_NIKO_detail_desktop_960x1067.jpg", sha256: "a2b56d19623a608f8fdd81f3b388aaf6ca1a0d993b5b8efa120fb2a2d98e60b2", width: 960, height: 1067 },
+  { therapistId: "T17", context: "detail_mobile", filename: "T17_王艳_NIKO_detail_mobile_640x840.jpg", sha256: "0cc01a0d3257a4c91141d505a78d67b3df9e25645fc6681a374e740896b937fd", width: 640, height: 840 },
+  { therapistId: "T18", context: "list_desktop", filename: "T18_潘新瑞_Melinda_list_desktop_640x844.jpg", sha256: "d3092ca496a087657056db205d04ec1202934280868a520b02e9911a4e7d07d1", width: 640, height: 844 },
+  { therapistId: "T18", context: "list_mobile", filename: "T18_潘新瑞_Melinda_list_mobile_480x600.jpg", sha256: "919d93a398f4774aae07b4c61a778c4c73ad0b813ec4525e9be249ffbfca0a6e", width: 480, height: 600 },
+  { therapistId: "T18", context: "detail_desktop", filename: "T18_潘新瑞_Melinda_detail_desktop_960x1067.jpg", sha256: "324e2aab97442bc1e165182268167ecd679771b601620ef54c56d6fb49b35cd7", width: 960, height: 1067 },
+  { therapistId: "T18", context: "detail_mobile", filename: "T18_潘新瑞_Melinda_detail_mobile_640x840.jpg", sha256: "45b84bfc09199db6e8964157a273d740ac311b1d32736dbcc3891de435fa76b2", width: 640, height: 840 },
+  { therapistId: "T19", context: "list_desktop", filename: "T19_徐凯_Rick_list_desktop_640x844.jpg", sha256: "21cec7c7c55ed92617071d8845f18f09a20b147439f0cb4cc420355d20001be7", width: 640, height: 844 },
+  { therapistId: "T19", context: "list_mobile", filename: "T19_徐凯_Rick_list_mobile_480x600.jpg", sha256: "c80ff2918810079c1c6c7bb4eb456782a78b23ade9116629439b9049b78a8005", width: 480, height: 600 },
+  { therapistId: "T19", context: "detail_desktop", filename: "T19_徐凯_Rick_detail_desktop_960x1067.jpg", sha256: "1231e1225ff5afd235bcc6c88a2f32441804e4aa59db266421e0fa7a4717b8c2", width: 960, height: 1067 },
+  { therapistId: "T19", context: "detail_mobile", filename: "T19_徐凯_Rick_detail_mobile_640x840.jpg", sha256: "317d7dfe88c8e81fec486b00ca1f2df5b78b4ccc57eac0beb60465cb04321cad", width: 640, height: 840 },
+  { therapistId: "T20", context: "list_desktop", filename: "T20_雪花_Lara_list_desktop_640x844.jpg", sha256: "4012245d9f8c0890bddf8d9f43f333b76919ef1b195fd171bcbaa3a3b8689aef", width: 640, height: 844 },
+  { therapistId: "T20", context: "list_mobile", filename: "T20_雪花_Lara_list_mobile_480x600.jpg", sha256: "5fd42431680b6ccb0c938b55ef6a23bb98038a34e32fc5164037b5be9c408883", width: 480, height: 600 },
+  { therapistId: "T20", context: "detail_desktop", filename: "T20_雪花_Lara_detail_desktop_960x1067.jpg", sha256: "642c52616aac77bd23040fd426050c158328788b9f75a409e05d85ea38930ad2", width: 960, height: 1067 },
+  { therapistId: "T20", context: "detail_mobile", filename: "T20_雪花_Lara_detail_mobile_640x840.jpg", sha256: "ce240e88335d9b40be0af9952ee5312fa9aa0fe194b2c5d74f54c77af228368d", width: 640, height: 840 },
+  { therapistId: "T21", context: "list_desktop", filename: "T21_许安_Jimmy_list_desktop_640x844.jpg", sha256: "df338b8e63df9e04afa8cc63c4d8b5c80f2f081bb28662351121ed5b3d67acfa", objectPositionPct: "50.0% 25.7%", width: 640, height: 844 },
+  { therapistId: "T21", context: "list_mobile", filename: "T21_许安_Jimmy_list_mobile_480x600.jpg", sha256: "977e16a75786860def8434650107b26d342b43c8f8ceab6665256692dc69f8bf", objectPositionPct: "50.0% 28.0%", width: 480, height: 600 },
+  { therapistId: "T21", context: "detail_desktop", filename: "T21_许安_Jimmy_detail_desktop_960x1067.jpg", sha256: "d6d66a38a41d8a3817a954638a721eaeef38172896501485e8a950d1e2f8d390", objectPositionPct: "50.0% 28.8%", width: 960, height: 1067 },
+  { therapistId: "T21", context: "detail_mobile", filename: "T21_许安_Jimmy_detail_mobile_640x840.jpg", sha256: "cbbe0f0b75999e639b4479b5492b59f38d821e7db5bca8cd34a68695deed7712", objectPositionPct: "50.0% 25.1%", width: 640, height: 840 },
+  { therapistId: "T22", context: "list_desktop", filename: "T22_周传美_Rose_list_desktop_640x844.jpg", sha256: "b6d4c7dc897727350b33cf372ae97be63711ab3717f5edabc0607b4f90e70318", width: 640, height: 844 },
+  { therapistId: "T22", context: "list_mobile", filename: "T22_周传美_Rose_list_mobile_480x600.jpg", sha256: "a5c27331f58e8b7f98aee490b84473bf16fdb2395b3bb89ceb3c724259e37e97", width: 480, height: 600 },
+  { therapistId: "T22", context: "detail_desktop", filename: "T22_周传美_Rose_detail_desktop_960x1067.jpg", sha256: "112920d0171395b0f1bb7c034145aec2aa989dbe5ce4da3e8ca6467b895372ba", width: 960, height: 1067 },
+  { therapistId: "T22", context: "detail_mobile", filename: "T22_周传美_Rose_detail_mobile_640x840.jpg", sha256: "7d6cff7b7797b133b23ab62dd8d2591f5e1fca8ba49f9ed49622c67d15d47216", width: 640, height: 840 },
+  { therapistId: "T23", context: "list_desktop", filename: "T23_汪芳_Mary_list_desktop_640x844.jpg", sha256: "b5e65093ca00ebe11b931d09caa4038359efffe4bc6d6bb56578844e73e6defb", width: 640, height: 844 },
+  { therapistId: "T23", context: "list_mobile", filename: "T23_汪芳_Mary_list_mobile_480x600.jpg", sha256: "10d9f88b97b2b93a82941feda2f2800fa23a78b6b18306226af721a17a1cb190", width: 480, height: 600 },
+  { therapistId: "T23", context: "detail_desktop", filename: "T23_汪芳_Mary_detail_desktop_960x1067.jpg", sha256: "cc2402a7d89b50fffb650dce35d0d9917a39a72b29ee3b8b3fa571c16f59378e", width: 960, height: 1067 },
+  { therapistId: "T23", context: "detail_mobile", filename: "T23_汪芳_Mary_detail_mobile_640x840.jpg", sha256: "7305bc5cf62584972107a0796363f4ef5515988de50ca2e80786c538c9e246f6", width: 640, height: 840 },
+  { therapistId: "T24", context: "list_desktop", filename: "T24_柳宇哲_Jacky_list_desktop_640x844.jpg", sha256: "9ca2fc1566640abf715fa2755f68bb02c9b5d878fb753d6246941838cffcff1e", objectPositionPct: "50.0% 25.7%", width: 640, height: 844 },
+  { therapistId: "T24", context: "list_mobile", filename: "T24_柳宇哲_Jacky_list_mobile_480x600.jpg", sha256: "b5b6fd489187116b3963a2f9c817b4eb28150077a59165410b256d4bc21dc369", objectPositionPct: "50.0% 28.0%", width: 480, height: 600 },
+  { therapistId: "T24", context: "detail_desktop", filename: "T24_柳宇哲_Jacky_detail_desktop_960x1067.jpg", sha256: "acb41f7fff4a26133449015ea7e2221eb64941aac95174db7009c88c46e6b539", objectPositionPct: "50.0% 28.8%", width: 960, height: 1067 },
+  { therapistId: "T24", context: "detail_mobile", filename: "T24_柳宇哲_Jacky_detail_mobile_640x840.jpg", sha256: "331d92912a0cbc3023b360219992d8834e5ae0c05e808b96ab24f3897a7e83f7", objectPositionPct: "50.0% 25.1%", width: 640, height: 840 },
+];
+
+/** 站点内派生图 URL（唯一合法生产路径前缀） */
+export function derivativeUrl(filename: string): string {
+  return `/therapists/derivatives/${filename}`;
+}
+
+/** 按页面与 viewport 取单张派生图 URL；缺行即抛错，禁止静默回退 */
+export function assetUrlFor(
+  therapistId: string,
+  page: "list" | "detail",
+  viewportWidth: number
+): string {
+  const row = resolveTherapistAsset(THERAPIST_ASSET_ROWS, therapistId, page, viewportWidth);
+  return derivativeUrl(row.filename);
+}
+
+/** 四端派生图对：<picture> 用（desktop + mobile），同页同源、禁止跨场景互借 */
+export function resolveTherapistPair(
+  therapistId: string,
+  page: "list" | "detail"
+): { desktop: string; mobile: string; objectPositionPct?: string } {
+  const d = THERAPIST_ASSET_ROWS.find(
+    (r) => r.therapistId === therapistId && r.context === `${page}_desktop`,
+  );
+  const m = THERAPIST_ASSET_ROWS.find(
+    (r) => r.therapistId === therapistId && r.context === `${page}_mobile`,
+  );
+  if (!d || !m) throw new Error(`THERAPIST_ASSET_MISSING:${therapistId}:${page}`);
+  if (/fullbody|全身|master/i.test(d.filename) || /fullbody|全身|master/i.test(m.filename)) {
+    throw new Error(`THERAPIST_MASTER_FORBIDDEN_IN_PRODUCTION:${d.filename}`);
+  }
+  return { desktop: derivativeUrl(d.filename), mobile: derivativeUrl(m.filename), objectPositionPct: d.objectPositionPct };
+}
+
+// ============================================================
+// v3.1 补充：24 人元数据与 alt（来自 24人alt与语义清单.csv）
+// ============================================================
+
+export interface TherapistMeta {
+  therapistId: string;
+  cnName: string;
+  enName: string;
+  listAlt: string;
+  detailAlt: string;
+}
+
+export const THERAPIST_META: TherapistMeta[] = [
+  { therapistId: "T01", cnName: "彭瑞", enName: "Rita", listAlt: "彭瑞心理师头像", detailAlt: "彭瑞心理师" },
+  { therapistId: "T02", cnName: "范晓", enName: "Nicolas", listAlt: "范晓心理师头像", detailAlt: "范晓心理师" },
+  { therapistId: "T03", cnName: "舒瑱", enName: "Susan", listAlt: "舒瑱心理师头像", detailAlt: "舒瑱心理师" },
+  { therapistId: "T04", cnName: "瑞琪", enName: "Rachel", listAlt: "瑞琪心理师头像", detailAlt: "瑞琪心理师" },
+  { therapistId: "T05", cnName: "天岚", enName: "Christy", listAlt: "天岚心理师头像", detailAlt: "天岚心理师" },
+  { therapistId: "T06", cnName: "万从容", enName: "Candice", listAlt: "万从容心理师头像", detailAlt: "万从容心理师" },
+  { therapistId: "T07", cnName: "丁怡", enName: "Dingding", listAlt: "丁怡心理师头像", detailAlt: "丁怡心理师" },
+  { therapistId: "T08", cnName: "徐玮伶", enName: "Fiona", listAlt: "徐玮伶心理师头像", detailAlt: "徐玮伶心理师" },
+  { therapistId: "T09", cnName: "闫雪", enName: "Qiqi", listAlt: "闫雪心理师头像", detailAlt: "闫雪心理师" },
+  { therapistId: "T10", cnName: "墨瑞", enName: "Moris", listAlt: "墨瑞心理师头像", detailAlt: "墨瑞心理师" },
+  { therapistId: "T11", cnName: "陈一明", enName: "Amy", listAlt: "陈一明心理师头像", detailAlt: "陈一明心理师" },
+  { therapistId: "T12", cnName: "祖迪", enName: "Zudi", listAlt: "祖迪心理师头像", detailAlt: "祖迪心理师" },
+  { therapistId: "T13", cnName: "叶伶", enName: "Eileen", listAlt: "叶伶心理师头像", detailAlt: "叶伶心理师" },
+  { therapistId: "T14", cnName: "麦兜", enName: "Michelle", listAlt: "麦兜心理师头像", detailAlt: "麦兜心理师" },
+  { therapistId: "T15", cnName: "刘磊", enName: "Lily", listAlt: "刘磊心理师头像", detailAlt: "刘磊心理师" },
+  { therapistId: "T16", cnName: "张菁", enName: "Jennifer", listAlt: "张菁心理师头像", detailAlt: "张菁心理师" },
+  { therapistId: "T17", cnName: "王艳", enName: "NIKO", listAlt: "王艳心理师头像", detailAlt: "王艳心理师" },
+  { therapistId: "T18", cnName: "潘新瑞", enName: "Melinda", listAlt: "潘新瑞心理师头像", detailAlt: "潘新瑞心理师" },
+  { therapistId: "T19", cnName: "徐凯", enName: "Rick", listAlt: "徐凯心理师头像", detailAlt: "徐凯心理师" },
+  { therapistId: "T20", cnName: "雪花", enName: "Lara", listAlt: "雪花心理师头像", detailAlt: "雪花心理师" },
+  { therapistId: "T21", cnName: "许安", enName: "Jimmy", listAlt: "许安心理师头像", detailAlt: "许安心理师" },
+  { therapistId: "T22", cnName: "周传美", enName: "Rose", listAlt: "周传美心理师头像", detailAlt: "周传美心理师" },
+  { therapistId: "T23", cnName: "汪芳", enName: "Mary", listAlt: "汪芳心理师头像", detailAlt: "汪芳心理师" },
+  { therapistId: "T24", cnName: "柳宇哲", enName: "Jacky", listAlt: "柳宇哲心理师头像", detailAlt: "柳宇哲心理师" },
+];
+
+/** 中文名 → T 编号（页面渲染时唯一对齐键，禁止按数组顺序猜测） */
+export function therapistIdByCnName(cnName: string): string | undefined {
+  return THERAPIST_META.find((m) => m.cnName === cnName)?.therapistId;
+}

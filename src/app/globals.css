@@ -1,0 +1,1541 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ================================================================
+   QM Aurora Mind 全站视觉系统 v2.2
+   设计原则：60%中性留白 + 30%品牌结构色 + 10%情绪强调
+   Mobile First · 5档断点 · 安全区 · 软键盘适配 · 无障碍
+   ================================================================ */
+
+/* ---------- CSS 变量：QM Aurora Mind Design Tokens ---------- */
+:root {
+  /* ===== 品牌色 Brand Purple ===== */
+  --qm-purple-950: #23163B;
+  --qm-purple-900: #342050;
+  --qm-purple-800: #4D3373;
+  --qm-purple-700: #62428B;
+  --qm-purple-600: #6B4C9A;
+  --qm-purple-500: #7D5CB2;
+  --qm-purple-400: #9A7AC8;
+  --qm-purple-300: #B8A0DB;
+  --qm-purple-200: #D8C9EC;
+  --qm-purple-100: #EEE7F7;
+  --qm-purple-50: #F8F5FC;
+
+  /* ===== 科技色 Tech (Indigo + Cyan) ===== */
+  --qm-indigo-700: #3F46A8;
+  --qm-indigo-600: #5158C9;
+  --qm-indigo-500: #6670E8;
+  --qm-indigo-100: #E8EAFE;
+  --qm-cyan-600: #2389A6;
+  --qm-cyan-500: #36A4BE;
+  --qm-cyan-100: #E4F7FB;
+
+  /* ===== 温度色 Warm (Rose + Amber + Coral) ===== */
+  --qm-rose-600: #B84F78;
+  --qm-rose-500: #D0648E;
+  --qm-rose-100: #FBEAF0;
+  --qm-amber-600: #A66A18;
+  --qm-terracotta: #B0573F;
+  --qm-amber-500: #C78726;
+  --qm-amber-100: #FFF4DA;
+  --qm-coral-500: #D56F68;
+  --qm-coral-100: #FCEAE8;
+
+  /* ===== 中性色 Neutral ===== */
+  --qm-ink-950: #19161D;
+  --qm-ink-800: #302B35;
+  --qm-ink-700: #46404B;
+  --qm-ink-600: #625B68;
+  --qm-ink-500: #807886;
+  --qm-line-300: #D8D1DD;
+  --qm-line-200: #E5DFE9;
+  --qm-line-100: #F0EBF3;
+  --qm-surface-0: #FFFFFF;
+  --qm-surface-25: #FCFBFD;
+  --qm-surface-50: #F9F7FA;
+  --qm-surface-100: #F4F1F5;
+
+  /* ===== 语义色 Semantic ===== */
+  --qm-success: #2F8A6A;
+  --qm-success-bg: #E8F6F0;
+  --qm-warning: #B67822;
+  --qm-warning-bg: #FFF3DC;
+  --qm-danger: #B84D5B;
+  --qm-danger-bg: #FBEAEC;
+  --qm-info: #5262B8;
+  --qm-info-bg: #ECEEFC;
+
+  /* ===== 渐变 Gradients ===== */
+  /* G01 Brand Aurora - 首页Hero/About Hero，每页最多1个大面积 */
+  --qm-gradient-brand: linear-gradient(135deg, #4D3373 0%, var(--qm-purple-600) 36%, #6670E8 72%, #36A4BE 115%);
+  /* G02 Human Connection - 小酷/关系/主CTA小面积 */
+  --qm-gradient-warm: linear-gradient(120deg, var(--qm-purple-600) 0%, #9A5FA7 48%, #D0648E 100%);
+  /* G03 Tech Focus - 测评/图表/进度/AI模块 */
+  --qm-gradient-tech: linear-gradient(120deg, #5158C9 0%, #6670E8 55%, #36A4BE 100%);
+  /* G04 Soft Aura - 页面大背景/卡片组背景 */
+  --qm-gradient-soft: linear-gradient(135deg, #F8F5FC 0%, #F2EEFA 45%, #EEF2FD 78%, #F2FAFB 100%);
+  /* G05 Deep Mind - 树洞夜间/页脚/沉浸模块 */
+  --qm-gradient-deep: linear-gradient(145deg, #23163B 0%, #342050 46%, #293A63 100%);
+  /* Glass Edge - 玻璃态边框 */
+  --qm-gradient-glass-edge: linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,255,255,.42));
+  /* Accent Line - 装饰线 */
+  --qm-gradient-accent-line: linear-gradient(90deg, var(--qm-purple-600), #6670E8, #36A4BE);
+
+  /* ===== 圆角 Radius ===== */
+  --qm-radius-xs: 8px;
+  --qm-radius-sm: 12px;
+  --qm-radius-md: 16px;
+  --qm-radius-lg: 20px;
+  --qm-radius-xl: 28px;
+  --qm-radius-pill: 999px;
+
+  /* ===== 阴影 Shadow ===== */
+  --qm-shadow-none: none;
+  --qm-shadow-soft: 0 6px 24px rgba(35, 22, 59, .07);
+  --qm-shadow-hover: 0 12px 36px rgba(35, 22, 59, .11);
+  --qm-shadow-floating: 0 16px 48px rgba(35, 22, 59, .14);
+  --qm-shadow-focus: 0 0 0 4px rgba(107, 76, 154, .16);
+
+  /* ===== 动效 Motion ===== */
+  --qm-motion-fast: 140ms;
+  --qm-motion-normal: 200ms;
+  --qm-motion-slow: 320ms;
+  --qm-easing: cubic-bezier(.2, .8, .2, 1);
+
+  /* ===== 布局 Layout ===== */
+  --qm-sidebar-desktop: 240px;
+  --qm-sidebar-collapsed: 72px;
+  --qm-content-max: 1280px;
+  --qm-reading-max: 760px;
+  --qm-chat-max: 900px;
+
+  /* ===== 断点 Breakpoints ===== */
+  --bp-compact-mobile: 320px;
+  --bp-large-mobile: 480px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1024px;
+  --bp-wide-desktop: 1440px;
+
+  /* ===== 内容宽度 token（默认 Mobile） ===== */
+  --content-max-width: 100%;
+  --content-padding-x: 16px;
+  --reading-max-width: 100%;
+  --chat-max-width: 100%;
+  --page-max-width: 100%;
+
+  /* ===== 字体 token（默认 Mobile） ===== */
+  --font-size-body: 16px;
+  --font-size-reading: 17px;
+  --font-size-h1: 28px;
+  --font-size-h2: 22px;
+  --font-size-h3: 18px;
+  --font-size-small: 13px;
+  --font-size-xs: 12px;
+
+  /* ===== 间距 token（默认 Mobile） ===== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ===== 触控目标 ===== */
+  --touch-min: 44px;
+  --touch-recommended: 48px;
+
+  /* ===== 安全区（运行时由浏览器更新，提供默认值） ===== */
+  --safe-area-inset-top: 0px;
+  --safe-area-inset-bottom: 0px;
+  --safe-area-inset-left: 0px;
+  --safe-area-inset-right: 0px;
+
+  /* ===== 视口高度 ===== */
+  --dvh: 100dvh;
+  --svh: 100svh;
+}
+
+/* Large Mobile: 480px+ */
+@media (min-width: 480px) {
+  :root {
+    --font-size-h1: 30px;
+  }
+}
+
+/* Tablet: 768px+ */
+@media (min-width: 768px) {
+  :root {
+    --content-padding-x: 24px;
+    --content-max-width: 720px;
+    --reading-max-width: 680px;
+    --chat-max-width: 720px;
+    --page-max-width: 960px;
+    --font-size-body: 16px;
+    --font-size-reading: 17px;
+    --font-size-h1: 36px;
+    --font-size-h2: 26px;
+    --font-size-h3: 20px;
+  }
+}
+
+/* Desktop: 1024px+ */
+@media (min-width: 1024px) {
+  :root {
+    --content-max-width: 900px;
+    --reading-max-width: 720px;
+    --chat-max-width: 900px;
+    --page-max-width: 1200px;
+    --font-size-body: 16px;
+    --font-size-reading: 17px;
+    --font-size-h1: 40px;
+    --font-size-h2: 28px;
+    --font-size-h3: 20px;
+    --space-1: 8px;
+    --space-2: 12px;
+    --space-3: 16px;
+    --space-4: 24px;
+    --space-6: 32px;
+    --space-8: 48px;
+  }
+}
+
+/* Wide Desktop: 1440px+ */
+@media (min-width: 1440px) {
+  :root {
+    --page-max-width: 1440px;
+    --reading-max-width: 760px;
+    --chat-max-width: 900px;
+    --font-size-body: 17px;
+    --font-size-reading: 18px;
+    --font-size-h1: 48px;
+    --font-size-h2: 32px;
+    --space-8: 72px;
+  }
+}
+
+/* ---------- 渐变 Utility Class ---------- */
+.qm-gradient-brand {
+  background: var(--qm-gradient-brand);
+}
+.qm-gradient-warm {
+  background: var(--qm-gradient-warm);
+}
+.qm-gradient-tech {
+  background: var(--qm-gradient-tech);
+}
+.qm-gradient-soft {
+  background: var(--qm-gradient-soft);
+}
+.qm-gradient-deep {
+  background: var(--qm-gradient-deep);
+}
+
+/* 文字渐变 */
+.qm-text-gradient-brand {
+  background: var(--qm-gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.qm-text-gradient-warm {
+  background: var(--qm-gradient-warm);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.qm-text-gradient-tech {
+  background: var(--qm-gradient-tech);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---------- 基础重置 ---------- */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100dvh;
+  height: auto;
+}
+
+body {
+  background: var(--qm-gradient-soft);
+  color: var(--qm-ink-800);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  overflow-x: hidden;
+}
+
+/* 320px 宽度下确保无横向溢出 */
+@media (max-width: 359px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* ---------- 自定义滚动条 ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--qm-line-200);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--qm-line-300);
+}
+
+/* 移动端滚动条更细更淡 */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(216, 209, 221, 0.5);
+  }
+}
+
+/* Firefox 滚动条 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--qm-line-200) transparent;
+}
+
+/* ---------- 文本选择 ---------- */
+::selection {
+  background: rgba(107, 76, 154, 0.2);
+}
+
+/* ---------- 正文行长控制 ---------- */
+.reading-measure {
+  max-width: var(--reading-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.chat-measure {
+  max-width: var(--chat-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-container {
+  max-width: var(--page-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--content-padding-x);
+  padding-right: var(--content-padding-x);
+}
+
+/* ---------- 触控目标增强（移动端） ---------- */
+@media (max-width: 1023px) {
+  button,
+  a[role="button"],
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ---------- 减少动效偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- 200% 文本缩放适配 ---------- */
+@media (max-width: 479px) and (pointer: coarse) {
+  html {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+}
+
+/* ---------- 软键盘适配 ---------- */
+input:focus,
+textarea:focus,
+[contenteditable="true"]:focus {
+  scroll-margin-bottom: calc(300px + env(safe-area-inset-bottom, 0px));
+}
+
+/* ---------- 焦点可见样式 ---------- */
+:focus-visible {
+  outline: 2px solid var(--qm-purple-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- 侧栏响应式：Mobile抽屉 + Desktop常驻（纯CSS） ---------- */
+/* Mobile 默认：抽屉模式，隐藏在左侧 */
+.qm-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  width: 288px;
+  transform: translateX(-100%);
+  transition: transform 300ms var(--qm-easing);
+  z-index: 50;
+  background: var(--qm-surface-25);
+  border-right: 1px solid var(--qm-line-100);
+  overflow-y: auto;
+}
+
+.qm-sidebar.is-open {
+  transform: translateX(0);
+}
+
+/* Mobile 遮罩 */
+.qm-sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(25, 22, 29, 0.38);
+  backdrop-filter: blur(4px);
+  z-index: 45;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 200ms ease;
+}
+
+.qm-sidebar-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Desktop: 1024px+ 常驻显示 */
+@media (min-width: 1024px) {
+  .qm-sidebar {
+    width: var(--qm-sidebar-desktop);
+    transform: translateX(0) !important;
+    z-index: 40;
+  }
+
+  .qm-sidebar.is-collapsed {
+    width: var(--qm-sidebar-collapsed);
+  }
+
+  .qm-sidebar-overlay {
+    display: none !important;
+  }
+
+  /* 主内容区域左侧预留空间 */
+  .qm-main-with-sidebar {
+    padding-left: 0;
+  }
+
+  /* Desktop 端通过 lg: 前缀类控制 */
+  .qm-main-sidebar-open {
+    padding-left: var(--qm-sidebar-desktop);
+  }
+
+  .qm-main-sidebar-collapsed {
+    padding-left: var(--qm-sidebar-collapsed);
+  }
+}
+
+/* ---------- 聊天输入框响应式 ---------- */
+.chat-composer {
+  padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+}
+
+/* 消息气泡最大宽度 */
+.message-bubble {
+  max-width: 88%;
+}
+
+@media (min-width: 768px) {
+  .message-bubble {
+    max-width: 75%;
+  }
+}
+
+/* ---------- 测评答题响应式 ---------- */
+.assessment-option {
+  min-height: 48px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+@media (min-width: 768px) {
+  .assessment-option {
+    min-height: 52px;
+  }
+}
+
+/* ---------- 进度条 sticky ---------- */
+.sticky-progress {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: inherit;
+}
+
+/* ---------- 知识库长文阅读 ---------- */
+.kb-article {
+  font-size: var(--font-size-reading);
+  line-height: 1.75;
+  color: var(--qm-ink-800);
+}
+
+.kb-article p {
+  margin-bottom: 1em;
+}
+
+.kb-article h2 {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: var(--qm-purple-800);
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+}
+
+.kb-article h3 {
+  font-size: 1.15em;
+  font-weight: 600;
+  color: var(--qm-purple-800);
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+}
+
+.kb-article blockquote {
+  margin: 1.5em 0;
+  padding: 1em 1.5em;
+  background: var(--qm-purple-50);
+  border-left: 4px solid var(--qm-purple-500);
+  color: var(--qm-ink-700);
+  border-radius: 0 var(--qm-radius-md) var(--qm-radius-md) 0;
+}
+
+/* 知识库桌面端三栏布局 */
+@media (min-width: 1024px) {
+  .kb-layout {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr) 240px;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .kb-layout-sidebar {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    max-height: calc(100dvh - 100px);
+    overflow-y: auto;
+  }
+
+  .kb-layout-content {
+    min-width: 0;
+  }
+
+  .kb-layout-right {
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    max-height: calc(100dvh - 100px);
+    overflow-y: auto;
+  }
+}
+
+/* ---------- 底部安全区占位 ---------- */
+.safe-bottom-pad {
+  height: env(safe-area-inset-bottom, 0px);
+}
+
+/* ---------- 视觉 Viewport 高度容器 ---------- */
+.h-dvh {
+  height: 100dvh;
+}
+
+.min-h-dvh {
+  min-height: 100dvh;
+}
+
+.h-svh {
+  height: 100svh;
+}
+
+.min-h-svh {
+  min-height: 100svh;
+}
+
+/* ---------- 关于 QM 品牌页响应式微调 ---------- */
+@media (max-width: 767px) {
+  .about-section {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .about-hero h1 {
+    font-size: 24px;
+  }
+
+  .about-hero p {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-section {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+}
+
+/* ---------- 输入框 Enter 行为提示 ---------- */
+.enter-hint {
+  font-size: 11px;
+  color: var(--qm-ink-500);
+  text-align: center;
+  margin-top: 6px;
+  user-select: none;
+}
+
+/* ---------- P1.7 F6：聊天文本可选可复制 ---------- */
+.message-bubble,
+.message-bubble * {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  -webkit-touch-callout: default;
+}
+
+/* 热线号码增强：可点击/长按复制 */
+.message-bubble a[href^="tel:"],
+.message-bubble .phone-number {
+  cursor: pointer;
+  text-decoration: underline;
+  user-select: all;
+  -webkit-user-select: all;
+}
+
+/* ---------- 高对比度模式支持 ---------- */
+@media (prefers-contrast: more) {
+  body {
+    color: #000;
+    background: #fff;
+  }
+}
+
+/* ---------- 横竖屏适配 ---------- */
+@media (max-height: 500px) and (orientation: landscape) and (max-width: 900px) {
+  .chat-composer {
+    padding-bottom: 8px;
+  }
+  .chat-header-compact {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+
+/* ---------- 玻璃态 Header ---------- */
+.qm-header-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--qm-line-100);
+}
+
+/* ---------- Sidebar 激活项 ---------- */
+.qm-nav-item-active {
+  background: var(--qm-purple-50);
+  color: var(--qm-purple-700);
+  font-weight: 500;
+  border-left: 3px solid var(--qm-purple-600);
+}
+
+.qm-nav-item {
+  color: var(--qm-ink-700);
+  transition: background-color var(--qm-motion-fast) var(--qm-easing),
+              color var(--qm-motion-fast) var(--qm-easing);
+}
+
+.qm-nav-item:hover {
+  background: var(--qm-surface-0);
+  color: var(--qm-purple-700);
+}
+
+/* ---------- 卡片基础样式 ---------- */
+.qm-card {
+  background: var(--qm-surface-0);
+  border: 1px solid var(--qm-line-100);
+  border-radius: var(--qm-radius-lg);
+  box-shadow: var(--qm-shadow-soft);
+  transition: box-shadow var(--qm-motion-normal) var(--qm-easing),
+              transform var(--qm-motion-normal) var(--qm-easing),
+              border-color var(--qm-motion-normal) var(--qm-easing);
+}
+
+.qm-card:hover {
+  box-shadow: var(--qm-shadow-hover);
+  border-color: var(--qm-purple-200);
+}
+
+/* ---------- 按钮基础 ---------- */
+.qm-btn-primary {
+  background: var(--qm-purple-600);
+  color: white;
+  border-radius: var(--qm-radius-md);
+  font-weight: 500;
+  transition: background-color var(--qm-motion-fast) var(--qm-easing),
+              box-shadow var(--qm-motion-fast) var(--qm-easing);
+}
+
+.qm-btn-primary:hover {
+  background: var(--qm-purple-700);
+  box-shadow: 0 4px 12px rgba(107, 76, 154, 0.25);
+}
+
+.qm-btn-secondary {
+  background: var(--qm-surface-0);
+  color: var(--qm-purple-700);
+  border: 1px solid var(--qm-purple-300);
+  border-radius: var(--qm-radius-md);
+  font-weight: 500;
+  transition: background-color var(--qm-motion-fast) var(--qm-easing);
+}
+
+.qm-btn-secondary:hover {
+  background: var(--qm-purple-50);
+}
+
+.qm-btn-danger {
+  background: var(--qm-danger);
+  color: white;
+  border-radius: var(--qm-radius-md);
+  font-weight: 500;
+}
+
+/* ---------- Chip 标签 ---------- */
+.qm-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  font-size: 12px;
+  border-radius: var(--qm-radius-pill);
+  background: var(--qm-purple-50);
+  color: var(--qm-purple-700);
+}
+
+.qm-chip-tech {
+  background: var(--qm-indigo-100);
+  color: var(--qm-indigo-700);
+}
+
+.qm-chip-warm {
+  background: var(--qm-rose-100);
+  color: var(--qm-rose-600);
+}
+
+.qm-chip-warn {
+  background: var(--qm-warning-bg);
+  color: var(--qm-warning);
+}
+
+.qm-chip-success {
+  background: var(--qm-success-bg);
+  color: var(--qm-success);
+}
+
+/* ---------- 输入框 ---------- */
+.qm-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--qm-surface-0);
+  border: 1px solid var(--qm-line-200);
+  border-radius: var(--qm-radius-md);
+  color: var(--qm-ink-800);
+  font-size: 14px;
+  transition: border-color var(--qm-motion-fast) var(--qm-easing),
+              box-shadow var(--qm-motion-fast) var(--qm-easing);
+}
+
+.qm-input:focus {
+  outline: none;
+  border-color: var(--qm-purple-400);
+  box-shadow: var(--qm-shadow-focus);
+}
+
+.qm-input::placeholder {
+  color: var(--qm-ink-500);
+}
+
+/* ---------- 危机/危险区域 ---------- */
+.qm-danger-panel {
+  background: var(--qm-danger-bg);
+  border: 1px solid rgba(184, 77, 91, 0.2);
+  border-radius: var(--qm-radius-md);
+  color: var(--qm-danger);
+}
+
+/* ---------- Logo 渐变 ---------- */
+.qm-logo-gradient {
+  background: var(--qm-gradient-warm);
+}
+
+/* ---------- 小酷 Xiaoku 品牌标记 ---------- */
+.qm-xiaoku-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--qm-gradient-warm);
+}
+
+/* 小酷头像：纯紫渐变，无粉色（Hotfix v1.0 / ROLE_VISUAL_REGISTRY） */
+.qm-xiaoku-avatar {
+  background: linear-gradient(135deg, #4D3373 0%, #6B4C9A 48%, #8B67BC 100%);
+  color: #fff;
+  opacity: 1;
+  visibility: visible;
+  box-shadow: 0 4px 16px rgba(107, 76, 154, 0.16);
+}
+
+/* ---------- 小雪 Xiaoxue 品牌标记 ---------- */
+.qm-xiaoxue-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5158C9 0%, #6670E8 52%, #7D5CB2 100%);
+}
+
+/* 小雪头像：蓝紫渐变（Hotfix v1.0 / ROLE_VISUAL_REGISTRY） */
+.qm-xiaoxue-avatar {
+  background: linear-gradient(135deg, #5158C9 0%, #6670E8 52%, #7D5CB2 100%);
+  color: #fff;
+  opacity: 1;
+  visibility: visible;
+  box-shadow: 0 4px 16px rgba(81, 88, 201, 0.16);
+}
+
+/* ---------- 发送键（Hotfix v1.0） ---------- */
+/* 规则：默认必须可见；Hover 只增强反馈；Disabled 只淡化，不隐藏 */
+.qm-send-xiaoku {
+  background: #6B4C9A;
+  color: #fff;
+  opacity: 1;
+  visibility: visible;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 12px;
+  transition: background 200ms cubic-bezier(.2,.8,.2,1),
+              transform 140ms cubic-bezier(.2,.8,.2,1),
+              box-shadow 200ms cubic-bezier(.2,.8,.2,1);
+}
+.qm-send-xiaoku:hover:not(:disabled) {
+  background: #62428B;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(107, 76, 154, 0.18);
+}
+.qm-send-xiaoku:active:not(:disabled) {
+  background: #4D3373;
+  transform: scale(0.98);
+}
+.qm-send-xiaoku:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(107, 76, 154, 0.16);
+}
+.qm-send-xiaoku:disabled {
+  background: #D8C9EC;
+  color: #fff;
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.qm-send-xiaoxue {
+  background: #6670E8;
+  color: #fff;
+  opacity: 1;
+  visibility: visible;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 12px;
+  transition: background 200ms cubic-bezier(.2,.8,.2,1),
+              transform 140ms cubic-bezier(.2,.8,.2,1),
+              box-shadow 200ms cubic-bezier(.2,.8,.2,1);
+}
+.qm-send-xiaoxue:hover:not(:disabled) {
+  background: #5158C9;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(81, 88, 201, 0.18);
+}
+.qm-send-xiaoxue:active:not(:disabled) {
+  background: #3F46A8;
+  transform: scale(0.98);
+}
+.qm-send-xiaoxue:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(81, 88, 201, 0.16);
+}
+.qm-send-xiaoxue:disabled {
+  background: #C9CEF8;
+  color: #fff;
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+/* 严禁任何规则让头像或发送按钮消失 */
+.qm-xiaoku-avatar,
+.qm-xiaoxue-avatar,
+.qm-send-xiaoku,
+.qm-send-xiaoxue {
+  /* 防止被 group-hover / hover\:opacity-0 / disabled\:opacity-0 覆盖 */
+}
+.qm-send-xiaoku:disabled,
+.qm-send-xiaoxue:disabled {
+  /* disabled 仍可见，不允许 opacity:0 / visibility:hidden / display:none */
+}
+
+/* ================================================================
+   QA04 知识库视觉系统 v2.0 Design Tokens
+   Primary #6B4C9A, Deep #4E376F, Soft #EEE8F6, Gold #C9A96E,
+   Pearl #F8F6FA, Ink #2D2D2D, Muted #6F6876
+   ================================================================ */
+
+:root {
+  --qa-primary: #6B4C9A;
+  --qa-deep: #4E376F;
+  --qa-soft: #EEE8F6;
+  --qa-gold: #C9A96E;
+  --qa-pearl: #F8F6FA;
+  --qa-ink: #2D2D2D;
+  --qa-muted: #6F6876;
+
+  /* 字号 token */
+  --qa-h1-desktop: 36px;
+  --qa-h1-mobile: 28px;
+  --qa-h2-desktop: 26px;
+  --qa-h2-mobile: 22px;
+  --qa-h3-desktop: 20px;
+  --qa-h3-mobile: 18px;
+  --qa-body-desktop: 17px;
+  --qa-body-mobile: 16px;
+  --qa-meta-desktop: 14px;
+  --qa-meta-mobile: 13px;
+
+  /* 行高 */
+  --qa-lh-h1: 1.25;
+  --qa-lh-h2: 1.35;
+  --qa-lh-h3: 1.45;
+  --qa-lh-body: 1.8;
+  --qa-lh-meta: 1.6;
+
+  /* 布局 */
+  --qa-article-max: 820px;
+  --qa-article-min: 760px;
+  --qa-toc-width: 240px;
+  --qa-mobile-gutter: 18px;
+  --qa-touch-min: 44px;
+}
+
+/* ---------- 知识库文章正文排版 v2.0 (QA04) ---------- */
+.qm-article-body {
+  font-size: var(--qa-body-mobile);
+  line-height: var(--qa-lh-body);
+  color: var(--qa-ink);
+  max-width: var(--qa-article-max);
+  width: 100%;
+}
+
+.qm-article-body h1 {
+  font-size: var(--qa-h1-mobile);
+  line-height: var(--qa-lh-h1);
+  font-weight: 600;
+  color: var(--qa-ink);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.qm-article-body h2 {
+  font-size: var(--qa-h2-mobile);
+  line-height: var(--qa-lh-h2);
+  font-weight: 600;
+  color: var(--qa-ink);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 80px;
+}
+
+.qm-article-body h3 {
+  font-size: var(--qa-h3-mobile);
+  line-height: var(--qa-lh-h3);
+  font-weight: 500;
+  color: var(--qa-deep);
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.qm-article-body h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--qa-primary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.qm-article-body p {
+  margin: 0.75rem 0;
+}
+
+.qm-article-body blockquote {
+  margin: 1.25rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid rgba(107, 76, 154, 0.3);
+  background: rgba(107, 76, 154, 0.04);
+  border-radius: 0 0.75rem 0.75rem 0;
+  color: var(--qa-muted);
+  font-style: normal;
+}
+
+.qm-article-body blockquote p {
+  margin: 0.25rem 0;
+}
+
+.qm-article-body ul,
+.qm-article-body ol {
+  margin: 1rem 0;
+  padding-left: 0;
+}
+
+.qm-article-body li {
+  margin: 0.5rem 0;
+}
+
+.qm-article-body strong {
+  color: var(--qa-ink);
+  font-weight: 600;
+}
+
+.qm-article-body a {
+  color: var(--qa-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.qm-article-body a:hover {
+  color: #62428B;
+}
+
+.qm-article-body code {
+  padding: 0.15rem 0.4rem;
+  background: #F3F4F6;
+  color: var(--qa-primary);
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+}
+
+.qm-article-body hr {
+  margin: 2.5rem 0;
+  border: none;
+  border-top: 1px solid #F3F4F6;
+}
+
+/* 表格：外层 overflow-x-auto 已在组件中包裹，这里补充表格样式 */
+.qm-article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--qa-meta-mobile);
+}
+
+.qm-article-body th {
+  text-align: left;
+  padding: 0.625rem 0.75rem;
+  font-weight: 600;
+  color: var(--qa-deep);
+  border-bottom: 2px solid rgba(107, 76, 154, 0.2);
+  white-space: nowrap;
+}
+
+.qm-article-body td {
+  padding: 0.625rem 0.75rem;
+  color: var(--qa-ink);
+  border-bottom: 1px solid #F3F4F6;
+  line-height: var(--qa-lh-meta);
+}
+
+/* 桌面端字号放大 */
+@media (min-width: 768px) {
+  .qm-article-body {
+    font-size: var(--qa-body-desktop);
+  }
+  .qm-article-body h1 {
+    font-size: var(--qa-h1-desktop);
+  }
+  .qm-article-body h2 {
+    font-size: var(--qa-h2-desktop);
+  }
+  .qm-article-body h3 {
+    font-size: var(--qa-h3-desktop);
+  }
+  .qm-article-body table {
+    font-size: var(--qa-meta-desktop);
+  }
+}
+
+/* 移动端 gutter */
+@media (max-width: 640px) {
+  .qm-article-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* ---------- PracticeCard 练习卡样式 ---------- */
+.qm-practice-card {
+  background: var(--qa-soft);
+  border: 1px solid #D8C9EC;
+  border-left: 4px solid var(--qa-primary);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+/* ---------- SafetyCard 安全卡（暖金/灰紫，非红色） ---------- */
+.qm-safety-card {
+  background: var(--qa-pearl);
+  border: 1px solid #E8DEFA;
+  border-left: 4px solid var(--qa-gold);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+.qm-safety-card-title {
+  color: var(--qa-deep);
+  font-weight: 600;
+}
+
+.qm-safety-card-body {
+  color: var(--qa-deep);
+  line-height: var(--qa-lh-body);
+}
+
+/* ---------- WhisperCard 耳语卡 ---------- */
+.qm-whisper-card {
+  background: var(--qa-pearl);
+  border: 1px solid #E8DEFA;
+  border-left: 4px solid var(--qa-primary);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+/* ---------- TOC 目录样式 ---------- */
+.qm-toc-nav {
+  width: var(--qa-toc-width);
+  flex-shrink: 0;
+}
+
+.qm-toc-link {
+  display: block;
+  padding: 0.375rem 0.75rem;
+  font-size: var(--qa-meta-mobile);
+  line-height: var(--qa-lh-meta);
+  color: var(--qa-muted);
+  border-radius: 0 0.375rem 0.375rem 0;
+  border-left: 2px solid transparent;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.qm-toc-link:hover {
+  color: var(--qa-primary);
+  background: var(--qa-pearl);
+  border-left-color: var(--qa-primary);
+}
+
+@media (min-width: 768px) {
+  .qm-toc-link {
+    font-size: var(--qa-meta-desktop);
+  }
+}
+
+/* ---------- BottomCTA 底部行动区 ---------- */
+.qm-bottom-cta {
+  min-height: var(--qa-touch-min);
+}
+
+/* ---------- RelatedCards 相关推荐卡片 ---------- */
+.qm-related-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .qm-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .qm-related-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.qm-related-card {
+  background: #fff;
+  border: 1px solid #E8DEFA;
+  border-radius: 1rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+}
+
+.qm-related-card:hover {
+  border-color: var(--qa-primary);
+  box-shadow: 0 4px 16px rgba(107, 76, 154, 0.1);
+  transform: translateY(-1px);
+}
+
+/* ---------- 移动端防横向溢出 ---------- */
+.qm-article-wrapper,
+.qm-article-body {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.qm-article-body img,
+.qm-article-body video,
+.qm-article-body iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 触控区域最小高度 */
+@media (max-width: 1023px) {
+  .qm-bottom-cta a,
+  .qm-toc-link {
+    min-height: var(--qa-touch-min);
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+/* ================================================================
+   QM v4.0 Typography Token Utilities
+   8 级字号统一：Display / H1 / H2 / H3 / H4 / Body-L / Body / Small / Micro
+   Mobile First；手机正文统一 16px，禁止 text-xs/text-sm 用于正文
+   ================================================================ */
+.qm-display {
+  font-size: clamp(30px, 7vw, 48px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--qm-ink-950);
+}
+.qm-h1 {
+  font-size: clamp(28px, 5.2vw, 40px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.005em;
+  color: var(--qm-ink-950);
+}
+.qm-h2 {
+  font-size: clamp(24px, 4.2vw, 30px);
+  font-weight: 650;
+  line-height: 1.25;
+  color: var(--qm-ink-900, var(--qm-ink-800));
+}
+.qm-h3 {
+  font-size: clamp(19px, 3vw, 21px);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--qm-ink-800);
+}
+.qm-h4 {
+  font-size: clamp(17px, 2.4vw, 18px);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--qm-ink-800);
+}
+.qm-body-l {
+  font-size: clamp(17px, 2vw, 18px);
+  font-weight: 400;
+  line-height: 1.72;
+  color: var(--qm-ink-700);
+}
+.qm-body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--qm-ink-700);
+}
+.qm-small {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--qm-ink-600);
+}
+.qm-micro {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--qm-ink-500);
+  letter-spacing: 0.02em;
+}
+/* v4.0: 手机正文强制 ≥16px；text-xs/text-sm 只能用于标签、轴标、辅助状态 */
+@media (max-width: 767px) {
+  .qm-body,
+  .qm-body-l {
+    font-size: 16px;
+  }
+}
+
+/* v4.0 Primary 按钮：品牌紫实色（禁止紫粉渐变） */
+.qm-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  min-height: 44px;
+  background: #6B4C9A;
+  color: #fff;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  border: none;
+  cursor: pointer;
+  transition: background 200ms cubic-bezier(.2,.8,.2,1),
+              box-shadow 200ms cubic-bezier(.2,.8,.2,1),
+              transform 140ms cubic-bezier(.2,.8,.2,1);
+}
+.qm-btn-primary:hover {
+  background: #62428B;
+  box-shadow: 0 8px 24px rgba(98, 66, 139, 0.22);
+}
+.qm-btn-primary:active {
+  background: #4D3373;
+  transform: translateY(1px);
+}
+.qm-btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(107, 76, 154, 0.2);
+}
+
+/* v4.0 标准卡片：白底 + 1px 浅边 + 圆角 + 软阴影；禁止渐变顶条 */
+.qm-card {
+  background: #fff;
+  border: 1px solid var(--qm-line-100);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(35, 22, 59, 0.04);
+}
+
+/* v4.0 Sidebar 后的 Main 容器：禁止 100vw/w-screen，避免横向溢出 */
+.qm-main-safe {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ================================================================
+   QM v4.0 Hero 区域（首页 BrandHero）
+   - Desktop 高度 620-720px，不撑满 100vh
+   - 浏览器高度 < 820px 进入 Compact Mode
+   ================================================================ */
+.qm-hero-section {
+  min-height: auto;
+  padding-top: 16px;
+  padding-bottom: 24px;
+}
+@media (min-width: 1024px) {
+  .qm-hero-section {
+    min-height: clamp(560px, 68vh, 720px);
+    display: flex;
+    align-items: center;
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
+}
+/* Compact Mode: 浏览器高度 < 820px */
+@media (min-width: 1024px) and (max-height: 820px) {
+  .qm-hero-section {
+    min-height: auto;
+    padding-top: 24px;
+    padding-bottom: 28px;
+  }
+}
+
+/* v4.0: 全站禁止 100vh / w-screen / 100vw 导致的溢出（安全网） */
+@supports (selector(:has(*))) {
+  main:has(> .qm-main-safe) {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+/* ================================================================
+   批次 D · v2.0 视觉资产接入（首页/品牌/知识/小雪）
+   背景图 fit:cover position:center · 材质低 opacity · 玻璃优先 CSS
+   ================================================================ */
+.qm-cbg {
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* 背景铺层：绝对定位填满父容器（fit:cover，position 按页面定制） */
+.qm-bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+/* 品牌首页 */
+.qm-bg-home {
+  background-image: url('/visual/bg_home_mobile_1080x1920.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media (min-width: 1024px) {
+  .qm-bg-home { background-image: url('/visual/bg_home_desktop_1440x900.png'); }
+}
+/* 品牌介绍 */
+.qm-bg-about {
+  background-image: url('/visual/bg_about_mobile_1080x1920.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media (min-width: 1024px) {
+  .qm-bg-about { background-image: url('/visual/bg_about_desktop_1440x900.png'); }
+}
+/* 知识探索 */
+.qm-bg-knowledge {
+  background-image: url('/visual/bg_knowledge_mobile_1080x1920.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media (min-width: 1024px) {
+  .qm-bg-knowledge { background-image: url('/visual/bg_knowledge_desktop_1440x900.png'); }
+}
+/* 自由对话 / 小雪 */
+.qm-bg-chat {
+  background-image: url('/visual/bg_chat_mobile_1080x1920.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media (min-width: 1024px) {
+  .qm-bg-chat { background-image: url('/visual/bg_chat_desktop_1440x900.png'); }
+}
+/* 服务报价（booking） */
+.qm-bg-service {
+  background-image: url('/visual/bg_service_mobile_1080x1920.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+@media (min-width: 1024px) {
+  .qm-bg-service { background-image: url('/visual/bg_service_desktop_1440x900.png'); }
+}
+/* 价格面板 · 暖金沙毛玻璃（booking BUDGET 卡片） */
+.qm-panel-price {
+  background-image: url('/visual/bg_price_panel_soft_warm.png');
+  background-size: cover;
+  background-position: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+/* 折射层 overlay_prism：加载图引 CSS，opacity 由用到页面 control */
+.qm-overlay-prism {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url('/visual/overlay_prism_mobile_soft.png');
+  background-position: center top;
+  opacity: 0.45;
+  pointer-events: none;
+}
+@media (min-width: 1024px) {
+  .qm-overlay-prism {
+    background-image: url('/visual/overlay_prism_desktop_soft.png');
+    background-position: center top;
+    opacity: 0.45;
+  }
+}
+/* 珍珠纸纹 texture_pearl_paper：低 opacity 卡片底 */
+.qm-texture-pearl {
+  position: relative;
+  background-image: url('/visual/texture_pearl_paper_1400x900.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* 玻璃面板：优先 CSS（backdrop-filter），PNG 仅作兜底，不使用 PNG 也可 */
+.qm-glass-panel {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+}
+/* 柔和分隔 divider_soft_wave（含 div 背景图，高度由用到组件控） */
+.qm-divider-wave {
+  background-image: url('/visual/divider_soft_wave.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ============================================================
+   心理师列表/详情 黄金样板 v3.0 字体工具类（批准稿：衬线标题 + 手写体点缀）
+   ============================================================ */
+.font-qm-serif {
+  font-family: 'Noto Serif SC', Georgia, 'Songti SC', 'SimSun', serif;
+}
+.font-qm-script {
+  font-family: 'Caveat', 'Segoe Script', 'Brush Script MT', cursive;
+}

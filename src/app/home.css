@@ -1,0 +1,885 @@
+@font-face {
+  font-family: "QM Home Sans";
+  src: url("/qm-home-v410/qmsans.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "QM Home Sans";
+  src: url("/qm-home-v410/qmsans-supplement.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: block;
+  unicode-range:
+    U+21, U+22, U+23, U+24, U+25, U+26, U+27, U+28, U+29, U+2A, U+2B, U+2C,
+    U+2D, U+2E, U+30, U+31, U+32, U+33, U+34, U+35, U+36, U+37, U+38, U+39,
+    U+3A, U+3B, U+3C, U+3D, U+3E, U+3F, U+40, U+42, U+43, U+44, U+45, U+46,
+    U+47, U+48, U+4A, U+4B, U+4C, U+4E, U+4F, U+50, U+52, U+53, U+54, U+55,
+    U+56, U+57, U+58, U+59, U+5A, U+5B, U+5C, U+5D, U+5E, U+5F, U+60, U+61,
+    U+62, U+63, U+64, U+65, U+66, U+67, U+68, U+69, U+6A, U+6B, U+6C, U+6D,
+    U+6E, U+6F, U+70, U+71, U+72, U+73, U+74, U+75, U+76, U+77, U+78, U+79,
+    U+7A, U+7B, U+7C, U+7D, U+7E, U+4EE5, U+4F9B, U+5148, U+514D, U+5220,
+    U+5355, U+53EF, U+53F7, U+540E, U+58F0, U+5B58, U+5BFC, U+5C06, U+5C1A,
+    U+5F00, U+5FC6, U+6237, U+636E, U+653E, U+653F, U+6570, U+660E, U+672A,
+    U+6B21, U+79C1, U+7B56, U+822A, U+83DC, U+8BAE, U+8D23, U+8D26, U+8DE8,
+    U+95ED, U+9664, U+9690;
+}
+
+@font-face {
+  font-family: "QM Home Serif";
+  src: url("/qm-home-v410/qmserif.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "QM Home Serif";
+  src: url("/qm-home-v410/qmserif-supplement.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: block;
+  unicode-range:
+    U+21, U+22, U+23, U+24, U+25, U+26, U+27, U+28, U+29, U+2A, U+2B, U+2C,
+    U+2D, U+2E, U+30, U+31, U+32, U+33, U+34, U+35, U+36, U+37, U+38, U+39,
+    U+3A, U+3B, U+3C, U+3D, U+3E, U+3F, U+40, U+42, U+43, U+44, U+45, U+46,
+    U+47, U+48, U+4A, U+4B, U+4C, U+4E, U+4F, U+50, U+52, U+53, U+54, U+55,
+    U+56, U+57, U+58, U+59, U+5A, U+5B, U+5C, U+5D, U+5E, U+5F, U+60, U+61,
+    U+62, U+63, U+64, U+65, U+66, U+67, U+68, U+69, U+6A, U+6B, U+6C, U+6D,
+    U+6E, U+6F, U+70, U+71, U+72, U+73, U+74, U+75, U+76, U+77, U+78, U+79,
+    U+7A, U+7B, U+7C, U+7D, U+7E, U+4EE5, U+4F9B, U+5148, U+514D, U+5220,
+    U+5355, U+53EF, U+53F7, U+540E, U+58F0, U+5B58, U+5BFC, U+5C06, U+5C1A,
+    U+5F00, U+5FC6, U+6237, U+636E, U+653E, U+653F, U+6570, U+660E, U+672A,
+    U+6B21, U+79C1, U+7B56, U+822A, U+83DC, U+8BAE, U+8D23, U+8D26, U+8DE8,
+    U+95ED, U+9664, U+9690;
+}
+.qm-home, .qm-home-surface {
+  color: #2d2a27;
+  font-family: "QM Home Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+}
+.qm-home {
+  min-height: 100vh;
+  background: #fffdf8;
+}
+.qm-home :where(*), .qm-home-surface :where(*) {
+  box-sizing: border-box;
+}
+.qm-home :where(a), .qm-home-surface :where(a) {
+  color: inherit;
+  text-decoration: none;
+}
+.qm-home :where(button), .qm-home-surface :where(button) {
+  font: inherit;
+  cursor: pointer;
+}
+.qm-home :where(svg), .qm-home-surface :where(svg) {
+  display: block;
+}
+.qm-home :where(.home-header) {
+  height: 72px;
+  padding: 0 48px;
+  border-bottom: 1px solid #e6dfd4;
+  background: #fffefa;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 6;
+}
+.qm-home :where(.brand) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "QM Home Serif", serif;
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  min-height: 44px;
+}
+.qm-home :where(.brand span) {
+  font-family: "QM Home Sans", sans-serif;
+  font-size: 16px;
+  color: #74685e;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+.qm-home :where(.qmark) {
+  width: 27px;
+  height: 27px;
+  border: 5px solid transparent;
+  border-radius: 50%;
+  background:
+    linear-gradient(#fffefa, #fffefa) padding-box,
+    conic-gradient(
+        from 30deg,
+        #d0b4db,
+        #8fc4df,
+        #a6d0b2,
+        #f4d5a1,
+        #e8a5a1,
+        #d0b4db
+      )
+      border-box;
+  position: relative;
+}
+.qm-home :where(.qmark)::after {
+  content: "";
+  position: absolute;
+  width: 11px;
+  height: 5px;
+  background: #a38a75;
+  transform: rotate(45deg);
+  right: -5px;
+  bottom: -2px;
+  border-radius: 2px;
+}
+.qm-home :where(.nav) {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.qm-home :where(.nav a) {
+  font-size: 17px;
+  font-weight: 400;
+  color: #372e26;
+  padding: 11px 20px;
+  min-height: 44px;
+}
+.qm-home :where(.nav .active) {
+  border-bottom: 1px solid #a4815f;
+  color: #302822;
+  padding: 12px 20px 10px;
+}
+.qm-home :where(.header-actions) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.qm-home :where(.login) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 17px;
+  border: 1px solid #926344;
+
+  --qm-home-focus-radius: 8px;
+
+  border-radius: var(--qm-home-focus-radius);
+  background: #eee0cd;
+  color: #49301e;
+  font-size: 16px;
+  font-weight: 500;
+
+  --qm-home-focus-shadow: 0 2px 5px #795d4210;
+
+  box-shadow: var(--qm-home-focus-shadow);
+  white-space: nowrap;
+}
+.qm-home :where(.login svg) {
+  width: 16px;
+  height: 16px;
+}
+.qm-home :where(.menu-trigger) {
+  display: none;
+}
+.qm-home :where(.home-main) {
+  max-width: 1320px;
+  padding: 22px 38px 10px;
+  margin: auto;
+  position: relative;
+}
+.qm-home :where(.intro) {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.qm-home :where(.eyebrow) {
+  font-size: 14px;
+  color: #69503c;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.qm-home :where(.intro p) {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #494037;
+  margin: 0;
+}
+.qm-home :where(.hero) {
+  position: relative;
+  height: 350px;
+  isolation: isolate;
+  overflow: visible;
+}
+.qm-home :where(.hero-bg) {
+  position: absolute;
+  inset: 0 -14px;
+  border-radius: 18px;
+  background: #fbf8f2;
+  z-index: -3;
+}
+.qm-home :where(.hero)::before {
+  content: "";
+  position: absolute;
+  inset: 0 -14px;
+  z-index: -2;
+  border-radius: 18px;
+  background: linear-gradient(
+    121deg,
+    transparent 10%,
+    rgb(237 136 149 / 24%) 20%,
+    rgb(243 190 96 / 25%) 29%,
+    rgb(123 186 136 / 24%) 37%,
+    rgb(108 174 220 / 25%) 45%,
+    rgb(159 127 207 / 25%) 53%,
+    transparent 63%
+  );
+  pointer-events: none;
+}
+.qm-home :where(.copy) {
+  position: absolute;
+  top: 74px;
+  left: 78px;
+  width: 610px;
+  padding: 0;
+  z-index: 3;
+}
+.qm-home :where(.copy h1) {
+  font-family: "QM Home Serif", serif;
+  font-size: 46px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0;
+  margin: 0 0 26px;
+  white-space: nowrap;
+  color: #24201c;
+}
+.qm-home :where(.lead), .qm-home :where(.lead strong) {
+  font-size: 19px;
+  line-height: 1.85;
+}
+.qm-home :where(.lead) {
+  margin: 0;
+  font-weight: 400;
+  color: #494037;
+}
+.qm-home :where(.lead strong) {
+  font-weight: 500;
+  color: #352e26;
+}
+.qm-home :where(.portrait) {
+  position: absolute;
+  height: 350px;
+  width: auto;
+  max-width: none;
+  aspect-ratio: 1080/1457;
+  right: 223px;
+  bottom: 83px;
+  object-fit: contain;
+  z-index: 1;
+  filter: drop-shadow(0 8px 12px rgb(117 86 54 / 6%));
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, #000 0%, #000 86%, transparent 100%);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+.qm-home :where(.welcome-action) {
+  position: absolute;
+  z-index: 4;
+  right: 189px;
+  bottom: 16px;
+  width: 333px;
+}
+.qm-home :where(.cta) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 23px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  color: #fffdf8;
+  border: 1px solid #704530;
+
+  --qm-home-focus-radius: 8px;
+
+  border-radius: var(--qm-home-focus-radius);
+  background: linear-gradient(110deg, #875333, #794c3b 55%, #69556f);
+
+  --qm-home-focus-shadow: 0 5px 12px #76533628;
+
+  box-shadow: var(--qm-home-focus-shadow);
+}
+.qm-home :where(.cta svg) {
+  width: 22px;
+  height: 22px;
+}
+.qm-home :where(.human) {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  background: #f5eee4;
+  margin-top: 24px;
+  padding: 24px 28px;
+  min-height: 105px;
+}
+.qm-home :where(.human .left) {
+  display: flex;
+  align-items: center;
+}
+.qm-home :where(.human h2) {
+  font-size: 23px;
+  line-height: 1.45;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  margin: 0 0 9px;
+  color: #35281e;
+}
+.qm-home :where(.human p) {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #65513f;
+  margin: 0;
+}
+.qm-home :where(.actions) {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.qm-home :where(.human a) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 49px;
+  padding: 13px 19px;
+  gap: 20px;
+  border: 1px solid #a27d54;
+
+  --qm-home-focus-radius: 8px;
+
+  border-radius: var(--qm-home-focus-radius);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  background: #fffaf2;
+  color: #52351e;
+
+  --qm-home-focus-shadow: 0 2px 4px #8665400b;
+
+  box-shadow: var(--qm-home-focus-shadow);
+}
+.qm-home :where(.human a:first-child) {
+  background: linear-gradient(135deg, #946c43, #7d552f);
+  color: #fffaf1;
+  border-color: #80562f;
+
+  --qm-home-focus-shadow: 0 3px 7px #80552d20;
+
+  box-shadow: var(--qm-home-focus-shadow);
+}
+.qm-home :where(.human a svg) {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
+.qm-home :where(.section) {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 215px 1fr;
+  gap: 40px;
+  margin-top: 20px;
+  padding: 24px 0 0;
+  border-top: 1px solid #cdb89f;
+}
+.qm-home :where(.section-heading) {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 12px;
+}
+.qm-home :where(.section-heading h2) {
+  font-family: "QM Home Serif", serif;
+  font-size: 29px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #38291e;
+  letter-spacing: 0.3px;
+  margin: 0;
+}
+.qm-home :where(.cards) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 39px;
+}
+.qm-home :where(.card) {
+  position: relative;
+  display: block;
+  min-width: 0;
+  min-height: 88px;
+  padding: 13px 59px 14px 0;
+  border-bottom: 1px solid #d9c6af;
+}
+.qm-home :where(.card:nth-child(n + 3)) {
+  padding-top: 13px;
+  border-bottom: 0;
+}
+.qm-home :where(.card b) {
+  display: block;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #35271d;
+  letter-spacing: 0.3px;
+}
+.qm-home :where(.card p) {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 8px 0 0;
+  color: #6a5542;
+}
+.qm-home :where(.entry-arrow) {
+  position: absolute;
+  top: 21px;
+  right: 4px;
+  width: 38px;
+  height: 38px;
+  padding: 10px;
+  border-radius: 50%;
+  border: 1px solid #967044;
+  background: linear-gradient(145deg, #977046, #79532e);
+  color: #fffaf0;
+  box-shadow: 0 2px 5px #81573018;
+}
+.qm-home :where(.home-footer) {
+  max-width: 1320px;
+  margin: 24px auto 0;
+  padding: 20px 38px 28px;
+  border-top: 1px solid #e6dfd4;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #65513f;
+}
+.qm-home :where(.home-footer nav) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 16px;
+  margin-bottom: 8px;
+}
+.qm-home :where(.home-footer a) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.qm-home :where(a), .qm-home :where(button), .qm-home-surface :where(a), .qm-home-surface :where(button) {
+  transition:
+    color 160ms ease,
+    filter 160ms ease;
+}
+.qm-home-surface :where(button:hover), .qm-home-surface :where(.dialog-primary:hover) {
+  filter: brightness(1.04);
+}
+.qm-home-surface.mobile-menu a:hover {
+  color: #805837;
+}
+.qm-home-surface :where(a:active), .qm-home-surface :where(button:active) {
+  filter: brightness(0.98);
+}
+.qm-home-surface :where(a:focus-visible), .qm-home-surface :where(button:focus-visible) {
+  outline: 2px solid #805837;
+  outline-offset: 3px;
+}
+.qm-home-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(45 34 24 / 45%);
+  z-index: 50;
+}
+.account-dialog {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(480px, calc(100vw - 32px));
+  padding: 28px;
+  background: #fffdf8;
+  border: 1px solid #cdb89f;
+  border-radius: 12px;
+  box-shadow: 0 12px 48px #35281e30;
+  z-index: 51;
+}
+.account-dialog :where(h2) {
+  font-family: "QM Home Serif", serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0 0 16px;
+}
+.account-dialog :where(p) {
+  margin: 0 0 24px;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.dialog-primary, .dialog-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1px solid #a27d54;
+  border-radius: 8px;
+}
+.qm-home-surface :where(.dialog-primary) {
+  background: #805837;
+  color: #fffaf1;
+}
+.dialog-primary :where(svg) {
+  width: 19px;
+  height: 19px;
+}
+.dialog-close {
+  background: #fffaf2;
+  color: #52351e;
+}
+.mobile-menu {
+  z-index: 40;
+  min-width: 216px;
+  padding: 8px;
+  background: #fffdf8;
+  border: 1px solid #cdb89f;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px #35281e20;
+}
+.mobile-menu :where(a) {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 16px;
+}
+
+@media (701px <= width <= 1400px) {
+  .qm-home :where(.home-main) {
+    padding-right: 34px;
+    padding-left: 34px;
+  }
+  .qm-home :where(.copy h1) {
+    font-size: 44px;
+  }
+  .qm-home :where(.section) {
+    gap: 36px;
+  }
+}
+
+@media (701px <= width <= 1199px) {
+  .qm-home :where(.home-header) {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+  .qm-home :where(.nav) {
+    gap: 0;
+  }
+  .qm-home :where(.nav a) {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  .qm-home :where(.hero) {
+    height: 370px;
+  }
+  .qm-home :where(.copy) {
+    left: 24px;
+    width: calc(100% - 380px);
+    top: 95px;
+  }
+  .qm-home :where(.copy h1) {
+    font-size: clamp(30px, 3.6vw, 40px);
+    white-space: normal;
+  }
+  .qm-home :where(.portrait) {
+    right: 52px;
+    bottom: 83px;
+  }
+  .qm-home :where(.welcome-action) {
+    right: 16px;
+  }
+  .qm-home :where(.human) {
+    gap: 20px;
+  }
+  .qm-home :where(.actions) {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .qm-home :where(.section) {
+    grid-template-columns: 170px 1fr;
+    gap: 24px;
+  }
+  .qm-home :where(.cards) {
+    column-gap: 24px;
+  }
+}
+
+@media (width <= 959px) {
+  .qm-home :where(.nav) {
+    display: none;
+  }
+  .qm-home :where(.menu-trigger) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    color: #49301e;
+    border: 1px solid #cdb89f;
+    border-radius: 8px;
+    background: #fffaf2;
+  }
+  .qm-home :where(.menu-trigger svg) {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (701px <= width <= 899px) {
+  .qm-home :where(.hero) {
+    display: grid;
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+  .qm-home :where(.copy) {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    padding: 29px 24px 0;
+  }
+  .qm-home :where(.portrait) {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin: 23px auto 0;
+    order: 2;
+  }
+  .qm-home :where(.welcome-action) {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin: 13px auto 21px;
+    order: 3;
+  }
+  .qm-home :where(.human) {
+    flex-wrap: wrap;
+  }
+  .qm-home :where(.actions) {
+    justify-content: flex-start;
+  }
+  .qm-home :where(.section) {
+    grid-template-columns: 150px 1fr;
+    gap: 24px;
+  }
+  .qm-home :where(.card) {
+    padding-right: 50px;
+  }
+}
+
+@media (width <= 700px) {
+  .qm-home :where(.semantic-unit) {
+    white-space: nowrap;
+  }
+  .qm-home :where(.home-header) {
+    height: 64px;
+    padding: 0 19px;
+  }
+  .qm-home :where(.brand) {
+    font-size: 23px;
+  }
+  .qm-home :where(.login) {
+    font-size: 14px;
+    padding: 9px 12px;
+    gap: 7px;
+  }
+  .qm-home :where(.home-main) {
+    padding: 21px 18px 22px;
+  }
+  .qm-home :where(.intro) {
+    display: block;
+    margin-bottom: 20px;
+  }
+  .qm-home :where(.intro p) {
+    font-size: 16px;
+  }
+  .qm-home :where(.hero) {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .qm-home :where(.hero-bg), .qm-home :where(.hero)::before {
+    inset: 0 -14px;
+    border-radius: 18px;
+  }
+  .qm-home :where(.copy) {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    padding: 29px 11px 0;
+    order: 1;
+  }
+  .qm-home :where(.copy h1) {
+    font-size: 30px;
+    line-height: 1.4;
+    white-space: normal;
+    margin-bottom: 21px;
+  }
+  .qm-home :where(.lead), .qm-home :where(.lead strong) {
+    font-size: 17px;
+    line-height: 1.8;
+  }
+  .qm-home :where(.portrait) {
+    position: relative;
+    height: 335px;
+    width: 248px;
+    right: auto;
+    bottom: auto;
+    margin: 23px auto 0;
+    order: 2;
+  }
+  .qm-home :where(.welcome-action) {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    margin: 13px 10px 21px;
+    order: 3;
+  }
+  .qm-home :where(.human) {
+    display: block;
+    padding: 23px 20px;
+    margin-top: 20px;
+    min-height: 0;
+  }
+  .qm-home :where(.human h2) {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .qm-home :where(.human p) {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .qm-home :where(.actions) {
+    margin-top: 17px;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .qm-home :where(.human a) {
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 16px;
+    gap: 15px;
+  }
+  .qm-home :where(.section) {
+    display: block;
+    margin-top: 25px;
+    padding-top: 22px;
+  }
+  .qm-home :where(.section-heading) {
+    padding-top: 0;
+    margin-bottom: 17px;
+  }
+  .qm-home :where(.section-heading h2) {
+    font-size: 25px;
+  }
+  .qm-home :where(.cards) {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .qm-home :where(.card), .qm-home :where(.card:nth-child(n + 3)) {
+    min-height: 95px;
+    padding: 17px 60px 17px 0;
+    border-bottom: 1px solid #d9c6af;
+  }
+  .qm-home :where(.card:last-child) {
+    border-bottom: 0;
+  }
+  .qm-home :where(.card b) {
+    font-size: 21px;
+  }
+  .qm-home :where(.entry-arrow) {
+    top: 26px;
+  }
+  .qm-home :where(.home-footer) {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+}
+
+@media (width <= 350px) {
+  .qm-home :where(.human-availability) {
+    white-space: nowrap;
+  }
+  .qm-home :where(.home-header) {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .qm-home :where(.brand) {
+    gap: 7px;
+    font-size: 21px;
+  }
+  .qm-home :where(.header-actions) {
+    gap: 6px;
+  }
+  .qm-home :where(.login) {
+    padding-right: 9px;
+    padding-left: 9px;
+  }
+  .qm-home :where(.copy h1) {
+    font-size: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qm-home :where(*), .qm-home-surface :where(*) {
+    transition: none;
+    transition-duration: 0s !important;
+  }
+}
+
+/* Keep required legal links after the approved desktop first screen.
+   This changes only trailing blank flow space, never the approved content geometry. */
+@media (width >= 901px) {
+  .qm-home :where(.home-main) {
+    min-height: calc(100dvh - 72px);
+  }
+}
+
+/* 首页批准主体沿用浏览器可见焦点；弹层独立保留其功能状态。 */
+.qm-home :is(a,button):focus-visible {
+  outline: revert;
+  outline-offset: revert;
+  border-radius: var(--qm-home-focus-radius, 0);
+  box-shadow: var(--qm-home-focus-shadow, none);
+}

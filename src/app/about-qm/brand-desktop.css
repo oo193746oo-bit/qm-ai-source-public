@@ -1,0 +1,242 @@
+@font-face{font-family:QMBrandIndependentSans;src:url('/qm-brand-desktop/independent/AboutSans.ttf');font-weight:100 900;font-display:block}
+@font-face{font-family:QMBrandIndependentSerif;src:url('/qm-brand-desktop/independent/AboutSerif.ttf');font-weight:200 900;font-display:block}
+.qm-brand-independent *{box-sizing:border-box}
+.qm-brand-independent{margin:0;background:#fffdf8;color:#3c342e;font-family:QMBrandIndependentSans,sans-serif;font-synthesis:none}
+.qm-brand-independent h1,.qm-brand-independent h2,.qm-brand-independent h3,.qm-brand-independent h4,.qm-brand-independent p,.qm-brand-independent figure{margin:0}
+.qm-brand-independent main{width:1160px;margin:38px auto 0}
+.qm-brand-independent h1{font-family:QMBrandIndependentSerif,serif;font-size:46px;font-weight:500;line-height:1.35}
+.qm-brand-independent h2{font-family:QMBrandIndependentSerif,serif;font-size:29px;font-weight:500;line-height:1.4}
+.qm-brand-independent h3{font-size:23px;font-weight:500;line-height:1.45}
+.qm-brand-independent h4{font-size:22px;font-weight:500;line-height:1.4}
+.qm-brand-independent .reading{font-size:19px;font-weight:400;line-height:1.85}
+.qm-brand-independent .secondary{font-size:16px;font-weight:400;line-height:1.55;color:#65513f}
+.qm-brand-independent .eyebrow{font-size:14px;font-weight:400;line-height:1.4;color:#897563;letter-spacing:.8px}
+.qm-brand-independent .opening{height:428px;position:relative;overflow:hidden;border-radius:18px;background:#f8f2e9}
+.qm-brand-independent .opening-copy{position:relative;z-index:2;padding:46px 42px;width:795px}
+.qm-brand-independent .opening h1{margin:22px 0 21px}
+.qm-brand-independent .identity{margin-top:24px}
+.qm-brand-independent .identity p+p{margin-top:5px}
+.qm-brand-independent .opening-scene{position:absolute;inset:0;height:428px}
+.qm-brand-independent .opening-scene img{width:100%;height:100%;object-fit:cover;object-position:center 56%}
+.qm-brand-independent .opening-scene:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#fffaf5 0%,#fffaf5f6 38%,#fffaf5a9 53%,#fffaf534 68%,transparent 85%)}
+.qm-brand-independent .brand{display:grid;grid-template-columns:405px 1fr;gap:50px;padding:45px 36px 42px}
+.qm-brand-independent .brand h2{margin-top:14px}
+.qm-brand-independent .brand-copy .secondary{margin-top:14px}
+.qm-brand-independent .services{border-top:1px solid #deceb7}
+.qm-brand-independent .services-heading{display:flex;justify-content:space-between;align-items:center;gap:30px;padding:32px 36px 30px}
+.qm-brand-independent .service-row{display:grid;grid-template-columns:1fr 366px;gap:45px;padding:29px 36px 34px;align-items:center}
+.qm-brand-independent .service-copy h3{margin:13px 0 13px;white-space:nowrap}
+.qm-brand-independent .service-purpose{font-size:19px;font-weight:500;line-height:1.85;margin-bottom:14px}
+.qm-brand-independent .service-copy .secondary{margin-top:17px}
+.qm-brand-independent .service-scene{height:322px;border-radius:14px;overflow:hidden;background:#f4ede3}
+.qm-brand-independent .service-scene img{width:100%;height:100%;object-fit:cover;object-position:65% center}
+.qm-brand-independent .human{border-top:1px solid #e2d6c7;padding-top:35px}
+.qm-brand-independent .human .service-scene{height:347px}
+.qm-brand-independent .human .service-scene img{object-position:53% center}
+.qm-brand-independent .institution{margin:7px 36px 30px;padding:27px 30px 30px;background:linear-gradient(108deg,#f8f3eb,#fdfaf5);border-radius:14px;display:grid;grid-template-columns:325px 1fr;gap:24px 32px}
+.qm-brand-independent .institution-title h3{margin-top:13px}
+.qm-brand-independent .institution-facts{display:grid;grid-template-columns:1fr 1.5fr;gap:30px;padding-top:3px}
+.qm-brand-independent .institution-facts>div+div{border-left:1px solid #ded0bd;padding-left:30px}
+.qm-brand-independent .institution-facts .secondary{margin-top:11px}
+.qm-brand-independent .channels{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;gap:42px;border-top:1px solid #e2d6c7;padding-top:22px;margin-top:1px}
+.qm-brand-independent .channels .secondary{margin-top:7px}
+.qm-brand-independent .ending{display:grid;grid-template-columns:405px 1fr;gap:50px;padding:38px 36px 43px;border-top:1px solid #deceb7}
+.qm-brand-independent .ending h2{margin-top:14px}
+.qm-brand-independent .ending .secondary{margin-top:14px}
+.qm-brand-independent .legal{width:1248px;margin:auto;padding:29px 0 38px;border-top:1px solid #dfd0bd;display:flex;justify-content:center;gap:24px;font-size:14px;line-height:1.55;color:#735d49}
+.qm-brand-independent .legal a{color:inherit;text-decoration:none}
+.qm-brand-independent .legal a:hover{text-decoration:underline}
+.qm-brand-independent .legal a:focus-visible{outline:2px solid #856591;outline-offset:5px}
+.qm-brand-independent .service-world{position:relative;isolation:isolate;overflow:hidden;border-radius:18px;background:#f8f1e5;height:850px;margin:0 0 38px}
+.qm-brand-independent .world-background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2}
+.qm-brand-independent .service-world:before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#fffaf4fa 0%,#fffaf4ef 32%,#fffaf47a 46%,transparent 58%)}
+.qm-brand-independent .service-row{display:flex;align-items:center;padding:34px 36px;height:425px;border:0;position:relative;gap:0}
+.qm-brand-independent .service-copy{width:490px}
+.qm-brand-independent .service-copy h3{font-family:QMBrandIndependentSerif,serif;font-size:29px;line-height:1.4;font-weight:500;margin:13px 0 19px;white-space:nowrap}
+.qm-brand-independent .service-purpose{font-size:22px;line-height:1.4;font-weight:500;margin-bottom:20px}
+.qm-brand-independent .service-copy .secondary{margin-top:20px}
+.qm-brand-independent .core-message{font-weight:400}
+.qm-brand-independent .human{padding-top:34px}
+.qm-brand-independent .service-row.ai:after{content:'';position:absolute;bottom:0;left:36px;width:430px;height:1px;background:linear-gradient(90deg,#ccbaa7,transparent)}
+.qm-brand-independent .institution{margin:0 0 35px;padding:32px 36px;background:linear-gradient(110deg,#f8f2e9,#f8f5f5,#f7f7ed);border:1px solid #e7ddd1;border-radius:18px}
+.qm-brand-independent .institution-title h3{max-width:300px}
+.qm-brand-independent .brand{padding-top:50px;padding-bottom:50px}
+.qm-brand-independent .services-heading{padding:36px 36px 32px}
+.qm-brand-independent .ending{padding-top:43px;padding-bottom:48px}
+.qm-brand-independent .opening{height:470px}
+.qm-brand-independent .opening-scene{height:470px}
+.qm-brand-independent .opening-copy{padding:46px 42px}
+.qm-brand-independent .opening h1{margin:24px 0 27px}
+.qm-brand-independent .identity{margin-top:31px}
+.qm-brand-independent .identity p{display:flex;align-items:baseline;gap:24px}
+.qm-brand-independent .identity p+p{margin-top:13px}
+.qm-brand-independent .identity span{font-size:16px;color:#786958;min-width:176px}
+.qm-brand-independent .identity b{font-size:19px;font-weight:500}
+.qm-brand-independent .brand{padding:66px 36px}
+.qm-brand-independent .brand h2{margin-top:20px}
+.qm-brand-independent .brand-copy .secondary{margin-top:24px}
+.qm-brand-independent .services-heading{padding:42px 36px}
+.qm-brand-independent .service-copy h3{margin:18px 0 32px;font-weight:600}
+.qm-brand-independent .service-purpose{margin-bottom:28px;font-weight:600}
+.qm-brand-independent .service-copy .reading{line-height:1.95}
+.qm-brand-independent .service-copy .secondary{margin-top:27px;line-height:1.75}
+.qm-brand-independent .service-copy .eyebrow{color:#776453}
+.qm-brand-independent .service-row.ai:after{width:370px}
+.qm-brand-independent .institution{padding:40px 36px;margin-bottom:50px;gap:32px}
+.qm-brand-independent .institution-title h3{margin-top:20px}
+.qm-brand-independent .institution-facts{gap:36px}
+.qm-brand-independent .institution-facts h4{font-weight:600}
+.qm-brand-independent .institution-facts .secondary{margin-top:18px;line-height:1.8}
+.qm-brand-independent .channels{padding-top:30px;gap:50px}
+.qm-brand-independent .channels strong{font-weight:600}
+.qm-brand-independent .channel-detail{margin-left:22px;font-size:16px;color:#786958}
+.qm-brand-independent .channels .secondary{margin-top:14px}
+.qm-brand-independent .ending{padding:54px 36px 62px}
+.qm-brand-independent .ending h2{margin-top:20px}
+.qm-brand-independent .ending .secondary{margin-top:24px;line-height:1.8}
+.qm-brand-independent .identity{margin-top:29px}
+.qm-brand-independent .identity p{display:block;font-size:19px;line-height:1.85}
+.qm-brand-independent .identity strong{font-weight:500}
+.qm-brand-independent .services{margin-top:58px;border-top:0}
+.qm-brand-independent .services-heading{display:block;padding:0 36px 35px}
+.qm-brand-independent .services-heading .reading{margin-top:17px;color:#65513f}
+.qm-brand-independent .service-copy h3{font-weight:500;margin:16px 0 32px}
+.qm-brand-independent .service-purpose{font-weight:500;margin-bottom:20px}
+.qm-brand-independent .service-copy .reading{line-height:1.85}
+.qm-brand-independent .service-copy .secondary{margin-top:23px;line-height:1.8}
+.qm-brand-independent .institution-title h3{margin-top:18px}
+.qm-brand-independent .institution-facts h4{font-weight:500}
+.qm-brand-independent .channels h4{font-weight:500}
+.qm-brand-independent .channels .reading{margin-top:14px}
+.qm-brand-independent .channels .secondary{margin-top:9px}
+.qm-brand-independent .consultation-process{grid-column:1/-1;padding-top:24px;border-top:1px solid #e2d6c7}
+.qm-brand-independent .ending{padding-top:45px;padding-bottom:54px}
+.qm-brand-independent .ending .secondary{margin-top:20px}
+.qm-brand-independent .institution-story{height:450px;position:relative;isolation:isolate;overflow:hidden;border-radius:18px;margin-top:48px;background:#faf5ed}
+.qm-brand-independent .institution-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 56%;z-index:-2}
+.qm-brand-independent .institution-story:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#fffaf5fa 0%,#fffaf5e8 34%,#fffaf563 49%,transparent 63%)}
+.qm-brand-independent .institution-copy{padding:43px 36px;width:600px}
+.qm-brand-independent .institution-copy h2{margin:19px 0 20px}
+.qm-brand-independent .team-copy{margin-top:38px}
+.qm-brand-independent .team-copy h3{font-size:22px;line-height:1.4;font-weight:500;margin-bottom:17px}
+.qm-brand-independent .service-channels{padding:43px 36px 40px}
+.qm-brand-independent .channel-options{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:32px}
+.qm-brand-independent .channel-options h3{font-size:22px;line-height:1.4;font-weight:500}
+.qm-brand-independent .channel-purpose{font-size:19px;line-height:1.85;margin-top:16px}
+.qm-brand-independent .channel-options .secondary{margin-top:12px}
+.qm-brand-independent .process-note{font-size:16px;line-height:1.8;color:#786958;margin-top:34px;padding-top:24px;border-top:1px solid #e4d8ca}
+.qm-brand-independent .brand-close{text-align:center;padding:43px 36px 52px;background:linear-gradient(110deg,#fcf6ee,#faf7f7,#f7f9f1);border-radius:18px;margin:7px 0 46px}
+.qm-brand-independent .brand-close h2{margin:18px 0 24px}
+.qm-brand-independent .brand-close .secondary{margin-top:17px}
+.qm-brand-independent .institution-story{height:480px}
+.qm-brand-independent .institution-copy{width:620px}
+.qm-brand-independent .team-copy{margin-top:30px}
+.qm-brand-independent .process-note h3{font-size:22px;font-weight:500;line-height:1.4;margin-bottom:17px}
+.qm-brand-independent .process-note .reading{color:#65513f}
+.qm-brand-independent .brand-close .reading{max-width:760px;margin:auto}
+.qm-brand-independent .service-channels{padding:0;margin-top:48px}
+.qm-brand-independent .channel-section-heading{padding:0 36px 30px}
+.qm-brand-independent .channel-section-heading h2{margin-top:17px}
+.qm-brand-independent .channel-stage{position:relative;isolation:isolate;height:760px;overflow:hidden;border-radius:18px;background:#f8f2e9}
+.qm-brand-independent .channel-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2}
+.qm-brand-independent .channel-stage:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#fffaf5fa 0%,#fffaf5ed 32%,#fffaf575 47%,transparent 60%)}
+.qm-brand-independent .channel-row{height:380px;padding:35px 36px;display:flex;align-items:center;position:relative}
+.qm-brand-independent .channel-row>div{width:470px}
+.qm-brand-independent .channel-row h3{font-family:QMBrandIndependentSerif,serif;font-size:29px;font-weight:500;line-height:1.4}
+.qm-brand-independent .channel-row .channel-purpose{font-size:22px;font-weight:500;line-height:1.4;margin:28px 0 23px}
+.qm-brand-independent .channel-row .reading{line-height:1.85}
+.qm-brand-independent .channel-row:first-of-type:after{content:'';position:absolute;bottom:0;left:36px;width:370px;height:1px;background:linear-gradient(90deg,#d6c7b5,transparent)}
+.qm-brand-independent .process-panel{display:grid;grid-template-columns:405px 1fr;gap:50px;align-items:center;padding:30px 36px;background:linear-gradient(115deg,#f9f3ea,#f8f6f5,#f6f7ef);border-radius:14px;margin-top:22px}
+.qm-brand-independent .process-panel h3{font-size:23px;font-weight:500;line-height:1.45}
+.qm-brand-independent .brand-close{position:relative;isolation:isolate;overflow:hidden;text-align:left;height:380px;padding:0;margin:46px 0;background:#faf6ee}
+.qm-brand-independent .closing-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;z-index:-2}
+.qm-brand-independent .brand-close:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#fffaf5fa,#fffaf5d9 40%,transparent 69%)}
+.qm-brand-independent .closing-copy{padding:39px 36px;width:620px}
+.qm-brand-independent .brand-close h2{margin:19px 0 24px}
+.qm-brand-independent .brand-close .reading{margin:0}
+.qm-brand-independent .brand-close .secondary{margin-top:22px;line-height:1.8}
+.qm-brand-independent h2{font-size:29px;line-height:1.4;font-weight:600;color:#302a25;letter-spacing:.35px}
+.qm-brand-independent .services-heading{padding-bottom:39px}
+.qm-brand-independent .services-heading .reading{margin-top:23px}
+.qm-brand-independent .channel-section-heading{padding-bottom:36px}
+.qm-brand-independent .channel-section-heading h2{margin-top:20px}
+.qm-brand-independent .institution-copy h2{margin-top:21px;margin-bottom:27px}
+.qm-brand-independent .brand-close h2{margin-top:21px;margin-bottom:29px}
+.qm-brand-independent .channel-row h3{font-family:QMBrandIndependentSans,sans-serif;font-size:23px;line-height:1.45;font-weight:500;color:#4b4035}
+.qm-brand-independent .service-copy h3{font-weight:500;color:#4b4035}
+.qm-brand-independent .team-copy h3,.qm-brand-independent .process-panel h3{color:#4b4035}
+.qm-brand-independent .channel-row .channel-purpose{font-size:19px;line-height:1.85;font-weight:500;margin-top:24px}
+.qm-brand-independent .service-purpose{color:#4b4035}
+.qm-brand-independent .services{margin-top:64px}
+.qm-brand-independent .services-heading{padding-bottom:36px}
+.qm-brand-independent .service-world{display:flex;flex-direction:column;gap:54px;position:static;isolation:auto;overflow:visible;height:auto;margin:0;background:none;border-radius:0}
+.qm-brand-independent .service-world:before{display:none}
+.qm-brand-independent .service-row{position:relative;isolation:isolate;overflow:hidden;border-radius:18px;background:#faf5ed;height:425px;padding:36px;flex-shrink:0}
+.qm-brand-independent .service-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 44%;z-index:-2}
+.qm-brand-independent .service-row:before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#fffaf5fa 0%,#fffaf5ed 34%,#fffaf56e 48%,transparent 62%)}
+.qm-brand-independent .service-row.ai:after{display:none}
+.qm-brand-independent .service-copy{width:490px}
+.qm-brand-independent .human{border:0}
+.qm-brand-independent .institution-story{margin-top:72px}
+.qm-brand-independent .service-channels{margin-top:64px}
+.qm-brand-independent .channel-section-heading{padding-bottom:35px}
+.qm-brand-independent .channel-stage{display:flex;flex-direction:column;gap:38px;height:auto;position:static;isolation:auto;overflow:visible;background:none;border-radius:0}
+.qm-brand-independent .channel-stage:after{display:none}
+.qm-brand-independent .channel-row{position:relative;isolation:isolate;overflow:hidden;border-radius:18px;background:#faf5ed;height:340px;padding:35px 36px;flex-shrink:0}
+.qm-brand-independent .channel-independent-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;z-index:-2}
+.qm-brand-independent .channel-row:before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#fffaf5fa 0%,#fffaf5ed 33%,#fffaf575 48%,transparent 62%)}
+.qm-brand-independent .channel-row:first-of-type:after{display:none}
+.qm-brand-independent .process-panel{margin-top:32px}
+.qm-brand-independent .brand-close{margin-top:64px;margin-bottom:50px}
+.qm-brand-independent{--qm-chapter-gap:64px;--qm-peer-gap:40px;--qm-related-gap:24px;--qm-heading-gap:32px}
+.qm-brand-independent .services{margin-top:var(--qm-chapter-gap)}
+.qm-brand-independent .services-heading{padding:0 36px var(--qm-heading-gap)}
+.qm-brand-independent .services-heading .reading{margin-top:16px}
+.qm-brand-independent .service-world{gap:var(--qm-peer-gap)}
+.qm-brand-independent .service-row{margin:0}
+.qm-brand-independent .institution-story{margin-top:var(--qm-chapter-gap)}
+.qm-brand-independent .service-channels{margin-top:var(--qm-chapter-gap)}
+.qm-brand-independent .channel-section-heading{padding:0 36px var(--qm-heading-gap)}
+.qm-brand-independent .channel-section-heading h2{margin:16px 0 0}
+.qm-brand-independent .channel-stage{gap:var(--qm-peer-gap)}
+.qm-brand-independent .channel-row{margin:0}
+.qm-brand-independent .process-panel{margin-top:var(--qm-related-gap)}
+.qm-brand-independent .brand-close{margin:var(--qm-chapter-gap) 0 0}
+.qm-brand-independent .legal{margin:var(--qm-chapter-gap) auto 0}
+.qm-brand-independent .process-panel{margin-top:64px}
+.qm-brand-independent .brand-close{margin-top:64px}
+.qm-brand-independent{min-height:calc(100vh - 72px);padding-bottom:0}.qm-brand-independent img{display:block}.qm-brand-independent strong{font-weight:500}
+
+/* Narrow desktop and native browser zoom retain all approved text and native scrolling. */
+@media (max-width:1200px){
+.qm-brand-independent main{width:calc(100% - 48px)}
+.qm-brand-independent .legal{width:calc(100% - 48px);flex-wrap:wrap}
+}
+@media (max-width:900px){
+.qm-brand-independent .opening-copy{width:100%;padding:36px 24px}
+.qm-brand-independent .opening{height:auto;min-height:470px}
+.qm-brand-independent .opening-scene{height:100%}
+.qm-brand-independent .service-copy,.qm-brand-independent .channel-row>div{width:100%;max-width:490px}
+.qm-brand-independent .service-copy h3{white-space:normal}
+.qm-brand-independent .institution-copy,.qm-brand-independent .closing-copy{width:100%;max-width:620px;padding-left:24px;padding-right:24px}
+.qm-brand-independent .service-row,.qm-brand-independent .channel-row{padding-left:24px;padding-right:24px}
+.qm-brand-independent .process-panel{grid-template-columns:1fr;gap:24px;padding:30px 24px}
+}
+@media (max-width:640px){
+.qm-brand-independent main{width:calc(100% - 32px)}
+.qm-brand-independent .opening h1{font-size:36px}
+.qm-brand-independent .service-row,.qm-brand-independent .channel-row,.qm-brand-independent .institution-story,.qm-brand-independent .brand-close{height:auto;min-height:425px}
+.qm-brand-independent .channel-row{min-height:340px}
+.qm-brand-independent .opening-scene:after,.qm-brand-independent .service-row:before,.qm-brand-independent .institution-story:after,.qm-brand-independent .channel-row:before,.qm-brand-independent .brand-close:after{background:linear-gradient(90deg,#fffaf5fa 0%,#fffaf5ed 70%,#fffaf5b0 100%)}
+.qm-brand-independent .services-heading,.qm-brand-independent .channel-section-heading{padding-left:24px;padding-right:24px}
+.qm-brand-independent .identity strong{white-space:normal}
+}
+
+/* Keep the approved 38px opening gap inside the isolated cream canvas. */
+.qm-brand-independent{display:flow-root}
+
+/* HQ BR056: existing R29 auxiliary brown, six-role repair scoped to approved labels. */
+.qm-brand-independent [data-qm-brand-block="A01"] .eyebrow,
+.qm-brand-independent [data-qm-brand-block="A05"] .eyebrow,
+.qm-brand-independent [data-qm-brand-block="A06"] .eyebrow,
+.qm-brand-independent [data-qm-brand-block="A10"] .eyebrow{color:#786958}

@@ -1,0 +1,121 @@
+@font-face { font-family: "QM Sans"; src: url("/treehole/fonts/批准原件字库_00.ttf") format("truetype"); font-weight: 100 900; font-style: normal; font-display: block; }
+@font-face { font-family: "QM Serif"; src: url("/treehole/fonts/批准原件字库_01.ttf") format("truetype"); font-weight: 200 900; font-style: normal; font-display: block; }
+* { box-sizing: border-box; }
+body { margin: 0px; background: rgb(255, 253, 248); color: rgb(45, 42, 39); font-family: "QM Sans", sans-serif; font-weight: 420; -webkit-font-smoothing: antialiased; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: Arial, sans-serif; font-size: 25px; font-weight: 500; letter-spacing: -0.6px; }
+.brand span { font-size: 16px; color: rgb(116, 104, 94); letter-spacing: 0px; font-weight: 400; }
+.qmark { width: 27px; height: 27px; border: 5px solid transparent; border-radius: 50%; background: linear-gradient(rgb(255, 254, 250), rgb(255, 254, 250)) padding-box padding-box, conic-gradient(from 30deg, rgb(208, 180, 219), rgb(143, 196, 223), rgb(166, 208, 178), rgb(244, 213, 161), rgb(232, 165, 161), rgb(208, 180, 219)) border-box border-box; position: relative; }
+.qmark::after { content: ""; position: absolute; width: 11px; height: 5px; background: rgb(163, 138, 117); transform: rotate(45deg); right: -5px; bottom: -2px; border-radius: 2px; }
+main { max-width: 1320px; padding: 22px 38px 14px; margin: auto; position: relative; }
+.brand { font-family: Georgia, serif; font-weight: 400; letter-spacing: 0.4px; }
+body { font-family: "QM Sans", sans-serif; font-weight: 400; font-synthesis: none; }
+.brand { font-family: "QM Serif", TreeholeCompleteSerif, TreeholeEmoji, serif; }
+.brand span { font-family: "QM Sans", sans-serif; }
+main { padding-bottom: 10px; }
+@font-face { font-family: ChatSans; src: url("/treehole/fonts/批准原件字库_02.ttf") format("opentype"); font-weight: 400; font-display: block; }
+html, body { width: 1440px; height: 900px; overflow: hidden; }
+body { background: linear-gradient(125deg, rgb(255, 250, 243), rgb(255, 253, 250) 52%, rgb(250, 247, 253)); font-family: "QM Sans", sans-serif; }
+body::before { content: ""; position: absolute; top: 72px; left: 0px; right: 0px; height: 300px; mask-image: linear-gradient(rgb(0, 0, 0) 40%, transparent); background: linear-gradient(110deg, rgba(245, 199, 195, 0.2), rgba(244, 223, 182, 0.2), rgba(196, 221, 200, 0.18), rgba(186, 221, 229, 0.19), rgba(211, 197, 229, 0.19)); pointer-events: none; }
+body { background: radial-gradient(at 8% 35%, rgba(248, 233, 223, 0.333), transparent 48%), radial-gradient(at 97% 12%, rgba(226, 219, 240, 0.333), transparent 48%), rgb(255, 253, 249); }
+body::before { height: 400px; background: linear-gradient(110deg, rgba(244, 207, 202, 0.2), rgba(240, 219, 179, 0.2), rgba(190, 218, 195, 0.2), rgba(188, 220, 226, 0.2), rgba(212, 199, 229, 0.2)); }
+@font-face { font-family: RoleSans; src: url("/treehole/fonts/批准原件字库_03.ttf"); }
+@font-face { font-family: NavComplete; src: url("/treehole/fonts/批准原件字库_04.ttf"); }
+@font-face { font-family: DiarySans; src: url("/treehole/fonts/批准原件字库_05.ttf"); }
+html, body { min-height: 900px; height: auto !important; overflow: visible !important; }
+body { margin: 0px; background: rgb(255, 253, 248); color: rgb(56, 47, 40); font-family: DiarySans, "QM Sans", sans-serif; }
+* { box-sizing: border-box; }
+main { width: 1192px; margin: 32px auto; }
+p { font-size: 17px; line-height: 1.8; margin: 8px 0px; color: rgb(108, 88, 73); }
+.paper { width: 960px; margin: 24px auto 0px; background: rgb(255, 254, 250); border: 1px solid rgb(217, 197, 180); border-radius: 16px; padding: 28px 32px; box-shadow: rgba(93, 68, 55, 0.03) 0px 10px 24px; }
+h2 { font-family: "QM Serif", TreeholeCompleteSerif, TreeholeEmoji, serif; font-size: 27px; font-weight: 400; margin: 15px 0px 20px; }
+.meta { display: flex; align-items: center; justify-content: space-between; color: rgb(138, 116, 99); font-size: 14px; }
+.local-note { font-size: 14px; color: rgb(143, 122, 105); margin: 17px 0px 0px; }
+.letter-title { margin: 28px 0px 20px; }
+html, body { background: rgb(255, 253, 248) !important; }
+main { margin: 28px auto 0px; }
+.paper { padding: 30px 34px; margin-top: 22px; border-color: rgb(213, 186, 164); border-radius: 16px; box-shadow: rgba(105, 74, 45, 0.03) 0px 7px 24px; }
+.paper h2 { font-size: 29px; color: rgb(57, 42, 31); }
+.paper .meta { color: rgb(133, 108, 88); }
+.letter-title { margin-top: 26px; }
+.paper { background: rgb(255, 254, 250); border: 1px solid rgb(201, 169, 139); box-shadow: rgba(97, 68, 42, 0.047) 0px 7px 22px; }
+.paper h2 { font-size: 30px; font-weight: 500; color: rgb(51, 37, 27); }
+.paper .meta { font-size: 16px; color: rgb(112, 88, 67); }
+.local-note { font-size: 16px; color: rgb(120, 96, 76); }
+main { margin-top: 28px; }
+.paper { border: 1px solid rgb(212, 187, 165); border-radius: 12px; padding: 32px 38px; box-shadow: rgba(105, 75, 48, 0.063) 0px 7px 20px; background: rgb(255, 254, 250); }
+.paper h2 { font-size: 30px; line-height: 1.5; margin-top: 20px; margin-bottom: 22px; font-weight: 400; }
+.letter-title { font-size: 30px !important; margin: 26px 0px 24px !important; }
+.local-note { font-size: 15px; color: rgb(139, 114, 92); }
+main { margin-top: 26px; }
+.paper { margin-top: 0px; border-radius: 0px 0px 12px 12px; border-top: 0px rgb(201, 170, 140); padding: 34px 38px 32px; background: rgb(255, 253, 248); border-right-color: rgb(201, 170, 140); border-bottom-color: rgb(201, 170, 140); border-left-color: rgb(201, 170, 140); box-shadow: rgba(102, 67, 41, 0.07) 0px 12px 28px; }
+.paper > h2 { margin-top: 17px; }
+.paper .meta { font-size: 16px; }
+.paper h2 { font-size: 31px; font-weight: 500; line-height: 1.5; }
+.letter-title { font-size: 31px !important; }
+@font-face { font-family: ScrollHelp; src: url("/treehole/fonts/批准原件字库_06.ttf"); }
+.letter-title { margin-bottom: 20px !important; }
+.local-note { margin-top: 14px; }
+.steps, .paper, .footer { box-sizing: border-box; width: 1116px !important; max-width: calc(-64px + 100vw) !important; }
+.paper { padding: 32px 38px !important; }
+.letter-title { margin-bottom: 18px !important; }
+@font-face { font-family: LetterText; src: url("/treehole/fonts/批准原件字库_07.ttf"); }
+.correspondence { padding: 40px 58px 28px !important; background: linear-gradient(135deg, rgb(255, 254, 250), rgb(255, 252, 246)) !important; border-color: rgb(213, 189, 167) !important; box-shadow: rgba(112, 83, 54, 0.05) 0px 12px 32px !important; }
+.correspondence .meta { padding-bottom: 21px; border-bottom: 1px solid rgb(231, 218, 205); font-family: LetterText, DiarySans, sans-serif !important; }
+.correspondence .letter-title { margin: 28px 0px 30px !important; font-size: 34px !important; }
+.received-letter { max-width: 920px; margin: 0px auto; font-family: LetterText, DiarySans, sans-serif; color: rgb(73, 52, 37); cursor: default; }
+.salutation { font-size: 20px; margin: 0px 0px 24px; line-height: 1.9; }
+.letter-paragraph { font-size: 19px; line-height: 2; margin: 0px 0px 25px; }
+.signature { margin: 33px 0px 34px; text-align: right; display: flex; flex-direction: column; gap: 10px; }
+.signature span { font-size: 26px; color: rgb(88, 60, 40); }
+.signature small { font-size: 15px; color: rgb(139, 113, 91); }
+.correspondence .local-note { margin-bottom: 0px; }
+html, body { margin: 0px !important; padding: 0px !important; background: rgb(246, 240, 232) !important; width: 1200px !important; min-width: 1200px !important; overflow: visible !important; }
+* { box-sizing: border-box; }
+.export-sheet { width: 1200px !important; max-width: none !important; margin: 0px !important; padding: 44px !important; }
+.export-brand { height: 66px; display: flex; align-items: center; justify-content: space-between; padding: 0px 4px 22px; font-size: 17px; color: rgb(124, 98, 75); letter-spacing: 1px; }
+.correspondence { width: 1112px !important; max-width: none !important; padding: 40px 56px 30px !important; margin: 0px !important; border-radius: 12px !important; box-shadow: none !important; background: rgb(255, 254, 250) !important; }
+.received-letter { max-width: none !important; }
+.correspondence .letter-title { font-size: 36px !important; }
+.letter-paragraph { font-size: 21px !important; line-height: 1.95 !important; margin-bottom: 27px !important; }
+.salutation { font-size: 21px !important; }
+.correspondence .meta { font-size: 17px !important; }
+.signature { margin-bottom: 31px !important; }
+.correspondence .local-note { border-top: 1px solid rgb(231, 218, 205); padding-top: 18px; line-height: 1.8; font-size: 15px !important; }
+.export-sheet footer { padding: 22px 4px 0px; font: 15px / 1.8 LetterText, sans-serif; color: rgb(138, 114, 93); letter-spacing: 0px; }
+html, body { height: auto !important; min-height: 0px !important; background: rgb(246, 240, 232) !important; }
+body::before, body::after { content: none !important; display: none !important; }
+.export-sheet { background: transparent !important; }
+.export-brand { height: 66px !important; padding: 0px 4px 22px !important; align-items: center !important; }
+.export-brand .brand { flex-shrink: 0; font-size: 25px !important; }
+.export-brand > span { font: 17px / 1.5 LetterText, DiarySans, sans-serif; letter-spacing: 0px; }
+.correspondence { border: 1px solid rgb(213, 189, 167) !important; }
+.letter-paragraph { overflow-wrap: anywhere; line-height: 41px !important; }
+.signature small { line-height: 24px; }
+.export-sheet footer { line-height: 27px; }
+html, body { background: rgb(243, 237, 229) !important; }
+.export-brand { border-bottom: 1px solid rgb(216, 200, 183); margin-bottom: 24px !important; height: 66px !important; }
+.export-brand .brand { color: rgb(70, 56, 46); }
+.export-brand > span { color: rgb(128, 105, 84); font-size: 16px !important; }
+.correspondence { position: relative; overflow: hidden; border: 1px solid rgb(205, 183, 159) !important; border-radius: 6px !important; background: linear-gradient(115deg, rgb(255, 253, 248) 0%, rgb(255, 254, 250) 58%, rgb(252, 248, 241) 100%) !important; box-shadow: rgba(112, 83, 51, 0.04) 0px 8px 22px !important; }
+.correspondence::before { content: ""; position: absolute; top: 0px; left: 0px; right: 0px; height: 5px; background: linear-gradient(90deg, rgb(232, 191, 176), rgb(235, 213, 170) 26%, rgb(200, 216, 189) 49%, rgb(190, 213, 223) 70%, rgb(203, 187, 215)); }
+.correspondence .meta { color: rgb(133, 103, 78); font-size: 17px !important; border-bottom: 0px !important; padding-bottom: 18px !important; }
+.correspondence .letter-title { letter-spacing: 1px; padding-bottom: 22px; border-bottom: 1px solid rgb(228, 213, 196); color: rgb(52, 39, 29) !important; margin-top: 13px !important; margin-bottom: 27px !important; font-weight: 400 !important; }
+.salutation { color: rgb(112, 80, 58) !important; margin-top: 28px !important; margin-bottom: 25px !important; }
+.letter-paragraph { color: rgb(71, 55, 43) !important; }
+.signature { padding-top: 13px !important; margin-top: 31px !important; }
+.signature span { letter-spacing: 3px; font-family: "QM Serif", TreeholeCompleteSerif, TreeholeEmoji, serif !important; color: rgb(115, 80, 55) !important; }
+.signature small { color: rgb(148, 124, 103) !important; }
+.correspondence .local-note { border-top-color: rgb(228, 213, 196) !important; color: rgb(154, 131, 112) !important; font-size: 15px !important; }
+.export-sheet footer { color: rgb(148, 127, 108) !important; font-size: 15px !important; padding-top: 20px !important; }
+@font-face{font-family:TreeholeFallback;src:url("/treehole/fonts/NotoSansCJKSC-Regular.woff2");font-display:block}
+.received-letter{font-family:LetterText,DiarySans,TreeholeFallback,sans-serif}.letter-paragraph{white-space:pre-wrap}
+
+@font-face{font-family:TreeholeEmoji;src:url("/treehole/fonts/NotoColorEmoji.woff2");font-display:block}
+.received-letter{font-family:LetterText,DiarySans,TreeholeFallback,TreeholeEmoji,sans-serif}
+
+@font-face{font-family:TreeholeCompleteSerif;src:url("/treehole/fonts/NotoSerifCJKSC-Regular.woff2");font-weight:400;font-style:normal;font-display:block}
+.received-letter{font-family:LetterText,DiarySans,TreeholeFallback,TreeholeEmoji,sans-serif;font-synthesis:none}
+.letter-paragraph{overflow-wrap:anywhere}
+
+/* 动态身份与日期同样使用明确的完整本地后备字库。 */
+.correspondence .meta{font-family:LetterText,DiarySans,TreeholeFallback,TreeholeEmoji,sans-serif!important}

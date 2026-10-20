@@ -1,0 +1,47 @@
+@font-face{font-family:QMBrandHomeSans;src:url("/qm-brand-desktop/home/AboutSans.ttf");font-weight:100 900;font-display:block}
+@font-face{font-family:QMBrandHomeSerif;src:url("/qm-brand-desktop/home/AboutSerif.ttf");font-weight:200 900;font-display:block}
+.qm-brand-home{margin-top:48px;font-family:QMBrandHomeSans,sans-serif;color:#3c342e}
+.qm-brand-home h2{font-family:QMBrandHomeSerif,serif;font-size:29px;line-height:1.4;font-weight:600;margin:18px 0 23px;color:#302a25}
+.qm-brand-home h3{font-size:23px;line-height:1.45;font-weight:500;margin:0}
+.qm-brand-home .ext-eyebrow{font-size:14px;line-height:1.4;color:#897563;letter-spacing:.8px;margin:0}
+.qm-brand-home .ext-reading{font-size:19px;line-height:1.85;font-weight:400;margin:0}
+.qm-brand-home .ext-secondary{font-size:16px;line-height:1.75;color:#65513f;margin:0}
+.qm-brand-home .extension-brand,.qm-brand-home .extension-institution{position:relative;isolation:isolate;overflow:hidden;border-radius:18px;background:#faf6ed}
+.qm-brand-home .extension-brand{height:340px}
+.qm-brand-home .extension-institution{height:375px;margin-top:28px}
+.qm-brand-home .extension-brand>img,.qm-brand-home .extension-institution>img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 55%}
+.qm-brand-home .extension-brand:after,.qm-brand-home .extension-institution:after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#fffaf5fa 0%,#fffaf5ed 36%,#fffaf564 52%,transparent 68%)}
+.qm-brand-home .extension-copy{padding:32px 36px;width:660px}
+.qm-brand-home .extension-brand .ext-secondary{margin-top:22px}
+.qm-brand-home .ext-team{margin-top:25px}
+.qm-brand-home .ext-team .ext-secondary{margin-top:13px}
+.qm-brand-home .extension-locations{display:grid;grid-template-columns:1fr 1fr;gap:72px;padding:35px 36px 32px}
+.qm-brand-home .extension-locations .ext-reading{margin-top:12px}
+.qm-brand-home .extension-locations .ext-secondary{margin-top:9px}
+.qm-brand-home .extension-next{display:flex;justify-content:space-between;align-items:center;padding:24px 36px 32px;border-top:1px solid #e2d6c7;margin:0 36px}
+.qm-brand-home .extension-link{height:52px;min-width:230px;display:flex;align-items:center;justify-content:space-between;padding:0 23px;border:1px solid #c9b4bf;border-radius:11px;font-size:18px;font-weight:500;background:linear-gradient(110deg,#fff4e5,#f1f5e9,#f2edf9);color:#473c33}
+.qm-brand-home .extension-link:focus-visible{outline:2px solid #856591;outline-offset:4px}
+.qm-brand-home .extension-next{margin:6px 0 12px;padding:30px 36px;gap:48px;border:1px solid #e8ded3;border-radius:16px;background:linear-gradient(115deg,#faf5ec,#f8f7ef 47%,#f7f4fa);min-height:174px}
+.qm-brand-home .extension-choice h3{font-size:23px;font-weight:500;line-height:1.45;color:#3c342e;margin:0 0 15px}
+.qm-brand-home .extension-choice .ext-reading{font-size:19px;line-height:1.75;color:#65513f}
+.qm-brand-home .extension-link{flex:0 0 230px;background:linear-gradient(110deg,#fff5e8,#f3f6ed,#f3eef9);border-color:#baa7bb;box-shadow:0 2px 5px #80613e08;letter-spacing:.2px}
+.qm-brand-home .extension-link span{font-size:24px;line-height:1;font-weight:400}
+.qm-brand-home .extension-link:hover{border-color:#9983a4;background:linear-gradient(110deg,#fff1df,#eff3e6,#eee7f7)}
+.qm-brand-home,.qm-brand-home *{box-sizing:border-box}.qm-brand-home{font-synthesis:none}.qm-brand-home a{text-decoration:none}.qm-brand-home img{display:block}
+
+@media (max-width:900px){
+.qm-brand-home .extension-copy{width:100%;max-width:660px;padding-left:24px;padding-right:24px}
+.qm-brand-home .extension-next{flex-wrap:wrap;gap:24px;padding:30px 24px}
+.qm-brand-home .extension-locations{gap:32px;padding-left:24px;padding-right:24px}
+}
+@media (max-width:640px){
+.qm-brand-home .extension-brand,.qm-brand-home .extension-institution{height:auto;min-height:340px}
+.qm-brand-home .extension-institution{min-height:375px}
+.qm-brand-home .extension-locations{grid-template-columns:1fr}
+.qm-brand-home .extension-brand:after,.qm-brand-home .extension-institution:after{background:linear-gradient(90deg,#fffaf5fa 0%,#fffaf5ed 70%,#fffaf5b0 100%)}
+.qm-brand-home .extension-link{min-width:0;max-width:100%;flex-basis:230px}
+}
+
+/* HQ BR056: two homepage-extension labels only; shared palette unchanged. */
+.qm-brand-home [data-qm-brand-block="H01"] .ext-eyebrow,
+.qm-brand-home [data-qm-brand-block="H02"] .ext-eyebrow{color:#786958}

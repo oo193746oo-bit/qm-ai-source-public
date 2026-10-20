@@ -1,0 +1,991 @@
+@font-face {
+font-family: QMTDSans;
+src:url("/qm-therapist-detail-v1/fonts/QMTDSans.ttf") format("truetype");
+font-weight:100 900;
+font-display:block;
+
+}
+
+
+@font-face {
+font-family: QMTDSerif;
+src:url("/qm-therapist-detail-v1/fonts/QMTDSerif.ttf") format("truetype");
+font-weight:100 900;
+font-display:block;
+
+}
+
+
+@font-face {
+ font-family: "QMTDSans-01";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-01.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-01";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-01.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-02";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-02.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-02";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-02.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-03";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-03.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-03";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-03.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-04";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-04.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-04";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-04.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-05";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-05.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-05";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-05.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-06";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-06.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-06";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-06.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-07";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-07.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-07";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-07.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-08";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-08.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-08";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-08.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-09";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-09.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-09";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-09.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-10";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-10.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-10";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-10.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-11";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-11.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-11";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-11.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-12";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-12.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-12";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-12.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-13";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-13.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-13";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-13.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-14";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-14.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-14";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-14.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-15";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-15.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-15";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-15.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-16";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-16.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-16";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-16.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-17";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-17.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-17";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-17.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-18";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-18.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-18";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-18.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-19";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-19.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-19";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-19.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSans-20";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSans-20.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+
+@font-face {
+ font-family: "QMTDSerif-20";
+ src: url("/qm-therapist-detail-v1/fonts/QMTDSerif-20.ttf") format("truetype");
+ font-weight: 100 900;
+ font-display: block;
+}
+.qm-td-page * {
+box-sizing:border-box
+}
+
+
+.qm-td-page {
+margin:0;
+background:#fffdf8;
+color:#35271e;
+font-family:var(--td-sans),sans-serif;
+font-size:17px;
+font-synthesis:none;
+min-height:100dvh;
+text-align:left;
+font-weight:400;
+line-height:normal;
+isolation:isolate
+}
+
+
+.qm-td-page header {
+height:72px;
+background:#fffefa;
+border-bottom:1px solid #e6dfd4;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 48px
+}
+
+
+.qm-td-page nav {
+display:flex;
+gap:12px
+}
+
+
+.qm-td-page button {
+font:500 17px var(--td-sans), sans-serif;
+border:1px solid #a27d54;
+border-radius:8px;
+background:#fffaf2;
+color:#52351e;
+min-height:49px;
+padding:12px 18px
+}
+
+
+.qm-td-page main {
+max-width:1320px;
+padding:24px 38px 30px;
+margin:auto
+}
+
+
+.qm-td-page h1 {
+font-family: var(--td-serif), serif;
+font-size:40px;
+font-weight:500;
+margin:0;
+line-height:1.4
+}
+
+
+.qm-td-page blockquote {
+margin:0 0 20px;
+font-size:19px;
+line-height:1.7;
+color:#5e4735
+}
+
+
+.qm-td-page footer {
+margin-top:25px;
+display:flex;
+justify-content:space-between;
+gap:20px;
+color:#7a6654;
+font-size:14px;
+line-height:1.8
+}
+
+
+.qm-td-page a {
+color:inherit;
+text-decoration:none;
+
+}
+
+
+.qm-td-page nav a {
+padding:12px 20px;
+color:#4a423b
+}
+
+
+.qm-td-page header button {
+background:#f2e8db;
+font-size:16px
+}
+
+
+.qm-td-page h1 span {
+font-family: var(--td-sans), sans-serif;
+font-size:22px;
+font-weight:400;
+color:#66513e;
+margin-left:16px
+}
+
+
+.qm-td-page .brand {
+font-family:var(--td-serif),serif;
+font-size:25px;
+display:flex;
+align-items:center;
+gap:10px
+}
+
+
+.qm-td-page .qmark {
+width:27px;
+height:27px;
+border:5px solid transparent;
+border-radius:50%;
+background:linear-gradient(#fffefa,#fffefa) padding-box,conic-gradient(#d0b4db,#8fc4df,#a6d0b2,#f4d5a1,#e8a5a1,#d0b4db) border-box
+}
+
+
+.qm-td-page .crumb {
+font-size:16px;
+color:#74604e;
+margin:0 0 21px
+}
+
+
+.qm-td-page .hero {
+padding:27px 36px;
+display:grid;
+grid-template-columns:224px 1fr;
+gap:41px;
+align-items:center;
+border-radius:16px;
+position:relative;
+background:linear-gradient(116deg,#fbf8f2 0%,#f7e4e2 25%,#f4ead3 39%,#e6eddd 53%,#e1eaf0 68%,#ebe3f0 82%,#fbf8f2 100%)
+}
+
+
+.qm-td-page .photo {
+height:300px;
+width:224px;
+position:relative;
+overflow:hidden;
+background:#efe7df;
+border:1px solid #e7d8c7;
+border-radius:10px
+}
+
+
+.qm-td-page .eyebrow {
+font-size:16px;
+color:#73573f;
+letter-spacing:2px;
+margin-bottom:12px
+}
+
+
+.qm-td-page .role {
+margin:11px 0 15px;
+font-size:17px;
+color:#654c36
+}
+
+
+.qm-td-page .tags {
+display:grid;
+grid-template-columns:repeat(5,minmax(0,1fr));
+gap:10px 12px;
+max-width:795px
+}
+
+
+.qm-td-page .panel {
+background:#fffefa;
+border:1px solid #e4d5c3;
+border-radius:12px;
+padding:26px 30px;
+margin-top:22px
+}
+
+
+.qm-td-page .section-title {
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+margin-bottom:19px
+}
+
+
+.qm-td-page .paragraphs {
+max-width:1080px
+}
+
+
+.qm-td-page .facts {
+margin:20px 0 0;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+padding:22px 0;
+background:#f5eee4;
+border-radius:10px
+}
+
+
+.qm-td-page .prices {
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:17px
+}
+
+
+.qm-td-page .price-row {
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:8px;
+min-height:51px;
+border-top:1px solid #e4d5c3;
+font-size:17px
+}
+
+
+.qm-td-page .note {
+margin:20px 0 0;
+font-size:16px;
+color:#7a6552;
+line-height:1.6
+}
+
+
+.qm-td-page .price-action {
+font:500 16px var(--td-sans), sans-serif;
+border:1px solid #a27d54;
+border-radius:8px;
+background:#fffaf2;
+color:#52351e;
+min-height:49px;
+padding:12px 18px;
+margin-top:18px;
+width:100%;
+cursor:pointer;
+line-height:normal;
+
+}
+
+
+.qm-td-page .skip-link {
+position:absolute;
+top:-100px;
+left:20px;
+z-index:70;
+background:#fffaf2;
+padding:12px;
+
+}
+
+
+.qm-td-page .td-modal {
+position:fixed;
+inset:0;
+margin:auto;
+width:min(560px,calc(100vw - 40px));
+max-height:calc(100dvh - 40px);
+overflow:auto;
+border:1px solid #c4ab8e;
+border-radius:16px;
+background:#fffdf8;
+color:#35271e;
+padding:32px;
+box-shadow:0 20px 80px #35271e33;
+font:17px/1.8 var(--td-sans), sans-serif;
+
+}
+
+
+.qm-td-page .brand span {
+font-family: var(--td-sans), sans-serif;
+font-size:16px;
+color:#74685e
+}
+
+
+.qm-td-page nav .active {
+border-bottom:1px solid #a4815f
+}
+
+
+.qm-td-page .photo img {
+position:absolute;
+max-width:none;
+
+}
+
+
+.qm-td-page .tags span {
+text-align:center;
+padding:9px 8px;
+min-height:43px;
+border:1px solid #deccb7;
+border-radius:12px;
+background:#fffaf3d9;
+white-space:nowrap;
+color:#604831;
+font-size:17px
+}
+
+
+.qm-td-page .section-title h2 {
+font-family: var(--td-serif), serif;
+font-size:28px;
+line-height:1.4;
+font-weight:500;
+margin:0
+}
+
+
+.qm-td-page .section-title span {
+font-size:16px;
+color:#7a6552
+}
+
+
+.qm-td-page .paragraphs p {
+font-size:17px;
+line-height:1.85;
+color:#514235;
+margin:0 0 15px;
+overflow-wrap:break-word
+}
+
+
+.qm-td-page .facts div {
+padding:0 25px;
+border-left:1px solid #d9c5af
+}
+
+
+.qm-td-page .facts strong {
+font-size:19px;
+font-weight:500;
+display:block;
+line-height:1.5
+}
+
+
+.qm-td-page .facts span {
+font-size:16px;
+color:#76604e;
+display:block;
+margin-top:6px
+}
+
+
+.qm-td-page .prices article {
+border:1px solid #e2d1bc;
+border-radius:10px;
+padding:20px 18px;
+background:#faf5ec;
+display:flex;
+flex-direction:column
+}
+
+
+.qm-td-page .prices h3 {
+font-size:21px;
+font-weight:500;
+line-height:1.4;
+margin:0 0 7px
+}
+
+
+.qm-td-page .price-row strong {
+font-size:22px;
+font-weight:500;
+color:#795032
+}
+
+
+.qm-td-page .tags > span {
+line-height:normal;
+
+}
+
+
+.qm-td-page .coach-prices article {
+min-height:294px;
+
+}
+
+
+
+
+.qm-td-page :is(a,button):focus-visible {
+outline:revert;
+outline-offset:revert;
+box-shadow:none;
+
+}
+
+
+.qm-td-page .td-modal::backdrop {
+background:#35271e66;
+
+}
+
+
+.qm-td-page .td-modal h2 {
+font:500 28px/1.5 var(--td-serif), serif;
+margin:0 0 16px;
+
+}
+
+
+.qm-td-page .td-modal p {
+margin:12px 0;
+
+}
+
+
+.qm-td-page .prices article>p {
+font-size:16px;
+color:#7a6350;
+margin:0 0 22px
+}
+
+
+.qm-td-page .prices > article > button {
+margin-top:18px;
+width:100%;
+font-size:16px
+}
+
+
+
+
+.qm-td-page .coach-prices .price-action {
+margin-top:auto;
+
+}
+
+
+
+
+.qm-td-page .skip-link:focus {
+top:8px;
+
+}
+
+
+.qm-td-page .td-modal .modal-actions {
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:24px;
+
+}
+
+
+.qm-td-page .td-modal .modal-action {
+display:inline-flex;
+align-items:center;
+min-height:49px;
+padding:10px 16px;
+border:1px solid #a27d54;
+border-radius:8px;
+
+}
+
+
+.qm-td-page .td-modal .modal-close {
+position:absolute;
+top:8px;
+right:12px;
+padding:4px 10px;
+min-height:40px;
+
+}
+
+
+.qm-td-page .td-modal .primary {
+background:#805b38;
+color:#fffaf1;
+
+}
+
+
+.qm-td-page .paragraphs p:last-child {
+margin-bottom:0
+}
+
+
+.qm-td-page .facts div:first-child {
+border:0
+}
+
+
+
+
+.qm-td-page:not([data-therapist-name="彭瑞"]) .paragraphs p {
+text-wrap:pretty;
+
+}
+
+
+.qm-td-page .prices article:first-child > button {
+background:linear-gradient(135deg,#946c43,#7d552f);
+color:#fffaf1;
+border-color:#80562f
+}
+
+
+.qm-td-page .prices article:nth-child(2) > button {
+background:linear-gradient(135deg,#946c43,#7d552f);
+color:#fffaf1;
+border-color:#80562f
+}
+
+
+.qm-td-page .prices article:nth-child(-n+2) .price-action {
+background:linear-gradient(135deg,#946c43,#7d552f);
+color:#fffaf1;
+border-color:#80562f;
+
+}
+
+
+@media(width <=1400px){
+.qm-td-page header {
+padding:0 34px
+}
+
+.qm-td-page nav a {
+padding-left:15px;
+padding-right:15px
+}
+
+.qm-td-page .hero {
+gap:30px;
+padding:27px 28px
+}
+
+.qm-td-page .tags {
+gap:10px
+}
+
+.qm-td-page .prices {
+gap:12px
+}
+
+.qm-td-page .price-row {
+font-size:16px
+}
+
+.qm-td-page .facts div {
+padding:0 18px
+}
+
+.qm-td-page .prices article {
+padding:18px 14px
+}
+
+.qm-td-page .price-row strong {
+font-size:21px
+}
+
+
+}
+
+
+/* 手机未批准：保留可读基础，不作为移动端设计或验收合同。 */
+@media (width <=1000px) {
+
+ .qm-td-page header {
+height:auto;
+min-height:72px;
+flex-wrap:wrap;
+gap:10px;
+padding:16px 20px;
+
+}
+
+ .qm-td-page nav {
+order:3;
+width:100%;
+overflow-x:auto;
+gap:0;
+
+}
+
+ .qm-td-page main {
+padding:24px 20px;
+
+}
+
+ .qm-td-page footer {
+flex-wrap:wrap;
+
+}
+
+ .qm-td-page nav a {
+flex-shrink:0;
+padding:10px;
+
+}
+
+ .qm-td-page .hero {
+grid-template-columns:224px minmax(0,1fr);
+gap:24px;
+padding:24px;
+
+}
+
+ .qm-td-page .tags {
+grid-template-columns:repeat(2,minmax(0,1fr));
+
+}
+
+ .qm-td-page .facts {
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:16px;
+
+}
+
+ .qm-td-page .prices {
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:16px;
+
+}
+
+ .qm-td-page .section-title {
+flex-wrap:wrap;
+
+}
+
+ .qm-td-page .facts div:nth-child(3) {
+border-left:0;
+
+}
+
+
+}
+
+
+@media (width <=620px) {
+
+ .qm-td-page h1 {
+font-size:32px;
+
+}
+
+ .qm-td-page .hero {
+grid-template-columns:minmax(0,1fr);
+
+}
+
+ .qm-td-page .photo {
+justify-self:center;
+
+}
+
+ .qm-td-page .facts {
+grid-template-columns:minmax(0,1fr);
+
+}
+
+ .qm-td-page .prices {
+grid-template-columns:minmax(0,1fr);
+
+}
+
+ .qm-td-page .facts div {
+border-left:0;
+
+}
+
+
+}
+
+
+/* 实际导航沿用批准正常形状，隔离全站焦点圆角。 */
+.qm-td-page :is(.brand,nav a,footer a,.crumb a):focus-visible {
+  border-radius: 0;
+}

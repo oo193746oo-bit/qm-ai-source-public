@@ -1,0 +1,49 @@
+@font-face{font-family:QMNavComplete;src:url('/visual/navigation-v1.1/NavComplete.otf') format('opentype');font-weight:400;font-display:block}
+@font-face{font-family:QMNavBase;src:url('/visual/chat-desktop/b93f12f39e30b6c5d5b288cceb4599f0e680c3b0e2eab9455e7b6a6f3068f1c8.ttf') format('truetype');font-weight:100 900;font-display:block}
+@font-face{font-family:QMNavSerif;src:url('/visual/chat-desktop/7155072662ad59b055b0885e22c47579e6abba26499803b733f6ee4b5f0697c9.ttf') format('truetype');font-weight:100 900;font-display:block}
+@media(min-width:901px),(hover:hover) and (pointer:fine){
+.qm-approved-nav-header.qm-approved-nav-header{position:relative;z-index:6;height:72px;width:100%;padding:0 48px;border:0;border-bottom:1px solid #e6dfd4;display:flex;align-items:center;justify-content:space-between;gap:0;box-sizing:border-box;background:linear-gradient(108deg,#fae5df 0%,#f8ecd6 24%,#e8efdf 43%,#e2edf1 65%,#eee5f2 85%,#fff8f0 100%);color:#2d2a27;font-family:QMNavBase,sans-serif;font-weight:400;font-synthesis:none;line-height:normal;-webkit-font-smoothing:antialiased}
+.qm-approved-nav-header.qm-approved-nav-header *{box-sizing:border-box}
+.qm-approved-nav-header.qm-approved-nav-header svg{display:block}
+.qm-approved-nav-header.qm-approved-nav-header a{text-decoration:none}
+.qm-approved-nav-header.qm-approved-nav-header .brand{display:flex;align-items:center;gap:10px;font-family:QMNavSerif,serif;font-size:25px;font-weight:400;letter-spacing:.4px;line-height:normal;color:#2d2a27;background:none;border:0;border-radius:0;box-shadow:none;padding:0;margin:0;white-space:nowrap;flex-shrink:0}
+.qm-approved-nav-header.qm-approved-nav-header .brand span{font-family:QMNavBase,sans-serif;font-size:16px;color:#74685e;letter-spacing:0;font-weight:400}
+.qm-approved-nav-header.qm-approved-nav-header .qmark{display:block;width:27px;height:27px;flex-shrink:0;border:5px solid transparent;border-radius:50%;background:linear-gradient(#fffefa,#fffefa) padding-box,conic-gradient(from 30deg,#d0b4db,#8fc4df,#a6d0b2,#f4d5a1,#e8a5a1,#d0b4db) border-box;position:relative}
+.qm-approved-nav-header.qm-approved-nav-header .qmark:after{content:"";position:absolute;width:11px;height:5px;background:#a38a75;transform:rotate(45deg);right:-5px;bottom:-2px;border-radius:2px}
+.qm-approved-nav-header.qm-approved-nav-header .qm-desktop-navigation{display:flex;align-items:center;gap:8px;font-weight:400;line-height:normal;min-width:0}
+.qm-approved-nav-header.qm-approved-nav-header .qm-desktop-navigation a{font-family:QMNavComplete,QMNavBase,sans-serif;font-size:17px;font-weight:400;color:#372e26;padding:11px 15px;border:0;border-radius:12px;background:transparent;box-shadow:none;line-height:normal;margin:0;white-space:nowrap;flex-shrink:0}
+.qm-approved-nav-header.qm-approved-nav-header .qm-desktop-navigation>a.active{border:0;border-bottom:1px solid #a4815f;background:transparent;border-radius:0;padding-top:12px;padding-bottom:10px;color:#302822}
+.qm-approved-nav-header.qm-approved-nav-header .more-wrap{position:relative;flex-shrink:0}
+.qm-approved-nav-header.qm-approved-nav-header .more-button{font-family:QMNavComplete,QMNavBase,sans-serif;font-size:17px;font-weight:400;color:#372e26;border:0;background:transparent;display:flex;align-items:center;gap:7px;padding:12px 15px;min-height:0;min-width:0;line-height:normal;box-shadow:none;border-radius:0;margin:0;white-space:nowrap;cursor:pointer}
+.qm-approved-nav-header.qm-approved-nav-header .more-menu{position:absolute;top:53px;right:0;width:212px;padding:8px;background:#fffefa;border:1px solid #d8c3b0;border-radius:12px;box-shadow:0 12px 30px #59433120}
+.qm-approved-nav-header.qm-approved-nav-header .more-menu a{display:flex;align-items:center;justify-content:space-between;padding:16px 17px;border-radius:7px;font-size:17px}
+.qm-approved-nav-header.qm-approved-nav-header .more-menu a span{color:#987052;font-family:Arial,sans-serif}
+.qm-approved-nav-header.qm-approved-nav-header .more-menu a:hover,.qm-approved-nav-header.qm-approved-nav-header .more-menu a.active{background:#f4eee5}
+.qm-approved-nav-header.qm-approved-nav-header .expanded .more-button{background:#ffffff68;border-radius:10px}
+.qm-approved-nav-header.qm-approved-nav-header .more-button.active{border-bottom:1px solid #a4815f}
+.qm-approved-nav-header.qm-approved-nav-header .expanded .more-button svg{transform:rotate(180deg)}
+.qm-approved-nav-header.qm-approved-nav-header .login{display:flex;align-items:center;gap:12px;min-height:44px;padding:10px 17px;border:1px solid #926344;border-radius:8px;background:#eee0cd;color:#49301e;font-family:QMNavBase,sans-serif;font-size:16px;font-weight:500;line-height:normal;box-shadow:0 2px 5px #795d4210;white-space:nowrap;flex-shrink:0;cursor:pointer}
+.qm-approved-nav-header.qm-approved-nav-header .login svg{width:16px;height:16px}
+.qm-approved-nav-header.qm-approved-nav-header :is(a,button):focus-visible{outline:2px solid #80618d;outline-offset:3px}
+.qm-approved-nav-header.qm-approved-nav-header .header-actions{display:flex;align-items:center}
+.qm-approved-nav-header.qm-approved-nav-header .menu-trigger{display:none}
+.qm-approved-nav-header.qm-nav-legacy{position:sticky;top:0;z-index:60}
+/* 新共享导航不得盖住旧模块现有全屏模态遮罩；只协调层级，不改正文。 */
+body:has(.qm-nav-legacy) .fixed.inset-0.z-50{z-index:80}
+.qm-has-unified-desktop-nav .qm-header-glass,body:has(.qm-nav-legacy) header.sticky{top:72px}
+.qm-has-unified-desktop-nav .qm-sidebar,body:has(.qm-nav-legacy) .qm-sidebar{top:72px;height:calc(100dvh - 72px)!important}
+}
+@media(max-width:1024px) and (hover:hover) and (pointer:fine){
+.qm-approved-nav-header.qm-approved-nav-header{padding-left:12px;padding-right:12px}
+.qm-approved-nav-header.qm-approved-nav-header .qm-desktop-navigation{flex:1 1 0%;min-width:0;overflow-x:auto;scroll-padding-inline:8px}
+.qm-approved-nav-header.qm-approved-nav-header .header-actions{flex:0 0 auto}
+}
+@media(max-width:900px) and (hover:none){.qm-nav-legacy{display:none}}
+@media(max-width:1024px) and (hover:hover) and (pointer:fine),(max-height:280px) and (hover:hover) and (pointer:fine){
+.qm-approved-nav-header.qm-approved-nav-header .more-menu{position:fixed;left:clamp(8px,var(--qm-menu-left,8px),calc(100vw - 220px));right:auto;top:var(--qm-menu-top,64px);max-height:calc(100dvh - var(--qm-menu-top,64px) - 8px);overflow-y:auto}
+}
+
+.th-desktop:is([data-treehole-visual="03"],[data-treehole-visual="13"])
+.qm-approved-nav-header.qm-approved-nav-header .brand {
+  color: #382f28;
+}

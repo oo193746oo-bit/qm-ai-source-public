@@ -1,0 +1,113 @@
+:root {
+  --qm-ink: #112D4D;
+  --qm-ink-secondary: #536B88;
+  --qm-coral: #C56B52;
+  --qm-cream: #FBF6F0;
+  --qm-surface: #FFFFFF;
+  --qm-tag: #F4ECE5;
+  --qm-lavender: #D8C7F2;
+  --qm-border: #EADDD2;
+  --qm-error: #B24C36;
+  --qm-focus: rgba(197, 107, 82, .28);
+  /* 卡片阴影层级规则（L-P2-3）：内容主卡纯描边 / 可点导航卡 --qm-shadow-soft 轻浮起 / 浮层面板 --qm-shadow-card */
+  --qm-shadow-card: 0 10px 30px rgba(86, 64, 45, .08);
+  --qm-radius-card: 24px;
+  --qm-radius-image: 18px;
+  --qm-radius-section: 28px;
+  --qm-radius-pill: 999px;
+  --qm-page-max: 1200px;
+  --qm-page-pad-desktop: 32px;
+  --qm-page-pad-tablet: 24px;
+  --qm-page-pad-mobile: 16px;
+  --qm-font-display: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  --qm-font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --qm-motion-fast: 180ms;
+  --qm-motion-ease: cubic-bezier(.2, .8, .2, 1);
+  --qm-motion-cta: 180ms cubic-bezier(.2, .8, .2, 1); /* A1：合并 duration+easing，绕开 minify 吃 var() 间空格 */
+  --qm-shadow-soft: 0 6px 18px rgba(86, 64, 45, .06); /* A6：可点导航卡轻阴影 */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; color: var(--qm-ink); background: var(--qm-cream); font-family: var(--qm-font-body); }
+:focus-visible { outline: 0; box-shadow: 0 0 0 3px var(--qm-focus); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0ms !important; animation-duration: 0ms !important; }
+}
+
+/* ===== S1/S2 material pre-placement (shell_a construction step S1S2, 2026-10-03) =====
+   Per PLACEMENT_AND_CROP_CONTRACT v1.0 (S1S2 asset pack 0930):
+   S1 list banner: bg cover, position 62% 52% desktop / 72% 50% mobile, min-h 360/300px,
+   text safe zone left 8%-47% (desktop). S2 detail hero decor: absolute right:0 top:0,
+   width 34%-42% desktop / 48%-66% mobile, z below portrait & text.
+   S2-T handwriting: display width 320-420px desktop / 220-300px mobile, alt="".
+   Token definitions only in this step - page-shell wiring lands in later steps. */
+:root{
+  --qm-therapist-list-banner-bg: url("/therapists/s1s2/QM_THERAPIST_LIST_BANNER_BG_S1_v1.0_2880w.png");
+  --qm-therapist-list-banner-pos: 62% 52%;
+  --qm-therapist-list-banner-min-h: 360px;
+  --qm-therapist-detail-hero-decor: url("/therapists/s1s2/QM_THERAPIST_DETAIL_HERO_DECOR_S2_v1.0_transparent.png");
+  --qm-therapist-detail-hero-decor-w: 38%;
+  --qm-therapist-detail-handwriting: url("/therapists/s1s2/QM_THERAPIST_HERO_HANDWRITING_S2_v1.0_transparent.png");
+  --qm-therapist-detail-handwriting-w: 380px;
+}
+@media (max-width: 767.98px){
+  :root{
+    --qm-therapist-list-banner-pos: 72% 50%;
+    --qm-therapist-list-banner-min-h: 300px;
+    --qm-therapist-detail-hero-decor-w: 56%;
+    --qm-therapist-detail-handwriting-w: 260px;
+  }
+}
+
+/* ===== S1/S2 hero wiring (per PLACEMENT_AND_CROP_CONTRACT, 20261004; text code-rendered, shell untouched) ===== */
+[data-shell-slot="list-hero"] {
+  position: relative;
+  background-image: var(--qm-therapist-list-banner-bg);
+  background-size: cover;
+  background-position: var(--qm-therapist-list-banner-pos);
+  background-repeat: no-repeat;
+  min-height: var(--qm-therapist-list-banner-min-h);
+}
+[data-shell-slot="list-hero"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,253,252,0.92) 0%, rgba(255,253,252,0.60) 34%, rgba(255,253,252,0) 52%);
+  pointer-events: none;
+}
+[data-shell-slot="list-hero"] > * {
+  position: relative;
+  z-index: 1;
+}
+[data-shell-slot="detail-hero"] {
+  position: relative;
+  overflow: hidden;
+}
+[data-shell-slot="detail-hero"]::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: var(--qm-therapist-detail-hero-decor-w);
+  aspect-ratio: 3 / 2;
+  background-image: var(--qm-therapist-detail-hero-decor);
+  background-size: contain;
+  background-position: top right;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+[data-shell-slot="detail-hero"] > * {
+  position: relative;
+  z-index: 1;
+}
+.therapist-detail-hero__handwriting {
+  width: var(--qm-therapist-detail-handwriting-w);
+  height: auto;
+  max-width: 100%;
+}
+@media (max-width: 767.98px) {
+  [data-shell-slot="list-hero"]::before {
+    background: linear-gradient(90deg, rgba(255,253,252,0.94) 0%, rgba(255,253,252,0.76) 46%, rgba(255,253,252,0.10) 78%);
+  }
+}

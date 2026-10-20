@@ -1,0 +1,55 @@
+import { PageLayout } from "@/components/page-layout";
+import type { Metadata } from "next";
+import { THERAPISTS } from "@/lib/booking/data";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { TherapistListClient } from "./_components/therapist-list-client";
+
+/**
+ * v3.1-phase1-r2 心理师列表页（golden master · 沉浸式布局版）
+ * 变更（GPT 回单 v1.0 P0-B）：
+ *  2. 修复分享元数据：openGraph 图改生产绝对 URL（原相对路径被解析为 localhost）。
+ *  3. 暴露构建标识：meta x-qm-build，与证据包 build.json 映射。
+ * 移动端不受影响：遮罩层 lg:hidden 行为保留，汉堡导航在 site-header 内（批准稿手机版有汉堡）。
+ */
+export const metadata: Metadata = {
+  title: "心理师团队 · QM上海酷儿心理咨询中心",
+  description:
+    "浏览 QM 酷儿心理团队的心理师与职场教练，了解擅长方向与收费，通过人工客服完成预约前置沟通。",
+  openGraph: {
+    title: "QM AI - 心理支持助手",
+    description:
+      "面向多元性别人群的心理支持助手，提供安全、温暖的情绪支持空间。",
+    url: "https://queermental.coze.site/therapists",
+    siteName: "QM AI",
+    locale: "zh_CN",
+    images: [{ url: "https://queermental.coze.site/qm-v5/og-image.png" }],
+  },
+  other: {
+    "x-qm-build": "v3.1-phase1-r2-immersive",
+  },
+};
+
+
+/**
+ * v3.1 心理师列表页（golden master）
+ * 结构合同：qm-page-shell > site_header(全站已审批组件) > hero > filterbar > grid(3列) 。
+ * 数据源：@/lib/booking/data THERAPISTS（唯一真实数据源，零虚构）。
+ */
+export default function TherapistListPage() {
+  const roster = THERAPISTS.filter(
+    (t) => t.role === "心理师" || t.role === "心理教练（非心理师）",
+  );
+
+  return (
+    <PageLayout title="心理师团队">
+    <div className="min-h-dvh qm-immersive">
+      <SiteHeader />
+      <div className="qm-page-shell">
+        <TherapistListClient roster={roster} />
+      </div>
+      <SiteFooter />
+    </div>
+    </PageLayout>
+  );
+}

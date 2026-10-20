@@ -1,0 +1,17 @@
+import {detectCrisis, hasImmediateDangerSignal} from "../src/lib/crisis-detection";
+const R3_WITHDRAWAL = /气话|吓到|缓过来|缓过劲|没事了|开玩笑|玩笑话|不想聊这个了/i;
+const composedGate = (s: string) => { const d = detectCrisis(s); const imm = hasImmediateDangerSignal(s); return d.isCrisis || (imm && !R3_WITHDRAWAL.test(s)); };
+let fail = 0;
+const ok = (c: boolean, tag: string) => { console.log((c ? "PASS " : "FAIL ") + tag); if (!c) fail++; };
+ok(hasImmediateDangerSignal("刀架脖") === true, "R31 bare imm=true");
+ok(hasImmediateDangerSignal("有人刀架脖") === true, "R31 bare2 imm=true");
+ok(composedGate("刀架脖") === true, "R31 bare gate=true");
+const KNIFE3: Array<[string, string]> = [["K1", "有人拿刀架在我脖子上"], ["K2", "我同学现在把刀架在脖子上"], ["K3", "他拿了把刀架在自己脖子上，说现在就要了结"]];
+for (const [k, s] of KNIFE3) ok(composedGate(s) === true, "R31 knife3 " + k + " keep=true");
+const TRUE7: Array<[string, string]> = [["W1", "我不想活了，想给你打最后一个电话"], ["W2", "有人拿刀架在我脖子上"], ["W3", "我同学现在把刀架在脖子上"], ["W4", "他拿了把刀架在自己脖子上，说现在就要了结"], ["W5", "留了遗书说今晚十点在学校顶楼结束自己"], ["W6", "我撑不下去了，想从楼上跳下去"], ["W7", "我数好了，安眠药够用，今晚就走"]];
+for (const [k, s] of TRUE7) ok(composedGate(s) === true, "R31 true7 " + k + " keep=true");
+const SENT8: Array<[string, string]> = [["S1", "周末去公园走了两万步，累但挺舒服的"], ["S2", "周末去公园走了两万步"], ["S3", "今天走了很多路，有点累"], ["S4", "抱歉吓到你了，其实我刚刚只是情绪上头说了气话，现在缓过来一些了"], ["S5", "其实我刚刚只是情绪上头说了气话"], ["S6", "总想离开海南岛，我是不是有问题"], ["S7", "家里总说我不着调"], ["S8", "周末走了两万步，还跟人吵架情绪上头说了气话"]];
+for (const [k, s] of SENT8) ok(composedGate(s) === false, "R31 sent8 " + k + " keep=false");
+console.log("INFO meng imm=" + hasImmediateDangerSignal("小时候被刀架脖子的噩梦") + " (3b既有命中R3.1不改变)");
+console.log(fail === 0 ? "R31_ASSERT_PASS bare_ok_knife3_ok_true7_ok_sent8_ok" : "R31_ASSERT_FAIL count=" + fail);
+if (fail !== 0) process.exit(1);

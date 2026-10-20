@@ -1,0 +1,274 @@
+import { PageLayout } from "@/components/page-layout";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Award, Clock, Globe, GraduationCap, Settings2, Sparkles, Star } from "lucide-react";
+import { THERAPISTS } from "@/lib/booking/data";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import {
+  resolveTherapistPair,
+  therapistIdByCnName,
+  THERAPIST_META,
+} from "@/lib/therapistAssetResolver.v3.1";
+import { TherapistImage } from "../_components/therapist-image";
+import { TherapistAboutBody } from "../_components/therapist-about-body";
+
+/**
+ * v3.1-phase1-r2 心理师详情页（golden master · 沉浸式布局版）
+ * 结构合同：breadcrumb > hero(280px+1fr) > about > credentials(4列) > services(4列卡) > 唯一 CTA。
+ * route 与全站一致：/therapists/[中文名]；数据源：THERAPISTS 唯一事实源，未知槽位不虚构。
+ */
+
+const FALLBACK_TEXT = "以人工客服复核为准";
+
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const t = THERAPISTS.find((x) => x.name === decodeURIComponent(id));
+  return {
+    title: t ? `${t.name} ${t.name_en} · 心理师团队 | QM上海酷儿心理咨询中心` : "心理师团队 | QM AI",
+    openGraph: {
+      title: t ? `${t.name} ${t.name_en} · QM上海酷儿心理咨询中心` : "QM AI - 心理支持助手",
+      url: t ? `https://queermental.coze.site/therapists/${encodeURIComponent(t.name)}` : "https://queermental.coze.site",
+      siteName: "QM AI",
+      locale: "zh_CN",
+      images: [{ url: "https://queermental.coze.site/qm-v5/og-image.png" }],
+    },
+    other: {
+      "x-qm-build": "v3.1-phase1-r2-immersive",
+    },
+  };
+}
+
+export default async function TherapistDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const t = THERAPISTS.find((x) => x.name === decodeURIComponent(id));
+  if (!t) notFound();
+
+  const tid = therapistIdByCnName(t.name);
+  if (!tid) notFound();
+  const meta = THERAPIST_META.find((m) => m.therapistId === tid);
+  if (!meta) notFound();
+
+  const pair = resolveTherapistPair(tid, "detail");
+  const isCoach = t.role === "心理教练（非心理师）";
+  const p = t.pricing;
+
+  const metaLine = [t.role, t.level, t.years ? `从业 ${t.years}` : ""].filter(Boolean).join(" · ");
+  const bgFirst = t.background.split(/[；;]/)[0]?.trim() ?? "";
+
+  const priceText = (v: number | undefined) =>
+    typeof v === "number" ? `¥${v}` : FALLBACK_TEXT;
+  const firstText = () => {
+    if (isCoach) return "不适用";
+    return priceText(p?.first60);
+  };
+  const cardText = () => {
+    if (isCoach) return "不适用";
+    return priceText(p?.card5);
+  };
+  const overtimeText = () => {
+    if (isCoach) return "不适用";
+    return typeof p?.overtime15 === "number" ? `¥${p.overtime15} / 15分钟` : FALLBACK_TEXT;
+  };
+  const card10Text = () => {
+    if (isCoach) return "不适用";
+    return priceText(p?.card10);
+  };
+
+  return (
+    <PageLayout title="心理师详情">
+    <div className="min-h-dvh qm-immersive">
+      <SiteHeader />
+      <div className="qm-page-shell">
+        <div className="therapist-detail__breadcrumb" aria-label="面包屑">
+          <Link href="/therapists">心理师团队</Link>
+          <span aria-hidden> / </span>
+          <span>
+            {t.name} {t.name_en}
+          </span>
+        </div>
+
+        <section className="therapist-detail-hero">
+          <div className="therapist-detail-hero__photo">
+            <TherapistImage
+              desktop={pair.desktop}
+              mobile={pair.mobile}
+              alt={meta.detailAlt}
+              name={t.name}
+              priority
+              objectPositionPct={pair.objectPositionPct}
+            />
+          </div>
+          <div>
+            <h1 className="therapist-detail-hero__name">
+              {t.name}
+              <span className="therapist-detail-hero__name-en">{t.name_en}</span>
+            </h1>
+            <p className="therapist-detail-hero__meta">{metaLine}</p>
+            {t.style ? (
+              <blockquote className="therapist-detail-hero__quote">「{t.style}」</blockquote>
+            ) : null}
+            <div className="therapist-tags">
+              {t.areas.map((a) => (
+                <span className="therapist-tag" key={a}>
+                  {a}
+                </span>
+              ))}
+                          </div>
+          </div>
+        </section>
+
+        <section className="therapist-about">
+          <h2 className="therapist-section-title">关于我</h2>
+          {t.about || t.background ? (
+            <TherapistAboutBody body={t.about || t.background} />
+          ) : (
+            <p className="therapist-about__body">资料整理中（UNVERIFIED）</p>
+          )}
+        </section>
+
+        <section className="therapist-credentials" aria-label="专业资料">
+          <div className="therapist-credential">
+            <Clock size={20} aria-hidden className="therapist-credential__icon" />
+            <div className="therapist-credential__main">
+              <p className="therapist-credential__value">{t.years || FALLBACK_TEXT}</p>
+              <p className="therapist-credential__label">专业从业经验</p>
+            </div>
+          </div>
+          <div className="therapist-credential">
+            <Award size={20} aria-hidden className="therapist-credential__icon" />
+            <div className="therapist-credential__main">
+              <p className="therapist-credential__value">{t.level || FALLBACK_TEXT}</p>
+              <p className="therapist-credential__label">{t.role}</p>
+            </div>
+          </div>
+          <div className="therapist-credential">
+            <GraduationCap size={20} aria-hidden className="therapist-credential__icon" />
+            <div className="therapist-credential__main">
+              <p className="therapist-credential__value">{bgFirst || FALLBACK_TEXT}</p>
+              <p className="therapist-credential__label">专业背景</p>
+            </div>
+          </div>
+          <div className="therapist-credential">
+            <Globe size={20} aria-hidden className="therapist-credential__icon" />
+            <div className="therapist-credential__main">
+              <p className="therapist-credential__value">
+                {t.languages.length ? t.languages.join(" · ") : FALLBACK_TEXT}
+              </p>
+              <p className="therapist-credential__label">语言能力</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="therapist-services">
+          <div className="therapist-services__head">
+            <h2>服务与价格</h2>
+            <span className="therapist-services__note-side">高质量陪伴，值得被真诚对待。</span>
+          </div>
+
+          <div className="therapist-service-grid">
+            <article className="therapist-service-card">
+              <h3 className="therapist-service-card__title">
+                <Clock size={16} aria-hidden />
+                常规咨询
+              </h3>
+              <p className="therapist-service-card__desc">适合持续的心理支持</p>
+              <div className="therapist-service-card__rows">
+                <div className="therapist-service-card__row">
+                  <span>60分钟</span>
+                  <strong>{priceText(p?.regular60 ?? t.price)}</strong>
+                </div>
+                <div className="therapist-service-card__row">
+                  <span>90分钟</span>
+                  <strong>{priceText(p?.regular90)}</strong>
+                </div>
+              </div>
+            </article>
+
+            <article className="therapist-service-card">
+              <h3 className="therapist-service-card__title">
+                <Sparkles size={16} aria-hidden />
+              </h3>
+              <p className="therapist-service-card__desc">开启改变的第一步</p>
+              <div className="therapist-service-card__rows">
+                <div className="therapist-service-card__row">
+                  <span>60分钟</span>
+                  <strong>{firstText()}</strong>
+                </div>
+                <div className="therapist-service-card__row">
+                  <span>90分钟</span>
+                  <strong>{isCoach ? "不适用" : priceText(p?.first90)}</strong>
+                </div>
+              </div>
+            </article>
+
+            <article className="therapist-service-card">
+              <h3 className="therapist-service-card__title">
+                <Star size={16} aria-hidden />
+                会员次卡
+              </h3>
+              <p className="therapist-service-card__desc">更灵活的长期陪伴</p>
+              <div className="therapist-service-card__rows">
+                <div className="therapist-service-card__row">
+                  <span>5小时</span>
+                  <strong>
+                    {cardText()}
+                  </strong>
+                </div>
+                <div className="therapist-service-card__row">
+                  <span>10小时</span>
+                  <strong>
+                    {card10Text()}
+                  </strong>
+                </div>
+              </div>
+            </article>
+
+            <article className="therapist-service-card">
+              <h3 className="therapist-service-card__title">
+                <Settings2 size={16} aria-hidden />
+                其他费用
+              </h3>
+              <p className="therapist-service-card__desc">透明明确的收费标准</p>
+              <div className="therapist-service-card__rows">
+                <div className="therapist-service-card__row">
+                  <span>超时补费</span>
+                  <strong>{overtimeText()}</strong>
+                </div>
+                <div className="therapist-service-card__row">
+                  <span>单次补差价</span>
+                  <strong>¥50</strong>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div className="therapist-services__cta-wrap">
+            <a
+              className="therapist-human-service-cta"
+              href="/contact"
+              aria-label={`联系人工客服，咨询 ${t.name} 的服务预约`}
+            >
+              联系人工客服
+            </a>
+            <p className="therapist-services__footnote">
+              温馨提示：具体咨询安排与更多服务说明，请联系人工客服了解。
+            </p>
+          </div>
+        </section>
+      </div>
+      <SiteFooter />
+    </div>
+    </PageLayout>
+  );
+}

@@ -30,7 +30,7 @@
 
 ### 仍未补齐的已知直接数据引用
 
-- `src/components/articles-ui/data.ts:2` → `src/components/articles-ui/fixtures/approved36.json`（仍未公开，原件保留在原私有库）。
+- `src/components/articles-ui/data.ts:2` → `src/components/articles-ui/fixtures/approved36.json`（仍未公开；包含现存36篇编辑文章正文，原文件仅声称文案已确认，明确未验证事实、权利及公开发布事项，待单独确认内容公开范围。未生成替代正文，原件保留在原私有库`product-source`下供已授权顾问读取）。
 - `src/app/therapists/[id]/page.tsx:6` → `src/app/therapists/_components/detail-desktop-contract.json`（仍未公开；包含24名心理师/教练的职业资料、服务价格和审阅来源元数据，待单独确认公开范围；原件保留在原私有库`product-source`下，已授权顾问仍可从原库读取）。
 
 上述静态引用记录不能穷尽动态`fs`/目录/网络依赖。未执行build/test/install/deploy，也未证明完整运行通过。
